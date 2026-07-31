@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Box, Icon, Typography, useTheme } from '@exotel-npm-dev/signal-design-system';
 
 const TEAMS = ['All', 'Enterprise', 'SMB', 'APAC'];
@@ -7,11 +6,12 @@ interface DimensionRowProps {
   isEng: boolean;
   onChangeTab: (isEng: boolean) => void;
   countdown: string;
+  team: string;
+  onTeamChange: (team: string) => void;
 }
 
-export function DimensionRow({ isEng, onChangeTab, countdown }: DimensionRowProps) {
+export function DimensionRow({ isEng, onChangeTab, countdown, team, onTeamChange }: DimensionRowProps) {
   const theme = useTheme();
-  const [team, setTeam] = useState('All');
 
   return (
     <Box
@@ -76,7 +76,7 @@ export function DimensionRow({ isEng, onChangeTab, countdown }: DimensionRowProp
         {TEAMS.map((t) => (
           <Box
             key={t}
-            onClick={() => setTeam(t)}
+            onClick={() => onTeamChange(t)}
             sx={{
               fontSize: 13.5,
               fontWeight: team === t ? 650 : 400,

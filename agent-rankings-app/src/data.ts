@@ -18,6 +18,11 @@ export type RawRow = [
   fVal: string,
 ];
 
+// r[11..13] (legacy hand-authored T/D/F percentages) are no longer read —
+// percentiles are computed live from r[14..16] (raw hours/days/focus-ratio).
+// r[4] is the raw baseline value: composite (engagement) is computed from
+// T/D/F percentiles, not read from here; avg QP (quality) IS read from here
+// directly, since quality ranks agents by their raw average QP score.
 export const ENG: RawRow[] = [
   ['Priya Sharma', 'PS', 'Enterprise', '#069954', '95.1', '↑ 3 rank', '#069351', '12d', 'TOP 10%', '#FFF4CE', '#4B3400', '92%', '88%', '76%', '41h', '26d', '0.86'],
   ['Aisha Okonkwo', 'AO', 'Enterprise', '#2163F1', '90.7', '—', '#9E9E9E', '8d', 'FOCUS CHAMP', '#E3EDFD', '#1C4BB8', '84%', '80%', '72%', '37h', '24d', '0.91'],
@@ -59,20 +64,44 @@ function badgeColorFor(badge: string): BadgeColor {
   return BADGE_COLORS[badge] ?? 'primary';
 }
 
+// Each agent's existing trend classification (rising/falling/flat, already
+// authored per-agent via deltaColor) doubles as the source of period
+// variation: weekly/custom pull a different week's ratio from the SAME
+// 8-week trend shape used for the score-history chart, so switching period
+// genuinely reorders agents (risers shrink less than fallers, etc.) instead
+// of uniformly rescaling everyone (which would leave percentiles/ranks
+// untouched).
 const UP_RATIOS = [0.6, 0.67, 0.73, 0.79, 0.85, 0.9, 0.95, 1.0];
 const DOWN_RATIOS = [1.28, 1.22, 1.16, 1.11, 1.07, 1.04, 1.02, 1.0];
 const FLAT_RATIOS = [0.94, 0.97, 1.01, 0.98, 1.03, 0.99, 1.02, 1.0];
 
-export function historyFor(score: string, deltaColor: string): number[] {
-  const s = parseFloat(score) || 0;
-  const ratios = deltaColor === '#069351' ? UP_RATIOS : deltaColor === '#B81914' ? DOWN_RATIOS : FLAT_RATIOS;
-  return ratios.map((r) => Math.max(0, +(s * r).toFixed(1)));
+function trendRatios(deltaColor: string): number[] {
+  if (deltaColor === '#069351') return UP_RATIOS;
+  if (deltaColor === '#B81914') return DOWN_RATIOS;
+  return FLAT_RATIOS;
+}
+
+export function historyFor(latestScore: number, deltaColor: string): number[] {
+  const ratios = trendRatios(deltaColor);
+  const scaleToLatest = latestScore / (ratios[ratios.length - 1] || 1);
+  return ratios.map((r) => Math.max(0, +(r * scaleToLatest).toFixed(1)));
+}
+
+export type Period = 'weekly' | 'monthly' | 'custom';
+
+// monthly = index 7 = 1.0 for every trend shape (identity scale, the
+// baseline fixture values); weekly/custom pull an earlier point on the same
+// per-agent trend curve.
+const PERIOD_RATIO_INDEX: Record<Period, number> = { monthly: 7, weekly: 3, custom: 1 };
+
+function periodScale(deltaColor: string, period: Period): number {
+  return trendRatios(deltaColor)[PERIOD_RATIO_INDEX[period]];
 }
 
 /**
- * Tenant-configurable minimum-activity gates. An agent below the gate for the
- * active leaderboard is flagged via `meetsThreshold: false` rather than being
- * silently dropped by the data layer — callers decide how to surface that.
+ * Tenant-configurable minimum-activity gates. Agents below the gate are
+ * excluded from the ranked list entirely (see rankAgents) — not just
+ * flagged — per "avoid misleading positions" in the requirements.
  */
 export interface ThresholdConfig {
   engagementMinSessionMinutes: number;
@@ -84,7 +113,7 @@ export const DEFAULT_THRESHOLDS: ThresholdConfig = {
   qualityMinEvaluatedInteractions: 30,
 };
 
-/** Rank-delta direction vs. the previous period snapshot, derived once so UI doesn't re-parse the arrow glyph. */
+/** Rank-delta direction vs. the previous period snapshot. */
 export type DeltaDirection = 'up' | 'down' | 'flat';
 
 function deltaDirectionFor(deltaColor: string): DeltaDirection {
@@ -98,13 +127,16 @@ function parseHoursToMinutes(val: string): number {
   return Number.isFinite(hours) ? Math.round(hours * 60) : 0;
 }
 
-/**
- * An agent's leaderboard data, independent of sort order or the viewer.
- * `rank`, `isYou`, `isTarget` etc. are derived per-view by `sortAgents` /
- * `buildRows`, not stored here — the same Agent is ranked differently on
- * each tab and after every sort/filter.
- */
-export interface Agent {
+/** Ties-aware percentile of `value` within `pool` (0 = worst, 100 = best). */
+function percentileOf(value: number, pool: number[]): number {
+  if (pool.length <= 1) return 100;
+  const below = pool.filter((v) => v < value).length;
+  const equal = pool.filter((v) => v === value).length;
+  return Math.round(((below + (equal - 1) / 2) / (pool.length - 1)) * 100);
+}
+
+export interface AgentRow {
+  rank: number;
   name: string;
   initials: string;
   team: string;
@@ -131,15 +163,45 @@ export interface Agent {
   sessionMinutes: number;
   evaluatedInteractions: number;
   meetsThreshold: boolean;
+  isYou: boolean;
+  isTarget: boolean;
+  targetGapPts: string;
 }
 
-export function buildAgents(isEng: boolean, thresholds: ThresholdConfig = DEFAULT_THRESHOLDS): Agent[] {
+export interface RankAgentsOptions {
+  period: Period;
+  team?: string;
+  thresholds?: ThresholdConfig;
+  viewerName?: string;
+}
+
+export interface RankAgentsResult {
+  rows: AgentRow[];
+  excludedCount: number;
+  totalCount: number;
+}
+
+/**
+ * The single source of ranked leaderboard data: applies period scaling,
+ * computes engagement composite (0.30T+0.25D+0.45F percentiles) or quality
+ * score (raw avg QP) live, excludes below-threshold agents from the ranked
+ * list, then filters to `team` and assigns rank 1..N within that view.
+ */
+export function rankAgents(isEng: boolean, opts: RankAgentsOptions): RankAgentsResult {
+  const { period, team = 'All', thresholds = DEFAULT_THRESHOLDS, viewerName = 'Daniel Reyes' } = opts;
   const src = isEng ? ENG : QUAL;
-  return src.map((r) => {
+
+  const base = src.map((r) => {
+    const deltaColor = r[6];
+    const scale = periodScale(deltaColor, period);
     const streakDays = parseInt(r[7] || '0', 10);
-    const fPct = isEng ? parseFloat(r[13]) : 0;
-    const sessionMinutes = isEng ? parseHoursToMinutes(r[14]) : 0;
-    const evaluatedInteractions = isEng ? 0 : parseInt(r[16] || '0', 10);
+
+    const sessionMinutes = isEng ? Math.round(parseHoursToMinutes(r[14]) * scale) : 0;
+    const activeDays = isEng ? Math.round((parseInt(r[15], 10) || 0) * scale) : 0;
+    const focusRatioRaw = isEng ? Math.min(1, (parseFloat(r[16]) || 0) * scale) : 0;
+    const evaluatedInteractions = isEng ? 0 : Math.round((parseInt(r[16], 10) || 0) * scale);
+    const avgQPRaw = isEng ? 0 : Math.min(100, (parseFloat(r[4]) || 0) * scale);
+
     const meetsThreshold = isEng
       ? sessionMinutes >= thresholds.engagementMinSessionMinutes
       : evaluatedInteractions >= thresholds.qualityMinEvaluatedInteractions;
@@ -149,112 +211,115 @@ export function buildAgents(isEng: boolean, thresholds: ThresholdConfig = DEFAUL
       initials: r[1],
       team: r[2],
       avatarBg: r[3],
-      score: r[4],
-      scoreValue: parseFloat(r[4]) || 0,
       delta: r[5],
-      deltaColor: r[6],
-      deltaDirection: deltaDirectionFor(r[6]),
-      streak: r[7] || false,
+      deltaColor,
+      deltaDirection: deltaDirectionFor(deltaColor),
+      streak: (r[7] || false) as string | false,
       streakDays,
-      badge: r[8] || false,
+      badge: (r[8] || false) as string | false,
       badgeColor: badgeColorFor(r[8]),
-      t: isEng ? r[11] : '0%',
-      d: isEng ? r[12] : '0%',
-      f: isEng ? r[13] : '0%',
-      fPctile: fPct ? `${Math.min(99, Math.round(fPct * 1.08))}%` : r[13] || '',
-      tVal: isEng ? r[14] : '',
-      dVal: isEng ? r[15] : '',
-      fVal: isEng ? r[16] : '',
-      interactions: isEng ? '' : r[16],
-      history: historyFor(r[4], r[6]),
-      showStreakBadge: streakDays >= 10,
       sessionMinutes,
+      activeDays,
+      focusRatioRaw,
       evaluatedInteractions,
+      avgQPRaw,
       meetsThreshold,
+      showStreakBadge: streakDays >= 10,
     };
   });
-}
 
-export type SortKey = 'score' | 'name' | 't' | 'd' | 'f' | 'interactions';
-export type SortDirection = 'asc' | 'desc';
+  const eligible = base.filter((a) => a.meetsThreshold);
+  const excludedCount = base.length - eligible.length;
 
-function sortValueFor(agent: Agent, key: SortKey): number | string {
-  switch (key) {
-    case 'score':
-      return agent.scoreValue;
-    case 'name':
-      return agent.name.toLowerCase();
-    case 't':
-      return agent.sessionMinutes;
-    case 'd':
-      return parseFloat(agent.dVal) || 0;
-    case 'f':
-      return parseFloat(agent.fVal) || 0;
-    case 'interactions':
-      return agent.evaluatedInteractions;
-    default:
-      return agent.scoreValue;
-  }
-}
+  const tPool = eligible.map((a) => a.sessionMinutes);
+  const dPool = eligible.map((a) => a.activeDays);
+  const fPool = eligible.map((a) => a.focusRatioRaw);
 
-/**
- * Sorts by `key`/`direction` with a fully deterministic tie-break (name, then
- * original list position) so equal-value rows never flicker between renders,
- * then assigns `rank` as the agent's 1..N position in *this* sorted view.
- * Below-threshold agents are not excluded here (see DEFAULT_THRESHOLDS doc) —
- * they sort in normally and carry `meetsThreshold: false` for the caller to
- * grey out, footnote, or filter as the UI section requires.
- */
-export interface RankedAgent extends Agent {
-  rank: number;
-}
-
-export function sortAgents(agents: Agent[], key: SortKey, direction: SortDirection): RankedAgent[] {
-  const withIndex = agents.map((agent, originalIndex) => ({ agent, originalIndex }));
-  const dir = direction === 'asc' ? 1 : -1;
-
-  withIndex.sort((a, b) => {
-    const av = sortValueFor(a.agent, key);
-    const bv = sortValueFor(b.agent, key);
-    if (av !== bv) return av < bv ? -dir : dir;
-    const nameCmp = a.agent.name.localeCompare(b.agent.name);
-    if (nameCmp !== 0) return nameCmp;
-    return a.originalIndex - b.originalIndex;
+  const scored = eligible.map((a) => {
+    if (isEng) {
+      const tPct = percentileOf(a.sessionMinutes, tPool);
+      const dPct = percentileOf(a.activeDays, dPool);
+      const fPct = percentileOf(a.focusRatioRaw, fPool);
+      const composite = 0.3 * tPct + 0.25 * dPct + 0.45 * fPct;
+      return {
+        ...a,
+        scoreValue: +composite.toFixed(1),
+        score: composite.toFixed(1),
+        t: `${tPct}%`,
+        d: `${dPct}%`,
+        f: `${fPct}%`,
+        fPctile: `${Math.min(99, fPct)}%`,
+        tVal: `${Math.round(a.sessionMinutes / 60)}h`,
+        dVal: `${a.activeDays}d`,
+        fVal: a.focusRatioRaw.toFixed(2),
+        interactions: '',
+      };
+    }
+    const qp = +a.avgQPRaw.toFixed(1);
+    return {
+      ...a,
+      scoreValue: qp,
+      score: qp.toFixed(1),
+      t: '0%',
+      d: '0%',
+      f: '0%',
+      fPctile: '0%',
+      tVal: '',
+      dVal: '',
+      fVal: '',
+      interactions: String(a.evaluatedInteractions),
+    };
   });
 
-  return withIndex.map(({ agent }, i) => ({ ...agent, rank: i + 1 }));
-}
+  const filtered = team === 'All' ? scored : scored.filter((a) => a.team === team);
 
-export function filterBySearch(agents: Agent[], query: string): Agent[] {
-  const q = query.trim().toLowerCase();
-  if (!q) return agents;
-  return agents.filter((a) => a.name.toLowerCase().includes(q) || a.team.toLowerCase().includes(q));
-}
+  const ranked = [...filtered].sort((a, b) => {
+    if (b.scoreValue !== a.scoreValue) return b.scoreValue - a.scoreValue;
+    return a.name.localeCompare(b.name);
+  });
 
-/**
- * @deprecated compatibility shim over buildAgents/sortAgents for components
- * not yet migrated to the sort-driven model. Preserves the exact shape/order
- * the old fixed-array-order data layer produced (score desc, "you" fixed to
- * Daniel Reyes) so existing UI keeps working unchanged during the migration.
- */
-export interface AgentRow extends RankedAgent {
-  isYou: boolean;
-  isTarget: boolean;
-  targetGapPts: string;
-}
+  const youIdx = ranked.findIndex((r) => r.name === viewerName);
 
-export function buildRows(isEng: boolean, chaseMode = true): AgentRow[] {
-  const ranked = sortAgents(buildAgents(isEng), 'score', 'desc');
-  const youIdx = ranked.findIndex((r) => r.name === 'Daniel Reyes');
-  return ranked.map((r, i) => {
+  const rows: AgentRow[] = ranked.map((r, i) => {
     const isYou = i === youIdx;
-    const isTarget = chaseMode && i === youIdx - 1;
+    const isTarget = youIdx > 0 && i === youIdx - 1;
     const gap = isTarget ? (ranked[i].scoreValue - ranked[youIdx].scoreValue).toFixed(1) : '';
     return {
       ...r,
+      rank: i + 1,
+      history: historyFor(r.scoreValue, r.deltaColor),
       isYou,
       isTarget,
       targetGapPts: gap ? `${gap} PTS` : '',
     };
   });
+
+  return { rows, excludedCount, totalCount: base.length };
+}
+
+export function filterBySearch(rows: AgentRow[], query: string): AgentRow[] {
+  const q = query.trim().toLowerCase();
+  if (!q) return rows;
+  return rows.filter((r) => r.name.toLowerCase().includes(q) || r.team.toLowerCase().includes(q));
+}
+
+/** Numeric rank-position climb parsed from `delta` (e.g. "↑ 3 rank" -> 3), 0 if not rising. */
+export function deltaMagnitude(row: AgentRow): number {
+  if (row.deltaDirection !== 'up') return 0;
+  const match = row.delta.match(/\d+/);
+  return match ? parseInt(match[0], 10) : 0;
+}
+
+/** The biggest riser in `rows` (current view), or null if nobody rose. */
+export function mostImprovedIn(rows: AgentRow[]): AgentRow | null {
+  let best: AgentRow | null = null;
+  let bestMag = 0;
+  for (const row of rows) {
+    const mag = deltaMagnitude(row);
+    if (mag > bestMag) {
+      best = row;
+      bestMag = mag;
+    }
+  }
+  return best;
 }

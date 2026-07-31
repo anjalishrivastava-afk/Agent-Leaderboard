@@ -38,25 +38,12 @@ export const FORMULA: Record<'engagement' | 'quality', { title: string; expr: st
   },
 };
 
-export const THRESHOLD_NOTE: Record<'engagement' | 'quality', string> = {
-  engagement: '1 agent below the minimum threshold (< 120 session minutes this period) — not ranked',
-  quality: '2 agents below the minimum threshold (< 30 evaluated interactions this period) — not ranked',
-};
-
-export const EXCLUDED_COUNT: Record<'engagement' | 'quality', string> = {
-  engagement: '1 agent',
-  quality: '2 agents',
-};
-
-export const MOST_IMPROVED: Record<'engagement' | 'quality', string> = {
-  engagement: 'Priya Sharma climbed +3 ranks',
-  quality: 'Tomás Herrera climbed +2 ranks',
-};
-
-export const MOST_IMPROVED_INFO: Record<'engagement' | 'quality', { name: string; rankDelta: number }> = {
-  engagement: { name: 'Priya Sharma', rankDelta: 3 },
-  quality: { name: 'Tomás Herrera', rankDelta: 2 },
-};
+export function thresholdNote(isEng: boolean, excludedCount: number): string {
+  const gate = isEng ? '120 session minutes' : '30 evaluated interactions';
+  if (excludedCount === 0) return `All agents meet the minimum threshold (< ${gate} this period)`;
+  const agents = excludedCount === 1 ? 'agent' : 'agents';
+  return `${excludedCount} ${agents} below the minimum threshold (< ${gate} this period) — not ranked`;
+}
 
 export const SUMMARY_CARD_DESCRIPTIONS = {
   agentsRanked: 'Agents meeting the activity threshold',

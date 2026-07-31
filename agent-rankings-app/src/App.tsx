@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Box, Card, CardContent, Typography } from '@exotel-npm-dev/signal-design-system';
-import { buildRows } from './data';
+import { DEFAULT_THRESHOLDS, deltaMagnitude, filterBySearch, mostImprovedIn, rankAgents, type ThresholdConfig } from './data';
 import { RankingsTable } from './components/RankingsTable';
 import { Header } from './components/Header';
 import { DimensionRow } from './components/DimensionRow';
@@ -9,17 +9,8 @@ import { MostImprovedCard } from './components/MostImprovedCard';
 import { YourRankCard } from './components/YourRankCard';
 import { InsightRow, LegendRow } from './components/InsightRow';
 import { FormulaPanel } from './components/FormulaPanel';
-import {
-  EXCLUDED_COUNT,
-  INITIAL_COUNTDOWN_SECONDS,
-  MOST_IMPROVED,
-  MOST_IMPROVED_INFO,
-  SUMMARY_CARD_DESCRIPTIONS,
-  THRESHOLD_NOTE,
-  formatCountdownShort,
-  type Period,
-  type Role,
-} from './dashboardMeta';
+import { trackEvent } from './analytics';
+import { INITIAL_COUNTDOWN_SECONDS, SUMMARY_CARD_DESCRIPTIONS, formatCountdownShort, thresholdNote, type Period, type Role } from './dashboardMeta';
 
 function SummaryCard({
   label,
@@ -57,10 +48,18 @@ function SummaryCard({
   );
 }
 
+function average(values: number[]): number {
+  if (!values.length) return 0;
+  return values.reduce((a, b) => a + b, 0) / values.length;
+}
+
 export default function App() {
   const [isEng, setIsEng] = useState(true);
   const [role, setRole] = useState<Role>('agent');
   const [period, setPeriod] = useState<Period>('monthly');
+  const [team, setTeam] = useState('All');
+  const [search, setSearch] = useState('');
+  const [thresholds, setThresholds] = useState<ThresholdConfig>(DEFAULT_THRESHOLDS);
   const [showFormula, setShowFormula] = useState(false);
   const [secs, setSecs] = useState(INITIAL_COUNTDOWN_SECONDS);
 
@@ -69,71 +68,109 @@ export default function App() {
     return () => clearInterval(id);
   }, []);
 
-  const rows = useMemo(() => buildRows(isEng), [isEng]);
-  const you = rows.find((r) => r.isYou)!;
-  const dimensionKey = isEng ? 'engagement' : 'quality';
-  const mostImprovedInfo = MOST_IMPROVED_INFO[dimensionKey];
-  const mostImprovedAgent = rows.find((r) => r.name === mostImprovedInfo.name) ?? rows[0];
+  useEffect(() => {
+    trackEvent('Leaderboard Viewed', { type: isEng ? 'engagement' : 'quality', role, period, team });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isEng, role, period, team]);
+
+  const engResult = useMemo(() => rankAgents(true, { period, team, thresholds }), [period, team, thresholds]);
+  const qualResult = useMemo(() => rankAgents(false, { period, team, thresholds }), [period, team, thresholds]);
+  const active = isEng ? engResult : qualResult;
+
+  const you = active.rows.find((r) => r.isYou);
+  const mostImproved = mostImprovedIn(active.rows);
+  const searchedRows = useMemo(() => filterBySearch(active.rows, search), [active.rows, search]);
+
+  const avgComposite = average(engResult.rows.map((r) => r.scoreValue)).toFixed(1);
+  const avgQuality = average(qualResult.rows.map((r) => r.scoreValue)).toFixed(1);
 
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: 'background.default', py: 4, px: { xs: 2, md: 4 } }}>
       <Box sx={{ maxWidth: 1280, mx: 'auto' }}>
         <Card variant="outlined">
           <CardContent sx={{ p: 3 }}>
-            <Header period={period} onPeriodChange={setPeriod} role={role} onRoleChange={setRole} />
+            <Header
+              period={period}
+              onPeriodChange={(p) => {
+                setPeriod(p);
+                trackEvent('Leaderboard Period Changed', { period: p });
+              }}
+              role={role}
+              onRoleChange={(r) => {
+                setRole(r);
+                trackEvent('Leaderboard Role Switched', { role: r });
+              }}
+              search={search}
+              onSearchChange={setSearch}
+              thresholds={thresholds}
+              onThresholdsChange={(t) => {
+                setThresholds(t);
+                trackEvent('Leaderboard Thresholds Changed', { ...t });
+              }}
+            />
 
             <Box sx={{ display: 'flex', gap: 1.5, mb: 2.5 }}>
               <SummaryCard
                 label="Agents Ranked"
                 description={SUMMARY_CARD_DESCRIPTIONS.agentsRanked}
-                value="10"
-                hint={`${EXCLUDED_COUNT[dimensionKey]} below threshold`}
+                value={String(active.rows.length)}
+                hint={`${active.excludedCount} below threshold`}
               />
               <SummaryCard
                 label="Avg Composite"
                 description={SUMMARY_CARD_DESCRIPTIONS.avgComposite}
-                value="52.4"
-                hint="↑ 1.2 vs last period"
-                hintColor="success.main"
+                value={avgComposite}
+                hint="engagement"
               />
               <SummaryCard
                 label="Avg QP Score"
                 description={SUMMARY_CARD_DESCRIPTIONS.avgQuality}
-                value="83.7"
-                hint="↑ 2.1% vs last period"
-                hintColor="success.main"
+                value={avgQuality}
+                hint="quality"
               />
               <SummaryCard
                 label="Active Streaks"
                 description={SUMMARY_CARD_DESCRIPTIONS.activeStreaks}
-                value="6"
+                value={String(active.rows.filter((r) => r.showStreakBadge).length)}
                 hint="agents on a streak"
                 highlight
               />
             </Box>
           </CardContent>
 
-          <DimensionRow isEng={isEng} onChangeTab={setIsEng} countdown={formatCountdownShort(secs)} />
+          <DimensionRow
+            isEng={isEng}
+            onChangeTab={(next) => {
+              setIsEng(next);
+              trackEvent('Leaderboard Tab Changed', { type: next ? 'engagement' : 'quality' });
+            }}
+            countdown={formatCountdownShort(secs)}
+            team={team}
+            onTeamChange={(t) => {
+              setTeam(t);
+              trackEvent('Leaderboard Team Filtered', { team: t });
+            }}
+          />
 
-          <Podium rows={rows} isEng={isEng} />
+          {active.rows.length >= 3 && <Podium rows={active.rows} isEng={isEng} />}
 
           <Box sx={{ px: 3, pb: 2, display: 'flex', flexDirection: 'column', gap: 1.5 }}>
-            <MostImprovedCard agent={mostImprovedAgent} rankDelta={mostImprovedInfo.rankDelta} />
-            <YourRankCard you={you} total={rows.length} period={period} />
+            {mostImproved && <MostImprovedCard agent={mostImproved} rankDelta={deltaMagnitude(mostImproved)} />}
+            {you && <YourRankCard you={you} total={active.rows.length} period={period} />}
           </Box>
 
           <InsightRow
-            mostImproved={MOST_IMPROVED[dimensionKey]}
+            mostImproved={mostImproved ? `${mostImproved.name} climbed +${deltaMagnitude(mostImproved)} ranks` : 'No rank movement this period'}
             showFormula={showFormula}
             onToggleFormula={() => setShowFormula((s) => !s)}
           />
           {showFormula && <FormulaPanel isEng={isEng} />}
 
           <Box sx={{ px: 3, pt: 2, pb: 3 }}>
-            <RankingsTable rows={rows} isEng={isEng} />
+            <RankingsTable rows={searchedRows} isEng={isEng} you={you} />
           </Box>
 
-          <LegendRow thresholdNote={THRESHOLD_NOTE[dimensionKey]} />
+          <LegendRow thresholdNote={thresholdNote(isEng, active.excludedCount)} />
         </Card>
       </Box>
     </Box>

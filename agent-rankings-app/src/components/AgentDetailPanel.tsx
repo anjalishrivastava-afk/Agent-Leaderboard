@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Box, Chip, Icon, Typography } from '@exotel-npm-dev/signal-design-system';
 import type { AgentRow } from '../data';
+import { trackEvent } from '../analytics';
 import { HeadToHeadModal } from './HeadToHeadModal';
 import { ScoreHistoryChart } from './ScoreHistoryChart';
 
@@ -39,25 +40,28 @@ export function AgentDetailPanel({ row }: { row: AgentRow }) {
   );
 }
 
-export function AgentDetailFooter({ row, you }: { row: AgentRow; you: AgentRow }) {
+export function AgentDetailFooter({ row, you }: { row: AgentRow; you?: AgentRow }) {
   const [compareOpen, setCompareOpen] = useState(false);
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mt: 1 }}>
-      <Chip
-        variant="outlined"
-        color="primary"
-        size="small"
-        clickable
-        onClick={(e: React.MouseEvent) => {
-          e.stopPropagation();
-          setCompareOpen(true);
-        }}
-        icon={<Icon name="chart-bar" size="xs" weight="bold" />}
-        label="Compare with me"
-        sx={{ fontWeight: 650 }}
-      />
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
+      {you && (
+        <Chip
+          variant="outlined"
+          color="primary"
+          size="small"
+          clickable
+          onClick={(e: React.MouseEvent) => {
+            e.stopPropagation();
+            setCompareOpen(true);
+            trackEvent('Leaderboard Compare Opened', { agent: row.name });
+          }}
+          icon={<Icon name="chart-bar" size="xs" weight="bold" />}
+          label="Compare with me"
+          sx={{ fontWeight: 650 }}
+        />
+      )}
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75, ml: 'auto' }}>
         {row.badge && (
           <Chip variant="tonal" color={row.badgeColor} size="small" label={`🏆 ${row.badge}`} sx={{ fontWeight: 700 }} />
         )}
@@ -74,7 +78,7 @@ export function AgentDetailFooter({ row, you }: { row: AgentRow; you: AgentRow }
         )}
       </Box>
 
-      <HeadToHeadModal open={compareOpen} onClose={() => setCompareOpen(false)} you={you} other={row} />
+      {you && <HeadToHeadModal open={compareOpen} onClose={() => setCompareOpen(false)} you={you} other={row} />}
     </Box>
   );
 }

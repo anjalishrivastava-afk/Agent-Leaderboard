@@ -12,6 +12,7 @@ import {
   useTheme,
 } from '@exotel-npm-dev/signal-design-system';
 import type { AgentRow } from '../data';
+import { trackEvent } from '../analytics';
 import { AgentDetailFooter, AgentDetailPanel } from './AgentDetailPanel';
 
 const RANK_ICON: Record<number, { name: 'crown' | 'shield' | 'medal'; color: string }> = {
@@ -59,12 +60,13 @@ function MetricBar({ label, value, pct, color }: { label: string; value: string;
 interface RankingsTableProps {
   rows: AgentRow[];
   isEng: boolean;
+  you?: AgentRow;
 }
 
-export function RankingsTable({ rows, isEng }: RankingsTableProps) {
+export function RankingsTable({ rows, isEng, you }: RankingsTableProps) {
   const [expanded, setExpanded] = useState<string | null>(null);
   const theme = useTheme();
-  const you = rows.find((r) => r.isYou) ?? rows[0];
+  const viewer = you ?? rows.find((r) => r.isYou);
 
   return (
     <Box sx={{ border: 1, borderColor: 'divider', borderRadius: 2, overflow: 'hidden' }}>
@@ -89,6 +91,14 @@ export function RankingsTable({ rows, isEng }: RankingsTableProps) {
         <div style={{ textAlign: 'right' }}>{isEng ? 'COMPOSITE' : 'AVG QP'}</div>
       </Box>
 
+      {rows.length === 0 && (
+        <Box sx={{ px: 3, py: 5, textAlign: 'center' }}>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            No agents match this view. Try a different team, period, or search.
+          </Typography>
+        </Box>
+      )}
+
       {rows.map((row) => {
         const key = `${row.name}::${isEng ? 'eng' : 'qual'}`;
         const isOpen = expanded === key;
@@ -96,7 +106,13 @@ export function RankingsTable({ rows, isEng }: RankingsTableProps) {
           <Accordion
             key={key}
             expanded={isOpen}
-            onChange={() => setExpanded((prev) => (prev === key ? null : key))}
+            onChange={() =>
+              setExpanded((prev) => {
+                const next = prev === key ? null : key;
+                if (next) trackEvent('Leaderboard Row Expanded', { agent: row.name, type: isEng ? 'engagement' : 'quality' });
+                return next;
+              })
+            }
             disableGutters
             square
             elevation={0}
@@ -214,7 +230,7 @@ export function RankingsTable({ rows, isEng }: RankingsTableProps) {
             <AccordionDetails sx={{ px: 3, pb: 2, pt: 0.5, bgcolor: 'background.default' }}>
               <Box sx={{ pl: '78px' }}>
                 <AgentDetailPanel row={row} />
-                <AgentDetailFooter row={row} you={you} />
+                <AgentDetailFooter row={row} you={viewer} />
               </Box>
             </AccordionDetails>
           </Accordion>
