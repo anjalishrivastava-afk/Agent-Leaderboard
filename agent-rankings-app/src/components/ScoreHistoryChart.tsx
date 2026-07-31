@@ -53,6 +53,8 @@ export function ScoreHistoryChart({ history, latestScore }: ScoreHistoryChartPro
       sx={{
         flex: 1,
         minWidth: 0,
+        display: 'flex',
+        flexDirection: 'column',
         bgcolor: 'background.paper',
         border: 1,
         borderColor: 'divider',
@@ -62,7 +64,7 @@ export function ScoreHistoryChart({ history, latestScore }: ScoreHistoryChartPro
         '&:hover': { boxShadow: 2 },
       }}
     >
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flex: '0 0 auto' }}>
         <Typography variant="overline" sx={{ color: 'text.secondary', letterSpacing: '.07em', fontWeight: 700 }}>
           Score History · 8 Weeks
         </Typography>
@@ -80,9 +82,9 @@ export function ScoreHistoryChart({ history, latestScore }: ScoreHistoryChartPro
       <Box
         onMouseMove={onMove}
         onMouseLeave={() => setHoverIdx(null)}
-        sx={{ position: 'relative', height: 130, mt: 1.5, cursor: 'crosshair' }}
+        sx={{ position: 'relative', flex: '1 1 auto', minHeight: 130, mt: 1.5, cursor: 'crosshair' }}
       >
-        <svg viewBox={`0 0 ${VB_W} ${VB_H}`} style={{ width: '100%', height: 130, display: 'block', overflow: 'visible' }} preserveAspectRatio="none">
+        <svg viewBox={`0 0 ${VB_W} ${VB_H}`} style={{ width: '100%', height: '100%', display: 'block', overflow: 'visible' }} preserveAspectRatio="none">
           <path d={areaPath} fill={theme.palette.primary.light ?? '#ECEEF9'} opacity={0.35} stroke="none" />
           <polyline points={linePoints} fill="none" stroke={theme.palette.primary.main} strokeWidth={2.5} />
           {pts.slice(0, -1).map((p, idx) => (
@@ -126,7 +128,7 @@ export function ScoreHistoryChart({ history, latestScore }: ScoreHistoryChartPro
         )}
       </Box>
 
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 0.75 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 0.75, flex: '0 0 auto' }}>
         {WEEKS.map((w) => (
           <Typography key={w} variant="caption" sx={{ color: 'text.secondary' }}>
             {w}
