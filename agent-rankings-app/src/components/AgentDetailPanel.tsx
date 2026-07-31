@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { Box, Chip, Icon, Typography } from '@exotel-npm-dev/signal-design-system';
 import type { AgentRow } from '../data';
+import { HeadToHeadModal } from './HeadToHeadModal';
 import { ScoreHistoryChart } from './ScoreHistoryChart';
 
 interface StatTileProps {
@@ -37,7 +39,9 @@ export function AgentDetailPanel({ row }: { row: AgentRow }) {
   );
 }
 
-export function AgentDetailFooter({ row }: { row: AgentRow }) {
+export function AgentDetailFooter({ row, you }: { row: AgentRow; you: AgentRow }) {
+  const [compareOpen, setCompareOpen] = useState(false);
+
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mt: 1 }}>
       <Chip
@@ -45,7 +49,10 @@ export function AgentDetailFooter({ row }: { row: AgentRow }) {
         color="primary"
         size="small"
         clickable
-        onClick={(e: React.MouseEvent) => e.stopPropagation()}
+        onClick={(e: React.MouseEvent) => {
+          e.stopPropagation();
+          setCompareOpen(true);
+        }}
         icon={<Icon name="chart-bar" size="xs" weight="bold" />}
         label="Compare with me"
         sx={{ fontWeight: 650 }}
@@ -66,6 +73,8 @@ export function AgentDetailFooter({ row }: { row: AgentRow }) {
           />
         )}
       </Box>
+
+      <HeadToHeadModal open={compareOpen} onClose={() => setCompareOpen(false)} you={you} other={row} />
     </Box>
   );
 }

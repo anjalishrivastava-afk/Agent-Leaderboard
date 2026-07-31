@@ -12,10 +12,11 @@ interface Point {
 }
 
 function buildPoints(history: number[], min: number, max: number): Point[] {
-  const span = max - min || 1;
+  const span = max - min;
+  const flat = span === 0;
   return history.map((v, i) => ({
     x: +((i * (VB_W / (history.length - 1))).toFixed(1)),
-    y: +((VB_H - PAD_Y - ((v - min) / span) * (VB_H - PAD_Y * 2)).toFixed(1)),
+    y: flat ? VB_H / 2 : +((VB_H - PAD_Y - ((v - min) / span) * (VB_H - PAD_Y * 2)).toFixed(1)),
   }));
 }
 
@@ -31,6 +32,7 @@ export function ScoreHistoryChart({ history, latestScore }: ScoreHistoryChartPro
   const min = Math.min(...history);
   const max = Math.max(...history);
   const mid = (min + max) / 2;
+  const isFlat = min === max;
   const pts = useMemo(() => buildPoints(history, min, max), [history, min, max]);
   const linePoints = pts.map((p) => `${p.x},${p.y}`).join(' ');
   const areaPath = `M${pts.map((p) => `${p.x},${p.y}`).join(' L')} L${VB_W},${VB_H} L0,${VB_H} Z`;
@@ -49,8 +51,8 @@ export function ScoreHistoryChart({ history, latestScore }: ScoreHistoryChartPro
     setHoverIdx((prev) => (prev === idx ? prev : idx));
   };
 
-  const yTicks = [max, mid, min];
-  const yTickPositions = [PAD_Y, VB_H / 2, VB_H - PAD_Y];
+  const yTicks = isFlat ? [max] : [max, mid, min];
+  const yTickPositions = isFlat ? [VB_H / 2] : [PAD_Y, VB_H / 2, VB_H - PAD_Y];
 
   return (
     <Box
@@ -75,7 +77,7 @@ export function ScoreHistoryChart({ history, latestScore }: ScoreHistoryChartPro
       </Box>
 
       <Box sx={{ display: 'flex', gap: 0.75, mt: 1 }}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: 130, py: `${PAD_Y}px`, flex: '0 0 auto' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: isFlat ? 'center' : 'space-between', height: 130, py: `${PAD_Y}px`, flex: '0 0 auto' }}>
           {yTicks.map((t, i) => (
             <Typography key={i} variant="caption" sx={{ color: 'text.secondary', lineHeight: 1, fontSize: 10.5 }}>
               {Math.round(t)}

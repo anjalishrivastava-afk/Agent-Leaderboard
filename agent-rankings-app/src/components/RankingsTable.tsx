@@ -64,6 +64,7 @@ interface RankingsTableProps {
 export function RankingsTable({ rows, isEng }: RankingsTableProps) {
   const [expanded, setExpanded] = useState<string | null>(null);
   const theme = useTheme();
+  const you = rows.find((r) => r.isYou) ?? rows[0];
 
   return (
     <Box sx={{ border: 1, borderColor: 'divider', borderRadius: 2, overflow: 'hidden' }}>
@@ -213,7 +214,7 @@ export function RankingsTable({ rows, isEng }: RankingsTableProps) {
             <AccordionDetails sx={{ px: 3, pb: 2, pt: 0.5, bgcolor: 'background.default' }}>
               <Box sx={{ pl: '78px' }}>
                 <AgentDetailPanel row={row} />
-                <AgentDetailFooter row={row} />
+                <AgentDetailFooter row={row} you={you} />
               </Box>
             </AccordionDetails>
           </Accordion>
