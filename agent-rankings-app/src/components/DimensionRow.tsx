@@ -1,4 +1,4 @@
-import { Box, Icon, Typography } from '@exotel-npm-dev/signal-design-system';
+import { Box, Icon, Typography, useTheme } from '@exotel-npm-dev/signal-design-system';
 
 const TEAMS = ['All Teams', 'Enterprise', 'SMB', 'APAC'];
 
@@ -9,6 +9,7 @@ interface DimensionRowProps {
 }
 
 export function DimensionRow({ isEng, onChangeTab, countdown }: DimensionRowProps) {
+  const theme = useTheme();
   return (
     <Box
       sx={{
@@ -60,26 +61,15 @@ export function DimensionRow({ isEng, onChangeTab, countdown }: DimensionRowProp
         </Box>
       </Box>
 
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 1,
-          px: 1.25,
-          py: 0.6,
-          borderRadius: 999,
-          bgcolor: 'error.50',
-          border: 1,
-          borderColor: 'error.100',
-        }}
-      >
-        <Box sx={{ width: 7, height: 7, borderRadius: '50%', bgcolor: 'error.main' }} />
-        <Typography sx={{ fontSize: 12, fontWeight: 700, color: 'error.dark', fontVariantNumeric: 'tabular-nums' }}>
-          Period ends in {countdown}
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
+        <Icon name="clock" size="xs" color={theme.palette.error.main} />
+        <Typography variant="body2" sx={{ color: 'error.main', fontVariantNumeric: 'tabular-nums' }}>
+          Resets in {countdown}
         </Typography>
       </Box>
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+        <Icon name="users" size="xs" color={theme.palette.text.secondary} />
         {TEAMS.map((t, i) => (
           <Typography key={t} variant="body2" sx={{ fontWeight: i === 0 ? 650 : 400, color: i === 0 ? 'text.primary' : 'text.secondary' }}>
             {t}

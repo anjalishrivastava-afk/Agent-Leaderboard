@@ -12,18 +12,17 @@ import {
   useTheme,
 } from '@exotel-npm-dev/signal-design-system';
 import type { AgentRow } from '../data';
-import type { Period } from '../dashboardMeta';
-import { AgentDetailPanel } from './AgentDetailPanel';
+import { AgentDetailFooter, AgentDetailPanel } from './AgentDetailPanel';
 
-const RANK_RING: Record<number, { bg: string; fg: string }> = {
-  1: { bg: '#FDF1CE', fg: '#8A6A00' },
-  2: { bg: '#EEEEEE', fg: '#5A5A5A' },
-  3: { bg: '#F6DDC3', fg: '#8A501B' },
+const RANK_ICON: Record<number, { name: 'crown' | 'shield' | 'medal'; color: string }> = {
+  1: { name: 'crown', color: '#E1AD01' },
+  2: { name: 'shield', color: '#9E9E9E' },
+  3: { name: 'medal', color: '#C77B3D' },
 };
 
 function RankBadge({ rank }: { rank: number }) {
-  const ring = RANK_RING[rank];
-  if (!ring) {
+  const meta = RANK_ICON[rank];
+  if (!meta) {
     return (
       <Typography sx={{ fontSize: 13, color: 'text.secondary', fontWeight: 600, fontVariantNumeric: 'tabular-nums', pl: 0.5 }}>
         {String(rank).padStart(2, '0')}
@@ -31,22 +30,8 @@ function RankBadge({ rank }: { rank: number }) {
     );
   }
   return (
-    <Box
-      sx={{
-        width: 26,
-        height: 26,
-        borderRadius: '50%',
-        bgcolor: ring.bg,
-        color: ring.fg,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: 12.5,
-        fontWeight: 800,
-        fontVariantNumeric: 'tabular-nums',
-      }}
-    >
-      {rank}
+    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 26, height: 26 }}>
+      <Icon name={meta.name} size="sm" weight="fill" color={meta.color} />
     </Box>
   );
 }
@@ -74,10 +59,9 @@ function MetricBar({ label, value, pct, color }: { label: string; value: string;
 interface RankingsTableProps {
   rows: AgentRow[];
   isEng: boolean;
-  period: Period;
 }
 
-export function RankingsTable({ rows, isEng, period }: RankingsTableProps) {
+export function RankingsTable({ rows, isEng }: RankingsTableProps) {
   const [expanded, setExpanded] = useState<string | null>(null);
   const theme = useTheme();
 
@@ -228,7 +212,8 @@ export function RankingsTable({ rows, isEng, period }: RankingsTableProps) {
 
             <AccordionDetails sx={{ px: 3, pb: 3, pt: 0.5, bgcolor: 'background.default' }}>
               <Box sx={{ pl: '78px' }}>
-                <AgentDetailPanel row={row} isEng={isEng} period={period} totalRanked={rows.length} target={rows[row.rank - 2]} />
+                <AgentDetailPanel row={row} />
+                <AgentDetailFooter row={row} />
               </Box>
             </AccordionDetails>
           </Accordion>

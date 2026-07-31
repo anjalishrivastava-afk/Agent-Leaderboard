@@ -1,17 +1,4 @@
 export type Period = 'weekly' | 'monthly' | 'custom';
-export type Role = 'agent' | 'supervisor' | 'admin';
-
-export const PERIOD_RANGE: Record<Period, string> = {
-  weekly: '28 Jul – 3 Aug',
-  monthly: '1 – 31 Jul',
-  custom: '12 Jun – 31 Jul',
-};
-
-export function seasonLabel(period: Period): string {
-  if (period === 'weekly') return 'WEEK 31';
-  if (period === 'custom') return 'CUSTOM RANGE';
-  return 'SEASON 4';
-}
 
 export function periodPhrase(period: Period): string {
   if (period === 'weekly') return 'this week';
@@ -65,17 +52,23 @@ export const MOST_IMPROVED: Record<'engagement' | 'quality', string> = {
   quality: 'Tomás Herrera climbed +2 ranks',
 };
 
-export const COMPOSITE_LINE: Record<'engagement' | 'quality', string> = {
-  engagement: 'Composite = 0.30×T + 0.25×D + 0.45×F — lift your focus ratio and you clear the gap before reset.',
-  quality: 'Average QP score across evaluated interactions this period — a few strong evaluations closes it.',
+export const MOST_IMPROVED_INFO: Record<'engagement' | 'quality', { name: string; rankDelta: number }> = {
+  engagement: { name: 'Priya Sharma', rankDelta: 3 },
+  quality: { name: 'Tomás Herrera', rankDelta: 2 },
 };
 
-export function formatCountdown(totalSeconds: number): string {
+export const SUMMARY_CARD_DESCRIPTIONS = {
+  agentsRanked: 'Agents meeting the activity threshold',
+  avgComposite: 'Mean composite score across ranked agents',
+  avgQuality: 'Mean QP score across evaluated interactions',
+  activeStreaks: 'Agents with a 2+ day active streak',
+};
+
+export function formatCountdownShort(totalSeconds: number): string {
   const s = Math.max(0, totalSeconds);
   const h = Math.floor(s / 3600);
-  const m = String(Math.floor((s % 3600) / 60)).padStart(2, '0');
-  const sec = String(Math.floor(s % 60)).padStart(2, '0');
-  return `${h}h ${m}m ${sec}s`;
+  const m = Math.floor((s % 3600) / 60);
+  return `${h}h ${m}m`;
 }
 
 export const INITIAL_COUNTDOWN_SECONDS = 11 * 3600 + 58 * 60;
