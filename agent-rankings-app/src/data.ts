@@ -69,22 +69,55 @@ export function historyFor(score: string, deltaColor: string): number[] {
   return ratios.map((r) => Math.max(0, +(s * r).toFixed(1)));
 }
 
-export interface AgentRow {
-  rank: number;
+/**
+ * Tenant-configurable minimum-activity gates. An agent below the gate for the
+ * active leaderboard is flagged via `meetsThreshold: false` rather than being
+ * silently dropped by the data layer — callers decide how to surface that.
+ */
+export interface ThresholdConfig {
+  engagementMinSessionMinutes: number;
+  qualityMinEvaluatedInteractions: number;
+}
+
+export const DEFAULT_THRESHOLDS: ThresholdConfig = {
+  engagementMinSessionMinutes: 120,
+  qualityMinEvaluatedInteractions: 30,
+};
+
+/** Rank-delta direction vs. the previous period snapshot, derived once so UI doesn't re-parse the arrow glyph. */
+export type DeltaDirection = 'up' | 'down' | 'flat';
+
+function deltaDirectionFor(deltaColor: string): DeltaDirection {
+  if (deltaColor === '#069351') return 'up';
+  if (deltaColor === '#B81914') return 'down';
+  return 'flat';
+}
+
+function parseHoursToMinutes(val: string): number {
+  const hours = parseFloat(val);
+  return Number.isFinite(hours) ? Math.round(hours * 60) : 0;
+}
+
+/**
+ * An agent's leaderboard data, independent of sort order or the viewer.
+ * `rank`, `isYou`, `isTarget` etc. are derived per-view by `sortAgents` /
+ * `buildRows`, not stored here — the same Agent is ranked differently on
+ * each tab and after every sort/filter.
+ */
+export interface Agent {
   name: string;
   initials: string;
   team: string;
   avatarBg: string;
   score: string;
+  scoreValue: number;
   delta: string;
   deltaColor: string;
+  deltaDirection: DeltaDirection;
   streak: string | false;
   streakDays: number;
   badge: string | false;
   badgeColor: BadgeColor;
-  isYou: boolean;
-  isTarget: boolean;
-  targetGapPts: string;
   t: string;
   d: string;
   f: string;
@@ -95,34 +128,36 @@ export interface AgentRow {
   interactions: string;
   history: number[];
   showStreakBadge: boolean;
+  sessionMinutes: number;
+  evaluatedInteractions: number;
+  meetsThreshold: boolean;
 }
 
-export function buildRows(isEng: boolean, chaseMode = true): AgentRow[] {
+export function buildAgents(isEng: boolean, thresholds: ThresholdConfig = DEFAULT_THRESHOLDS): Agent[] {
   const src = isEng ? ENG : QUAL;
-  const youIdx = src.findIndex((r) => r[0] === 'Daniel Reyes');
-  return src.map((r, i) => {
-    const rank = i + 1;
-    const isYou = i === youIdx;
-    const isTarget = chaseMode && i === youIdx - 1;
-    const gap = isTarget ? (parseFloat(src[i][4]) - parseFloat(src[youIdx][4])).toFixed(1) : '';
+  return src.map((r) => {
     const streakDays = parseInt(r[7] || '0', 10);
     const fPct = isEng ? parseFloat(r[13]) : 0;
+    const sessionMinutes = isEng ? parseHoursToMinutes(r[14]) : 0;
+    const evaluatedInteractions = isEng ? 0 : parseInt(r[16] || '0', 10);
+    const meetsThreshold = isEng
+      ? sessionMinutes >= thresholds.engagementMinSessionMinutes
+      : evaluatedInteractions >= thresholds.qualityMinEvaluatedInteractions;
+
     return {
-      rank,
       name: r[0],
       initials: r[1],
       team: r[2],
       avatarBg: r[3],
       score: r[4],
+      scoreValue: parseFloat(r[4]) || 0,
       delta: r[5],
       deltaColor: r[6],
+      deltaDirection: deltaDirectionFor(r[6]),
       streak: r[7] || false,
       streakDays,
       badge: r[8] || false,
       badgeColor: badgeColorFor(r[8]),
-      isYou,
-      isTarget,
-      targetGapPts: gap ? `${gap} PTS` : '',
       t: isEng ? r[11] : '0%',
       d: isEng ? r[12] : '0%',
       f: isEng ? r[13] : '0%',
@@ -133,6 +168,93 @@ export function buildRows(isEng: boolean, chaseMode = true): AgentRow[] {
       interactions: isEng ? '' : r[16],
       history: historyFor(r[4], r[6]),
       showStreakBadge: streakDays >= 10,
+      sessionMinutes,
+      evaluatedInteractions,
+      meetsThreshold,
+    };
+  });
+}
+
+export type SortKey = 'score' | 'name' | 't' | 'd' | 'f' | 'interactions';
+export type SortDirection = 'asc' | 'desc';
+
+function sortValueFor(agent: Agent, key: SortKey): number | string {
+  switch (key) {
+    case 'score':
+      return agent.scoreValue;
+    case 'name':
+      return agent.name.toLowerCase();
+    case 't':
+      return agent.sessionMinutes;
+    case 'd':
+      return parseFloat(agent.dVal) || 0;
+    case 'f':
+      return parseFloat(agent.fVal) || 0;
+    case 'interactions':
+      return agent.evaluatedInteractions;
+    default:
+      return agent.scoreValue;
+  }
+}
+
+/**
+ * Sorts by `key`/`direction` with a fully deterministic tie-break (name, then
+ * original list position) so equal-value rows never flicker between renders,
+ * then assigns `rank` as the agent's 1..N position in *this* sorted view.
+ * Below-threshold agents are not excluded here (see DEFAULT_THRESHOLDS doc) —
+ * they sort in normally and carry `meetsThreshold: false` for the caller to
+ * grey out, footnote, or filter as the UI section requires.
+ */
+export interface RankedAgent extends Agent {
+  rank: number;
+}
+
+export function sortAgents(agents: Agent[], key: SortKey, direction: SortDirection): RankedAgent[] {
+  const withIndex = agents.map((agent, originalIndex) => ({ agent, originalIndex }));
+  const dir = direction === 'asc' ? 1 : -1;
+
+  withIndex.sort((a, b) => {
+    const av = sortValueFor(a.agent, key);
+    const bv = sortValueFor(b.agent, key);
+    if (av !== bv) return av < bv ? -dir : dir;
+    const nameCmp = a.agent.name.localeCompare(b.agent.name);
+    if (nameCmp !== 0) return nameCmp;
+    return a.originalIndex - b.originalIndex;
+  });
+
+  return withIndex.map(({ agent }, i) => ({ ...agent, rank: i + 1 }));
+}
+
+export function filterBySearch(agents: Agent[], query: string): Agent[] {
+  const q = query.trim().toLowerCase();
+  if (!q) return agents;
+  return agents.filter((a) => a.name.toLowerCase().includes(q) || a.team.toLowerCase().includes(q));
+}
+
+/**
+ * @deprecated compatibility shim over buildAgents/sortAgents for components
+ * not yet migrated to the sort-driven model. Preserves the exact shape/order
+ * the old fixed-array-order data layer produced (score desc, "you" fixed to
+ * Daniel Reyes) so existing UI keeps working unchanged during the migration.
+ */
+export interface AgentRow extends RankedAgent {
+  isYou: boolean;
+  isTarget: boolean;
+  targetGapPts: string;
+}
+
+export function buildRows(isEng: boolean, chaseMode = true): AgentRow[] {
+  const ranked = sortAgents(buildAgents(isEng), 'score', 'desc');
+  const youIdx = ranked.findIndex((r) => r.name === 'Daniel Reyes');
+  return ranked.map((r, i) => {
+    const isYou = i === youIdx;
+    const isTarget = chaseMode && i === youIdx - 1;
+    const gap = isTarget ? (ranked[i].scoreValue - ranked[youIdx].scoreValue).toFixed(1) : '';
+    return {
+      ...r,
+      isYou,
+      isTarget,
+      targetGapPts: gap ? `${gap} PTS` : '',
     };
   });
 }
