@@ -115,7 +115,7 @@ export default function App() {
 
           <DimensionRow isEng={isEng} onChangeTab={setIsEng} countdown={formatCountdownShort(secs)} />
 
-          <Podium rows={rows} />
+          <Podium rows={rows} isEng={isEng} />
 
           <Box sx={{ px: 3, pb: 2, display: 'flex', flexDirection: 'column', gap: 1.5 }}>
             <MostImprovedCard agent={mostImprovedAgent} rankDelta={mostImprovedInfo.rankDelta} />

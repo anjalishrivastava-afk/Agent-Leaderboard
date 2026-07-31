@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { Box, Typography } from '@exotel-npm-dev/signal-design-system';
-import { FORMULA, THRESHOLD_NOTE } from '../dashboardMeta';
+import { FORMULA } from '../dashboardMeta';
 
 export function FormulaPanel({ isEng }: { isEng: boolean }) {
   const meta = FORMULA[isEng ? 'engagement' : 'quality'];
@@ -47,9 +47,6 @@ export function FormulaPanel({ isEng }: { isEng: boolean }) {
           </Fragment>
         ))}
       </Box>
-      <Typography variant="body2" sx={{ color: 'text.secondary', mt: 1.5 }}>
-        {THRESHOLD_NOTE[isEng ? 'engagement' : 'quality']}
-      </Typography>
     </Box>
   );
 }
