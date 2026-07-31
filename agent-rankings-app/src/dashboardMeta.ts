@@ -13,6 +13,17 @@ export function seasonLabel(period: Period): string {
   return 'SEASON 4';
 }
 
+export function periodPhrase(period: Period): string {
+  if (period === 'weekly') return 'this week';
+  if (period === 'custom') return 'this period';
+  return 'this month';
+}
+
+export const DIMENSION_LABEL: Record<'engagement' | 'quality', string> = {
+  engagement: 'Engagement composite',
+  quality: 'Quality score',
+};
+
 export interface FormulaRow {
   dim: string;
   weight: string;

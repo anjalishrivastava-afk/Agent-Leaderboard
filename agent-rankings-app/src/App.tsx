@@ -90,7 +90,7 @@ export default function App() {
           {showFormula && <FormulaPanel isEng={isEng} />}
 
           <Box sx={{ px: 3, pt: 2, pb: 3 }}>
-            <RankingsTable rows={rows} isEng={isEng} />
+            <RankingsTable rows={rows} isEng={isEng} period={period} />
           </Box>
 
           <LegendRow thresholdNote={THRESHOLD_NOTE[isEng ? 'engagement' : 'quality']} />

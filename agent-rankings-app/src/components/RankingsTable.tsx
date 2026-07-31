@@ -12,7 +12,8 @@ import {
   useTheme,
 } from '@exotel-npm-dev/signal-design-system';
 import type { AgentRow } from '../data';
-import { AgentDetailFooter, AgentDetailPanel } from './AgentDetailPanel';
+import type { Period } from '../dashboardMeta';
+import { AgentDetailPanel } from './AgentDetailPanel';
 
 const RANK_RING: Record<number, { bg: string; fg: string }> = {
   1: { bg: '#FDF1CE', fg: '#8A6A00' },
@@ -73,9 +74,10 @@ function MetricBar({ label, value, pct, color }: { label: string; value: string;
 interface RankingsTableProps {
   rows: AgentRow[];
   isEng: boolean;
+  period: Period;
 }
 
-export function RankingsTable({ rows, isEng }: RankingsTableProps) {
+export function RankingsTable({ rows, isEng, period }: RankingsTableProps) {
   const [expanded, setExpanded] = useState<string | null>(null);
   const theme = useTheme();
 
@@ -226,8 +228,7 @@ export function RankingsTable({ rows, isEng }: RankingsTableProps) {
 
             <AccordionDetails sx={{ px: 3, pb: 3, pt: 0.5, bgcolor: 'background.default' }}>
               <Box sx={{ pl: '78px' }}>
-                <AgentDetailPanel row={row} />
-                <AgentDetailFooter row={row} />
+                <AgentDetailPanel row={row} isEng={isEng} period={period} totalRanked={rows.length} target={rows[row.rank - 2]} />
               </Box>
             </AccordionDetails>
           </Accordion>
