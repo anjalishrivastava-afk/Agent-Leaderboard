@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import { Box, Icon, Typography, useTheme } from '@exotel-npm-dev/signal-design-system';
 
-const TEAMS = ['All Teams', 'Enterprise', 'SMB', 'APAC'];
+const TEAMS = ['All', 'Enterprise', 'SMB', 'APAC'];
 
 interface DimensionRowProps {
   isEng: boolean;
@@ -10,6 +11,8 @@ interface DimensionRowProps {
 
 export function DimensionRow({ isEng, onChangeTab, countdown }: DimensionRowProps) {
   const theme = useTheme();
+  const [team, setTeam] = useState('All');
+
   return (
     <Box
       sx={{
@@ -68,12 +71,25 @@ export function DimensionRow({ isEng, onChangeTab, countdown }: DimensionRowProp
         </Typography>
       </Box>
 
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
         <Icon name="users" size="xs" color={theme.palette.text.secondary} />
-        {TEAMS.map((t, i) => (
-          <Typography key={t} variant="body2" sx={{ fontWeight: i === 0 ? 650 : 400, color: i === 0 ? 'text.primary' : 'text.secondary' }}>
+        {TEAMS.map((t) => (
+          <Box
+            key={t}
+            onClick={() => setTeam(t)}
+            sx={{
+              fontSize: 13.5,
+              fontWeight: team === t ? 650 : 400,
+              cursor: 'pointer',
+              px: team === t ? 1.5 : 0,
+              py: team === t ? 0.5 : 0,
+              borderRadius: 999,
+              bgcolor: team === t ? 'primary.100' : 'transparent',
+              color: team === t ? 'primary.dark' : 'text.secondary',
+            }}
+          >
             {t}
-          </Typography>
+          </Box>
         ))}
       </Box>
     </Box>

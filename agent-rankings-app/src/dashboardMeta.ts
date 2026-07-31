@@ -1,4 +1,5 @@
 export type Period = 'weekly' | 'monthly' | 'custom';
+export type Role = 'agent' | 'supervisor' | 'admin';
 
 export function periodPhrase(period: Period): string {
   if (period === 'weekly') return 'this week';

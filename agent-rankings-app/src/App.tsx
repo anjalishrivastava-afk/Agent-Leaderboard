@@ -18,6 +18,7 @@ import {
   THRESHOLD_NOTE,
   formatCountdownShort,
   type Period,
+  type Role,
 } from './dashboardMeta';
 
 function SummaryCard({
@@ -58,6 +59,7 @@ function SummaryCard({
 
 export default function App() {
   const [isEng, setIsEng] = useState(true);
+  const [role, setRole] = useState<Role>('agent');
   const [period, setPeriod] = useState<Period>('monthly');
   const [showFormula, setShowFormula] = useState(false);
   const [secs, setSecs] = useState(INITIAL_COUNTDOWN_SECONDS);
@@ -78,7 +80,7 @@ export default function App() {
       <Box sx={{ maxWidth: 1280, mx: 'auto' }}>
         <Card variant="outlined">
           <CardContent sx={{ p: 3 }}>
-            <Header period={period} onPeriodChange={setPeriod} />
+            <Header period={period} onPeriodChange={setPeriod} role={role} onRoleChange={setRole} />
 
             <Box sx={{ display: 'flex', gap: 1.5, mb: 2.5 }}>
               <SummaryCard
