@@ -59,14 +59,14 @@ export function ScoreHistoryChart({ history, latestScore }: ScoreHistoryChartPro
         border: 1,
         borderColor: 'divider',
         borderRadius: 2,
-        p: 2.25,
+        p: 1.5,
       }}
     >
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <Typography variant="caption" sx={{ color: 'text.secondary', letterSpacing: '.06em', fontWeight: 600, textTransform: 'uppercase' }}>
+        <Typography variant="caption" sx={{ color: 'text.secondary', letterSpacing: '.06em', fontWeight: 600, textTransform: 'uppercase', fontSize: 10.5 }}>
           Score history · 8 weeks
         </Typography>
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+        <Typography variant="caption" sx={{ color: 'text.secondary' }}>
           Latest: <Box component="strong" sx={{ color: 'primary.main' }}>{latestScore}</Box>{' '}
           <Box component="span" sx={{ color: deltaColor, fontWeight: 650 }}>
             {deltaLabel}
@@ -74,16 +74,16 @@ export function ScoreHistoryChart({ history, latestScore }: ScoreHistoryChartPro
         </Typography>
       </Box>
 
-      <Box sx={{ display: 'flex', gap: 1, mt: 1.5 }}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: 180, py: `${PAD_Y}px`, flex: '0 0 auto' }}>
+      <Box sx={{ display: 'flex', gap: 0.75, mt: 1 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: 130, py: `${PAD_Y}px`, flex: '0 0 auto' }}>
           {yTicks.map((t, i) => (
-            <Typography key={i} variant="caption" sx={{ color: 'text.secondary', lineHeight: 1 }}>
+            <Typography key={i} variant="caption" sx={{ color: 'text.secondary', lineHeight: 1, fontSize: 10.5 }}>
               {Math.round(t)}
             </Typography>
           ))}
         </Box>
 
-        <Box onMouseMove={onMove} onMouseLeave={() => setHoverIdx(null)} sx={{ position: 'relative', flex: 1, height: 180, cursor: 'crosshair' }}>
+        <Box onMouseMove={onMove} onMouseLeave={() => setHoverIdx(null)} sx={{ position: 'relative', flex: 1, height: 130, cursor: 'crosshair' }}>
           <svg viewBox={`0 0 ${VB_W} ${VB_H}`} style={{ width: '100%', height: '100%', display: 'block', overflow: 'visible' }} preserveAspectRatio="none">
             {yTickPositions.map((y, i) => (
               <line key={i} x1={0} x2={VB_W} y1={y} y2={y} stroke={theme.palette.divider} strokeWidth={1} strokeDasharray="4,4" />
@@ -132,14 +132,14 @@ export function ScoreHistoryChart({ history, latestScore }: ScoreHistoryChartPro
         </Box>
       </Box>
 
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 1, pl: 4.5 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 0.75, pl: 3.5 }}>
         {WEEKS.map((w) => (
-          <Typography key={w} variant="caption" sx={{ color: 'text.secondary' }}>
+          <Typography key={w} variant="caption" sx={{ color: 'text.secondary', fontSize: 10.5 }}>
             {w}
           </Typography>
         ))}
       </Box>
-      <Typography variant="caption" sx={{ display: 'block', textAlign: 'right', color: 'text.disabled', mt: 0.5 }}>
+      <Typography variant="caption" sx={{ display: 'block', textAlign: 'right', color: 'text.disabled', mt: 0.25, fontSize: 10 }}>
         Each bar = 1 calendar week
       </Typography>
     </Box>

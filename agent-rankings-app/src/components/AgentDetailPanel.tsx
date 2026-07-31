@@ -11,12 +11,12 @@ interface StatTileProps {
 
 function StatTile({ value, label, pctile, color }: StatTileProps) {
   return (
-    <Box sx={{ bgcolor: 'background.paper', border: 1, borderColor: 'divider', borderRadius: 2, px: 2, py: 1.5, flex: 1 }}>
-      <Typography sx={{ fontSize: 20, fontWeight: 700, color, fontVariantNumeric: 'tabular-nums' }}>{value}</Typography>
-      <Typography variant="body2" sx={{ mt: 0.25 }}>
+    <Box sx={{ bgcolor: 'background.paper', border: 1, borderColor: 'divider', borderRadius: 1.5, px: 1.5, py: 1, flex: 1 }}>
+      <Typography sx={{ fontSize: 16, fontWeight: 700, color, fontVariantNumeric: 'tabular-nums', lineHeight: 1.2 }}>{value}</Typography>
+      <Typography variant="caption" sx={{ display: 'block', mt: 0.1 }}>
         {label}
       </Typography>
-      <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+      <Typography variant="caption" sx={{ color: 'text.secondary', fontSize: 10.5 }}>
         {pctile} pct
       </Typography>
     </Box>
@@ -25,8 +25,8 @@ function StatTile({ value, label, pctile, color }: StatTileProps) {
 
 export function AgentDetailPanel({ row }: { row: AgentRow }) {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
-      <Box sx={{ display: 'flex', gap: 1.5 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+      <Box sx={{ display: 'flex', gap: 1 }}>
         <StatTile value={row.f} label="Focus Ratio" pctile={row.fPctile} color="warning.dark" />
         <StatTile value={row.tVal} label="Time Spent" pctile={row.t} color="text.primary" />
         <StatTile value={row.dVal} label="Days Active" pctile={row.d} color="success.main" />
@@ -39,17 +39,18 @@ export function AgentDetailPanel({ row }: { row: AgentRow }) {
 
 export function AgentDetailFooter({ row }: { row: AgentRow }) {
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mt: 1.5 }}>
+    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mt: 1 }}>
       <Chip
         variant="outlined"
         color="primary"
+        size="small"
         clickable
         onClick={(e: React.MouseEvent) => e.stopPropagation()}
         icon={<Icon name="chart-bar" size="xs" weight="bold" />}
         label="Compare with me"
         sx={{ fontWeight: 650 }}
       />
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
         {row.badge && (
           <Chip variant="tonal" color={row.badgeColor} size="small" label={`🏆 ${row.badge}`} sx={{ fontWeight: 700 }} />
         )}

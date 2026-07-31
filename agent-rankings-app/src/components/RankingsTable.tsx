@@ -210,7 +210,7 @@ export function RankingsTable({ rows, isEng }: RankingsTableProps) {
               </Box>
             </AccordionSummary>
 
-            <AccordionDetails sx={{ px: 3, pb: 3, pt: 0.5, bgcolor: 'background.default' }}>
+            <AccordionDetails sx={{ px: 3, pb: 2, pt: 0.5, bgcolor: 'background.default' }}>
               <Box sx={{ pl: '78px' }}>
                 <AgentDetailPanel row={row} />
                 <AgentDetailFooter row={row} />
