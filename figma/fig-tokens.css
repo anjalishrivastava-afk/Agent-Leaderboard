@@ -1,0 +1,1673 @@
+/* Generated from Figma Variables. First mode = :root default.
+   FLOAT tokens are unitless — multiply by 1px in calc() where a length is needed. */
+
+:root {
+  --1-2: 8;
+  --1-5: 12;
+  --10: 0;
+  --12-2: 12;
+  --12-3: 12;
+  --12-4: 0;
+  --12-5: 12;
+  --12: 12;
+  --14: 0;
+  --16-2: 16;
+  --16-3: 16;
+  --16-4: 16;
+  --16-5: 16;
+  --16-6: 16;
+  --16-7: 16;
+  --16-8: 16;
+  --16: 16;
+  --1: 8;
+  --2-2: 16;
+  --20-2: 20;
+  --20: 20;
+  --24-2: 24;
+  --24-3: 24;
+  --24-4: 24;
+  --24: 24;
+  --28-2: 28;
+  --28: 28;
+  --2: 16;
+  --3-2: 24;
+  --32-2: 32;
+  --32-3: 32;
+  --32: 32;
+  --3: 24;
+  --4-2: 4;
+  --4-3: 4;
+  --4-4: 4;
+  --4-5: 32;
+  --4-6: 32;
+  --4-7: 4;
+  --4-8: 4;
+  --40-2: 40;
+  --40: 40;
+  --48-2: 48;
+  --48: 48;
+  --4: 4;
+  --5-2: 40;
+  --5: 40;
+  --6-2: 48;
+  --6: 48;
+  --7-2: 56;
+  --7: 56;
+  --8-10: 64;
+  --8-11: 8;
+  --8-12: 8;
+  --8-2: 8;
+  --8-3: 8;
+  --8-4: 8;
+  --8-5: 8;
+  --8-6: 0;
+  --8-7: 8;
+  --8-8: 8;
+  --8-9: 64;
+  --80-2: 80;
+  --80-3: 80;
+  --80-4: 80;
+  --80: 80;
+  --8: 8;
+  --action-active-2: var(--neutral-900); /* @kind color */
+  --action-active-3: var(--neutral-900); /* @kind color */
+  --action-active-4: rgba(0,0,0,0.86); /* @kind color */
+  --action-active-5: rgba(0,0,0,0.48); /* @kind color */
+  --action-active-6: rgba(0,0,0,0.56); /* @kind color */
+  --action-active-7: rgba(0,0,0,0.54); /* @kind color */
+  --action-active-8: rgba(0,0,0,0.87); /* @kind color */
+  --action-active-9: rgba(0,0,0,0.57); /* @kind color */
+  --action-active: var(--neutral-900); /* @kind color */
+  --action-disabled-2: rgba(0,0,0,0.38); /* @kind color */
+  --action-disabled-3: rgba(0,0,0,0.26); /* @kind color */
+  --action-disabled-4: rgba(0,0,0,0.38); /* @kind color */
+  --action-disabled-5: rgba(0,0,0,0.38); /* @kind color */
+  --action-disabled: rgba(26,26,26,0.38); /* @kind color */
+  --action-disabledbackground-2: rgba(0,0,0,0.12); /* @kind color */
+  --action-disabledbackground-3: rgba(0,0,0,0.12); /* @kind color */
+  --action-disabledbackground: rgba(26,26,26,0.12); /* @kind color */
+  --action-focus-2: rgba(0,0,0,0.12); /* @kind color */
+  --action-focus-3: rgba(0,0,0,0.12); /* @kind color */
+  --action-focus-4: rgba(0,0,0,0.12); /* @kind color */
+  --action-focus: rgba(26,26,26,0.12); /* @kind color */
+  --action-hover-2: rgba(0,0,0,0.04); /* @kind color */
+  --action-hover-3: rgba(0,0,0,0.04); /* @kind color */
+  --action-hover-4: rgba(0,0,0,0.04); /* @kind color */
+  --action-hover: rgba(26,26,26,0.04); /* @kind color */
+  --action-selected-2: rgba(0,0,0,0.08); /* @kind color */
+  --action-selected: rgba(26,26,26,0.08); /* @kind color */
+  --background-default-2: rgb(255,255,255); /* @kind color */
+  --background-default: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-0: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-10: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-11: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-12: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-13: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-14: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-15: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-16: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-17: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-18: rgb(241,241,241); /* @kind color */
+  --background-paper-elevation-19: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-20: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-21: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-22: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-23: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-24: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-2: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-3: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-4: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-5: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-6: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-7: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-8-2: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-8-3: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-8: rgb(255,255,255); /* @kind color */
+  --background-paper-elevation-9: rgb(255,255,255); /* @kind color */
+  --background-stroke-default: rgb(255,255,255); /* @kind color */
+  --background-stroke-paper-elevation-0-2: var(--neutral-50); /* @kind color */
+  --background-stroke-paper-elevation-0-3: var(--neutral-50); /* @kind color */
+  --background-stroke-paper-elevation-0: var(--neutral-50); /* @kind color */
+  --background-stroke-paper-elevation-1-2: var(--neutral-100); /* @kind color */
+  --background-stroke-paper-elevation-1-3: var(--neutral-100); /* @kind color */
+  --background-stroke-paper-elevation-1: var(--neutral-100); /* @kind color */
+  --background-stroke-stroke-default-2: var(--neutral-200); /* @kind color */
+  --background-stroke-stroke-default-3: var(--neutral-200); /* @kind color */
+  --background-stroke-stroke-default: var(--neutral-200); /* @kind color */
+  --background-stroke-stroke-prominent-2: var(--neutral-300); /* @kind color */
+  --background-stroke-stroke-prominent-3: var(--neutral-300); /* @kind color */
+  --background-stroke-stroke-prominent: var(--neutral-300); /* @kind color */
+  --black-10-2: rgba(0,0,0,0.1); /* @kind color */
+  --black-10-3: rgba(28,28,28,0.1); /* @kind color */
+  --black-10-4: rgba(28,28,28,0.1); /* @kind color */
+  --black-10-5: rgba(28,28,28,0.1); /* @kind color */
+  --black-100-2: rgb(28,28,28); /* @kind color */
+  --black-100-3: rgb(28,28,28); /* @kind color */
+  --black-100-4: rgb(28,28,28); /* @kind color */
+  --black-100-5: rgb(28,28,28); /* @kind color */
+  --black-100-6: rgb(28,28,28); /* @kind color */
+  --black-100: rgb(0,0,0); /* @kind color */
+  --black-10: rgba(28,28,28,0.1); /* @kind color */
+  --black-20: rgba(28,28,28,0.2); /* @kind color */
+  --black-4-2: rgba(0,0,0,0.04); /* @kind color */
+  --black-40-2: rgba(28,28,28,0.4); /* @kind color */
+  --black-40: rgba(0,0,0,0.4); /* @kind color */
+  --black-4: rgba(0,0,0,0.04); /* @kind color */
+  --black-5: rgba(28,28,28,0.05); /* @kind color */
+  --black-80: rgba(0,0,0,0.8); /* @kind color */
+  --black100: rgb(0,0,0); /* @kind color */
+  --black10: rgba(0,0,0,0.1); /* @kind color */
+  --black40: rgba(0,0,0,0.4); /* @kind color */
+  --black60: rgba(0,0,0,0.6); /* @kind color */
+  --blue-200: rgb(144,202,249); /* @kind color */
+  --blue-300: rgb(143,164,255); /* @kind color */
+  --blue-500: rgb(83,123,255); /* @kind color */
+  --blue-50: rgb(227,233,255); /* @kind color */
+  --blue-600: rgb(50,103,242); /* @kind color */
+  --blue-700: rgb(25,118,210); /* @kind color */
+  --blue-800: rgb(0,66,186); /* @kind color */
+  --blur-blur-0: 0;
+  --blur-blur-3: 4;
+  --borderradius-12: 12;
+  --borderradius-2: 8;
+  --borderradius-6: 6;
+  --borderradius-8-default: 8;
+  --borderradius: 8;
+  --brand-100-2: rgb(216,221,243); /* @kind color */
+  --brand-100: rgb(216,221,243); /* @kind color */
+  --brand-200-2: rgb(177,187,231); /* @kind color */
+  --brand-200: rgb(177,187,231); /* @kind color */
+  --brand-300-2: rgb(138,153,219); /* @kind color */
+  --brand-300-3: rgb(138,153,219); /* @kind color */
+  --brand-300: rgb(138,153,219); /* @kind color */
+  --brand-50-2: rgb(236,238,249); /* @kind color */
+  --brand-50-3: rgb(236,238,249); /* @kind color */
+  --brand-500-brand-2: rgb(57,79,182); /* @kind color */
+  --brand-500-brand: rgb(57,79,182); /* @kind color */
+  --brand-500: rgb(61,84,194); /* @kind color */
+  --brand-50: rgb(236,238,249); /* @kind color */
+  --brand-600-2: rgb(49,67,155); /* @kind color */
+  --brand-600-3: rgb(49,67,155); /* @kind color */
+  --brand-600: rgb(49,67,155); /* @kind color */
+  --brand-700: rgb(36,51,117); /* @kind color */
+  --brand-800: rgb(24,34,78); /* @kind color */
+  --brand-900: rgb(12,17,39); /* @kind color */
+  --brand-brand: rgb(57,79,182); /* @kind color */
+  --brand-indigo-100: rgb(216,221,243); /* @kind color */
+  --brand-indigo-200: rgb(177,187,231); /* @kind color */
+  --brand-indigo-300: rgb(138,153,219); /* @kind color */
+  --brand-indigo-400: rgb(100,118,206); /* @kind color */
+  --brand-indigo-500-brand: rgb(57,79,182); /* @kind color */
+  --brand-indigo-50: rgb(236,238,249); /* @kind color */
+  --brand-indigo-600: rgb(49,67,155); /* @kind color */
+  --brand-transparent-32: rgba(57,79,182,0.32); /* @kind color */
+  --button: "Button";
+  --color-alpha-n00-6: rgba(0,0,0,0.06); /* @kind color */
+  --color-n04: rgb(10,10,10); /* @kind color */
+  --color-n100: rgb(255,255,255); /* @kind color */
+  --color-n14: rgb(35,38,38); /* @kind color */
+  --color-y94: rgb(245,242,235); /* @kind color */
+  --colors-alpha-dark-50: rgba(26,26,26,0.08); /* @kind color */
+  --colors-alpha-dark-700: rgba(26,26,26,0.7); /* @kind color */
+  --colors-alpha-dark-900: rgb(26,26,26); /* @kind color */
+  --colors-blue-gray-300: rgb(200,214,229); /* @kind color */
+  --colors-bronze-50: rgb(250,250,249); /* @kind color */
+  --colors-gray-200: rgb(225,225,226); /* @kind color */
+  --colors-gray-50: rgb(252,252,252); /* @kind color */
+  --common-black-states-hover: rgba(26,26,26,0.04); /* @kind color */
+  --common-black-states-main-2: var(--neutral-900); /* @kind color */
+  --common-black-states-main: var(--neutral-900); /* @kind color */
+  --common-white-states-focus-2: rgba(255,255,255,0.12); /* @kind color */
+  --common-white-states-focus-3: rgba(255,255,255,0.12); /* @kind color */
+  --common-white-states-focus: rgba(255,255,255,0.12); /* @kind color */
+  --common-white-states-focusvisible-2: rgba(255,255,255,0.3); /* @kind color */
+  --common-white-states-focusvisible-3: rgba(255,255,255,0.3); /* @kind color */
+  --common-white-states-focusvisible: rgba(255,255,255,0.3); /* @kind color */
+  --common-white-states-hover-2: rgba(255,255,255,0.04); /* @kind color */
+  --common-white-states-hover-3: rgba(255,255,255,0.04); /* @kind color */
+  --common-white-states-hover: rgba(255,255,255,0.04); /* @kind color */
+  --common-white-states-main-2: rgb(255,255,255); /* @kind color */
+  --common-white-states-main-3: rgb(255,255,255); /* @kind color */
+  --common-white-states-main: rgb(255,255,255); /* @kind color */
+  --common-white-states-selected: rgba(255,255,255,0.08); /* @kind color */
+  --components-alert-error-background: rgb(253,237,237); /* @kind color */
+  --components-alert-error-color: rgb(95,33,32); /* @kind color */
+  --components-alert-info-background: rgb(229,246,253); /* @kind color */
+  --components-alert-info-color: rgb(1,67,97); /* @kind color */
+  --components-alert-success-background: rgb(237,247,237); /* @kind color */
+  --components-alert-success-color: rgb(30,70,32); /* @kind color */
+  --components-alert-warning-background: rgb(255,244,229); /* @kind color */
+  --components-alert-warning-color: rgb(102,60,0); /* @kind color */
+  --components-appbar-defaultfill: var(--neutral-100); /* @kind color */
+  --components-avatar-fill-2: var(--neutral-400); /* @kind color */
+  --components-avatar-fill-3: var(--neutral-400); /* @kind color */
+  --components-avatar-fill-4: var(--grey-400); /* @kind color */
+  --components-avatar-fill: var(--neutral-400); /* @kind color */
+  --components-backdrop-fill: rgba(0,0,0,0.5); /* @kind color */
+  --components-button-outlined-text-2: var(--neutral-500); /* @kind color */
+  --components-button-outlined-text-3: var(--neutral-500); /* @kind color */
+  --components-button-outlined-text: var(--neutral-500); /* @kind color */
+  --components-button-slidefill: var(--action-selected); /* @kind color */
+  --components-chip-defaultclosefill: rgb(0,0,0); /* @kind color */
+  --components-chip-defaultenabledborder-2: var(--neutral-400); /* @kind color */
+  --components-chip-defaultenabledborder-3: var(--neutral-400); /* @kind color */
+  --components-chip-defaultenabledborder-4: var(--grey-400); /* @kind color */
+  --components-chip-defaultenabledborder: var(--neutral-400); /* @kind color */
+  --components-chip-defaultfocusfill-2: rgba(0,0,0,0.2); /* @kind color */
+  --components-chip-defaultfocusfill: rgba(0,0,0,0.2); /* @kind color */
+  --components-chip-defaulthoverfill-2: rgba(0,0,0,0.12); /* @kind color */
+  --components-chip-defaulthoverfill: rgba(0,0,0,0.12); /* @kind color */
+  --components-dialog-header-fill: var(--grey-100-2); /* @kind color */
+  --components-input-filled-enabledfill: rgb(255,255,255); /* @kind color */
+  --components-input-filled-hoverfill: rgb(255,255,255); /* @kind color */
+  --components-input-outlined-enabledborder-2: rgba(0,0,0,0.23); /* @kind color */
+  --components-input-outlined-enabledborder: rgba(0,0,0,0.23); /* @kind color */
+  --components-input-outlined-hoverborder-2: rgb(0,0,0); /* @kind color */
+  --components-input-outlined-hoverborder: rgb(0,0,0); /* @kind color */
+  --components-input-standard-enabledborder: rgba(0,0,0,0.42); /* @kind color */
+  --components-input-standard-hoverborder: rgb(0,0,0); /* @kind color */
+  --components-paper-elevation-0: rgb(241,241,241); /* @kind color */
+  --components-paper-elevation-10: rgb(255,255,255); /* @kind color */
+  --components-paper-elevation-11: rgb(255,255,255); /* @kind color */
+  --components-paper-elevation-12: rgb(255,255,255); /* @kind color */
+  --components-paper-elevation-13: rgb(255,255,255); /* @kind color */
+  --components-paper-elevation-14: rgb(255,255,255); /* @kind color */
+  --components-paper-elevation-15: rgb(255,255,255); /* @kind color */
+  --components-paper-elevation-16: rgb(255,255,255); /* @kind color */
+  --components-paper-elevation-17: rgb(255,255,255); /* @kind color */
+  --components-paper-elevation-18: rgb(255,255,255); /* @kind color */
+  --components-paper-elevation-19: rgb(255,255,255); /* @kind color */
+  --components-paper-elevation-1: rgb(255,255,255); /* @kind color */
+  --components-paper-elevation-20: rgb(255,255,255); /* @kind color */
+  --components-paper-elevation-21: rgb(255,255,255); /* @kind color */
+  --components-paper-elevation-22: rgb(255,255,255); /* @kind color */
+  --components-paper-elevation-23: rgb(255,255,255); /* @kind color */
+  --components-paper-elevation-24: rgb(255,255,255); /* @kind color */
+  --components-paper-elevation-2: rgb(255,255,255); /* @kind color */
+  --components-paper-elevation-3: rgb(255,255,255); /* @kind color */
+  --components-paper-elevation-4: rgb(255,255,255); /* @kind color */
+  --components-paper-elevation-5: rgb(255,255,255); /* @kind color */
+  --components-paper-elevation-6: rgb(255,255,255); /* @kind color */
+  --components-paper-elevation-7: rgb(255,255,255); /* @kind color */
+  --components-paper-elevation-8: rgb(255,255,255); /* @kind color */
+  --components-paper-elevation-9: rgb(255,255,255); /* @kind color */
+  --components-paper-outlineborder: var(--divider-2); /* @kind color */
+  --components-rating-activefill-2: rgb(255,180,0); /* @kind color */
+  --components-rating-activefill: rgb(255,180,0); /* @kind color */
+  --components-rating-enabledborder-2: rgba(0,0,0,0.23); /* @kind color */
+  --components-rating-enabledborder: rgba(0,0,0,0.23); /* @kind color */
+  --components-snackbar-fill-2: rgb(50,50,50); /* @kind color */
+  --components-snackbar-fill: rgb(50,50,50); /* @kind color */
+  --components-switch-knobfillenabled: var(--neutral-50); /* @kind color */
+  --components-switch-knowfilldisabled: var(--neutral-100); /* @kind color */
+  --components-switch-slidefill: var(--action-selected); /* @kind color */
+  --components-table-border: var(--grey-300-2); /* @kind color */
+  --components-tooltip-fill: rgba(97,97,97,0.9); /* @kind color */
+  --contents-secondary: rgb(52,58,62); /* @kind color */
+  --danger-300-2: rgb(240,121,117); /* @kind color */
+  --danger-300: rgb(240,121,117); /* @kind color */
+  --danger-400-2: rgb(235,76,71); /* @kind color */
+  --danger-400: rgb(235,76,71); /* @kind color */
+  --danger-500-2: rgb(217,30,24); /* @kind color */
+  --danger-500: rgb(217,30,24); /* @kind color */
+  --danger-600: rgb(184,25,20); /* @kind color */
+  --danger-700-2: rgb(138,19,15); /* @kind color */
+  --danger-700: rgb(138,19,15); /* @kind color */
+  --danger-source: rgb(183,19,26); /* @kind color */
+  --divider-2: rgba(0,0,0,0.12); /* @kind color */
+  --divider-3: rgba(0,0,0,0.12); /* @kind color */
+  --divider: rgba(0,0,0,0.12); /* @kind color */
+  --elevation-outlined: rgb(224,224,224); /* @kind color */
+  --error-100: rgb(250,210,209); /* @kind color */
+  --error-200: rgb(245,166,163); /* @kind color */
+  --error-300: rgb(240,121,117); /* @kind color */
+  --error-50: rgb(252,233,232); /* @kind color */
+  --error-600: rgb(184,25,20); /* @kind color */
+  --error-800: rgb(92,13,10); /* @kind color */
+  --error-contrasttext-2: rgb(255,255,255); /* @kind color */
+  --error-contrasttext-3: rgb(255,255,255); /* @kind color */
+  --error-contrasttext: rgb(255,255,255); /* @kind color */
+  --error-dark-2: var(--red-700); /* @kind color */
+  --error-dark-3: var(--red-700); /* @kind color */
+  --error-dark-4: var(--red-800); /* @kind color */
+  --error-dark-5: var(--red-800-2); /* @kind color */
+  --error-dark-6: var(--red-800-2); /* @kind color */
+  --error-dark: var(--red-700); /* @kind color */
+  --error-light-2: var(--red-300); /* @kind color */
+  --error-light-3: var(--red-300); /* @kind color */
+  --error-light: var(--red-300); /* @kind color */
+  --error-main-2: var(--red-500); /* @kind color */
+  --error-main-3: var(--red-500); /* @kind color */
+  --error-main-4: var(--red-700); /* @kind color */
+  --error-main-5: var(--red-700-3); /* @kind color */
+  --error-main-6: var(--red-700-4); /* @kind color */
+  --error-main-7: var(--red-700-4); /* @kind color */
+  --error-main: var(--red-500); /* @kind color */
+  --error-source: rgb(217,30,24); /* @kind color */
+  --error-states-focusvisible-2: rgba(211,47,47,0.3); /* @kind color */
+  --error-states-focusvisible-3: rgba(211,47,47,0.3); /* @kind color */
+  --error-states-focusvisible-4: rgba(211,47,47,0.3); /* @kind color */
+  --error-states-focusvisible-5: rgba(217,45,32,0.3); /* @kind color */
+  --error-states-focusvisible: rgba(217,30,24,0.3); /* @kind color */
+  --error-states-hover-2: rgba(211,47,47,0.04); /* @kind color */
+  --error-states-hover-3: rgba(211,47,47,0.04); /* @kind color */
+  --error-states-hover-4: rgba(211,47,47,0.04); /* @kind color */
+  --error-states-hover-5: rgba(217,45,32,0.04); /* @kind color */
+  --error-states-hover: rgba(217,30,24,0.04); /* @kind color */
+  --error-states-outlinedborder-2: rgba(211,47,47,0.5); /* @kind color */
+  --error-states-outlinedborder-3: rgba(217,45,32,0.5); /* @kind color */
+  --error-states-outlinedborder: rgba(217,30,24,0.5); /* @kind color */
+  --error-states-selected-2: rgba(217,45,32,0.08); /* @kind color */
+  --error-states-selected-3: rgba(211,47,47,0.08); /* @kind color */
+  --error-states-selected: rgba(217,30,24,0.08); /* @kind color */
+  --error-transparent-32: rgba(217,30,24,0.32); /* @kind color */
+  --fill-50: var(--colors-gray-50); /* @kind color */
+  --font-families-noto-sans: "Noto Sans";
+  --font-family-2: "Inter";
+  --font-family-label-body: "Noto Sans";
+  --font-family: "Inter";
+  --font-size-0: 11;
+  --font-size-1: 12;
+  --font-size-2: 14;
+  --font-weight-medium: "Medium";
+  --font-weights-noto-sans-1: "Medium";
+  --font-weights-noto-sans-m: "Medium";
+  --font-weights-noto-sans-r: "Regular";
+  --font-weights-noto-sans-sm: "SemiBold";
+  --fontfamily-2: "Roboto";
+  --fontfamily-3: "Noto Sans";
+  --fontfamily-4: "Noto Sans";
+  --fontfamily-5: "Noto Sans";
+  --fontfamily-6: "IBM Plex Sans";
+  --fontfamily-7: "IBM Plex Sans";
+  --fontfamily: "Noto Sans";
+  --fontsize-0-625rem-2: 10;
+  --fontsize-0-625rem: 10;
+  --fontsize-0-75rem-2: 12;
+  --fontsize-0-75rem-3: 12;
+  --fontsize-0-75rem-4: 12;
+  --fontsize-0-75rem: 12;
+  --fontsize-0-8125rem-2: 13;
+  --fontsize-0-8125rem: 13;
+  --fontsize-0-875rem-2: 14;
+  --fontsize-0-875rem-3: 14;
+  --fontsize-0-875rem: 14;
+  --fontsize-0-9375rem: 15;
+  --fontsize-1-125rem: 18;
+  --fontsize-1-25rem-2: 20;
+  --fontsize-1-25rem: 20;
+  --fontsize-1-5625rem: 25;
+  --fontsize-1-5rem-2: 24;
+  --fontsize-1-5rem: 24;
+  --fontsize-1rem-2: 16;
+  --fontsize-1rem: 16;
+  --fontsize-2-125rem-2: 34;
+  --fontsize-2-125rem: 34;
+  --fontsize-2-375rem: 38;
+  --fontsize-2rem: 32;
+  --fontsize-3-5rem: 56;
+  --fontsize-3-75rem-2: 60;
+  --fontsize-3-75rem-3: 60;
+  --fontsize-3-75rem: 60;
+  --fontsize-3rem-2: 48;
+  --fontsize-3rem-3: 48;
+  --fontsize-3rem: 48;
+  --fontsize-6rem-2: 96;
+  --fontsize-6rem-3: 96;
+  --fontsize-6rem: 96;
+  --fontweightbold-2: 700;
+  --fontweightbold: 700;
+  --fontweightlight-2: 300;
+  --fontweightlight: 300;
+  --fontweightmedium-2: 500;
+  --fontweightmedium: 500;
+  --fontweightregular-2: 400;
+  --fontweightregular-3: 400;
+  --fontweightregular: 400;
+  --fontweightsemibold-2: 600;
+  --fontweightsemibold: 600;
+  --gray-900: rgb(30,30,30); /* @kind color */
+  --green-200: rgb(165,214,167); /* @kind color */
+  --green-300: rgb(108,249,183); /* @kind color */
+  --green-400-2: rgb(102,187,106); /* @kind color */
+  --green-400-3: rgb(102,187,106); /* @kind color */
+  --green-400: rgb(102,187,106); /* @kind color */
+  --green-600: rgb(8,196,108); /* @kind color */
+  --green-700-2: rgb(56,142,60); /* @kind color */
+  --green-700-3: rgb(56,142,60); /* @kind color */
+  --green-700: rgb(6,147,81); /* @kind color */
+  --green-800-2: rgb(46,125,50); /* @kind color */
+  --green-800-3: rgb(46,125,50); /* @kind color */
+  --green-800: rgb(46,125,50); /* @kind color */
+  --green-900-2: rgb(27,94,32); /* @kind color */
+  --green-900-3: rgb(27,94,32); /* @kind color */
+  --green-900: rgb(2,49,27); /* @kind color */
+  --grey-100-2: rgb(245,245,245); /* @kind color */
+  --grey-100: rgb(245,245,245); /* @kind color */
+  --grey-200-2: rgb(238,238,238); /* @kind color */
+  --grey-200: rgb(238,238,238); /* @kind color */
+  --grey-300-2: rgb(224,224,224); /* @kind color */
+  --grey-300: rgb(224,224,224); /* @kind color */
+  --grey-400-2: rgb(189,189,189); /* @kind color */
+  --grey-400: rgb(189,189,189); /* @kind color */
+  --grey-600: rgb(117,117,117); /* @kind color */
+  --grey-700-2: rgb(97,97,97); /* @kind color */
+  --grey-700: rgb(97,97,97); /* @kind color */
+  --grey-800: rgb(66,66,66); /* @kind color */
+  --icon-default-default-2: var(--gray-900); /* @kind color */
+  --icon-default-default: var(--gray-900); /* @kind color */
+  --indigo-200-2: rgb(159,168,218); /* @kind color */
+  --indigo-200: rgb(177,187,231); /* @kind color */
+  --indigo-300: rgb(138,153,219); /* @kind color */
+  --indigo-400: rgb(92,107,192); /* @kind color */
+  --indigo-500-brand: rgb(57,79,182); /* @kind color */
+  --indigo-50: rgb(232,234,246); /* @kind color */
+  --indigo-600-2: rgb(57,73,171); /* @kind color */
+  --indigo-600: rgb(49,67,155); /* @kind color */
+  --indigo-800: rgb(40,53,147); /* @kind color */
+  --info-300: rgb(111,154,246); /* @kind color */
+  --info-500: rgb(15,86,240); /* @kind color */
+  --info-contrasttext-2: rgb(255,255,255); /* @kind color */
+  --info-contrasttext: rgb(255,255,255); /* @kind color */
+  --info-dark-2: var(--blue-800); /* @kind color */
+  --info-dark-3: var(--blue-800); /* @kind color */
+  --info-dark-4: var(--lightblue-900); /* @kind color */
+  --info-dark-5: var(--lightblue-900-2); /* @kind color */
+  --info-dark: var(--blue-800); /* @kind color */
+  --info-main-2: var(--blue-600); /* @kind color */
+  --info-main-3: var(--lightblue-700); /* @kind color */
+  --info-main-4: var(--blue-600); /* @kind color */
+  --info-main-5: var(--lightblue-700); /* @kind color */
+  --info-main-6: var(--lightblue-700-3); /* @kind color */
+  --info-main-7: var(--lightblue-700-4); /* @kind color */
+  --info-main: var(--blue-600); /* @kind color */
+  --info-source: rgb(33,99,241); /* @kind color */
+  --info-states-focusvisible-2: rgba(2,136,209,0.3); /* @kind color */
+  --info-states-focusvisible-3: rgba(2,136,209,0.3); /* @kind color */
+  --info-states-focusvisible-4: rgba(2,136,209,0.3); /* @kind color */
+  --info-states-focusvisible: rgba(50,103,242,0.3); /* @kind color */
+  --info-states-hover-2: rgba(2,136,209,0.04); /* @kind color */
+  --info-states-hover-3: rgba(2,136,209,0.04); /* @kind color */
+  --info-states-hover-4: rgba(2,136,209,0.04); /* @kind color */
+  --info-states-hover-5: rgba(2,136,209,0.04); /* @kind color */
+  --info-states-hover: rgba(50,103,242,0.04); /* @kind color */
+  --info-states-outlinedborder-2: rgba(2,136,209,0.5); /* @kind color */
+  --info-states-outlinedborder-3: rgba(2,136,209,0.5); /* @kind color */
+  --info-states-outlinedborder: rgba(50,103,242,0.5); /* @kind color */
+  --info-states-selected-2: rgba(2,136,209,0.08); /* @kind color */
+  --info-states-selected: rgba(2,136,209,0.08); /* @kind color */
+  --layout-background: rgb(255,255,255); /* @kind color */
+  --layout-divider: rgb(219,219,219); /* @kind color */
+  --letter-spacing-2: 0.1;
+  --letter-spacing-3: 0.5;
+  --letter-spacing: 0;
+  --lightblue-400-2: rgb(41,182,246); /* @kind color */
+  --lightblue-400-3: rgb(41,182,246); /* @kind color */
+  --lightblue-400-4: rgb(41,182,246); /* @kind color */
+  --lightblue-400: rgb(41,182,246); /* @kind color */
+  --lightblue-700-2: rgb(2,136,209); /* @kind color */
+  --lightblue-700-3: rgb(2,136,209); /* @kind color */
+  --lightblue-700-4: rgb(2,136,209); /* @kind color */
+  --lightblue-700: rgb(2,136,209); /* @kind color */
+  --lightblue-900-2: rgb(1,87,155); /* @kind color */
+  --lightblue-900: rgb(1,87,155); /* @kind color */
+  --line-height-base: 24;
+  --line-heights-10: 20;
+  --line-heights-11: 16;
+  --link-300-2: rgb(143,164,255); /* @kind color */
+  --link-300: rgb(143,164,255); /* @kind color */
+  --link-400: rgb(113,143,255); /* @kind color */
+  --link-500: rgb(83,123,255); /* @kind color */
+  --link-50: rgb(227,233,255); /* @kind color */
+  --link-600-2: rgb(50,103,242); /* @kind color */
+  --link-600: rgb(50,103,242); /* @kind color */
+  --link-800-2: rgb(0,66,186); /* @kind color */
+  --link-800: rgb(0,66,186); /* @kind color */
+  --native-scrollbar-bg-2: var(--grey-200); /* @kind color */
+  --native-scrollbar-bg-3: var(--neutral-200); /* @kind color */
+  --native-scrollbar-bg-4: var(--neutral-200); /* @kind color */
+  --native-scrollbar-bg: var(--neutral-200); /* @kind color */
+  --neutral-0-white-2: rgb(255,255,255); /* @kind color */
+  --neutral-0-white: rgb(255,255,255); /* @kind color */
+  --neutral-100-2: rgb(244,244,245); /* @kind color */
+  --neutral-100-subtle: rgb(241,241,241); /* @kind color */
+  --neutral-100: rgb(241,241,241); /* @kind color */
+  --neutral-200-stroke: rgb(228,228,228); /* @kind color */
+  --neutral-200: rgb(228,228,228); /* @kind color */
+  --neutral-300-2: rgb(212,212,216); /* @kind color */
+  --neutral-300-soft: rgb(158,158,158); /* @kind color */
+  --neutral-300: rgb(158,158,158); /* @kind color */
+  --neutral-400-2: rgb(198,198,198); /* @kind color */
+  --neutral-400-muted: rgb(97,97,97); /* @kind color */
+  --neutral-400: rgb(97,97,97); /* @kind color */
+  --neutral-50-background: rgb(248,248,248); /* @kind color */
+  --neutral-500-2: rgb(77,77,77); /* @kind color */
+  --neutral-500: rgb(77,77,76); /* @kind color */
+  --neutral-50: rgb(248,248,248); /* @kind color */
+  --neutral-600-2: rgb(51,51,51); /* @kind color */
+  --neutral-600: rgb(51,51,51); /* @kind color */
+  --neutral-700-2: rgb(56,56,56); /* @kind color */
+  --neutral-700: rgb(26,26,26); /* @kind color */
+  --neutral-900: rgb(26,26,26); /* @kind color */
+  --neutral-source: rgb(33,33,33); /* @kind color */
+  --neutral-transparent-8: rgba(33,33,33,0.08); /* @kind color */
+  --nuetral-100-2: rgb(241,241,241); /* @kind color */
+  --nuetral-100: rgb(241,241,241); /* @kind color */
+  --nuetral-200-2: rgb(228,228,228); /* @kind color */
+  --nuetral-200: rgb(228,228,228); /* @kind color */
+  --nuetral-300-2: rgb(158,158,158); /* @kind color */
+  --nuetral-300: rgb(158,158,158); /* @kind color */
+  --nuetral-400-2: rgb(97,97,97); /* @kind color */
+  --nuetral-400: rgb(97,97,97); /* @kind color */
+  --nuetral-50-2: rgb(248,248,248); /* @kind color */
+  --nuetral-500-2: rgb(77,77,76); /* @kind color */
+  --nuetral-500: rgb(77,77,76); /* @kind color */
+  --nuetral-50: rgb(248,248,248); /* @kind color */
+  --nuetral-600-2: rgb(51,51,51); /* @kind color */
+  --nuetral-600: rgb(51,51,51); /* @kind color */
+  --nuetral-700-2: rgb(56,56,56); /* @kind color */
+  --nuetral-700: rgb(56,56,56); /* @kind color */
+  --nuetral-800-2: rgb(33,33,33); /* @kind color */
+  --nuetral-800: rgb(33,33,33); /* @kind color */
+  --nuetral-900-2: rgb(26,26,26); /* @kind color */
+  --nuetral-900: rgb(26,26,26); /* @kind color */
+  --orange-400-2: rgb(254,207,52); /* @kind color */
+  --orange-400-3: rgb(255,167,38); /* @kind color */
+  --orange-400-4: rgb(255,167,38); /* @kind color */
+  --orange-400: rgb(254,207,52); /* @kind color */
+  --orange-500: rgb(225,173,1); /* @kind color */
+  --orange-50: rgb(255,249,230); /* @kind color */
+  --orange-600-2: rgb(203,156,1); /* @kind color */
+  --orange-600: rgb(203,156,1); /* @kind color */
+  --orange-700-2: rgb(245,124,0); /* @kind color */
+  --orange-700: rgb(152,117,1); /* @kind color */
+  --orange-800-2: rgb(239,108,0); /* @kind color */
+  --orange-800: rgb(239,108,0); /* @kind color */
+  --orange-900: rgb(230,81,0); /* @kind color */
+  --primary-brand-2: rgb(28,28,28); /* @kind color */
+  --primary-brand: var(--black-100); /* @kind color */
+  --primary-contrasttext-2: rgb(255,255,255); /* @kind color */
+  --primary-contrasttext-3: rgb(255,255,255); /* @kind color */
+  --primary-contrasttext: rgb(255,255,255); /* @kind color */
+  --primary-dark-2: var(--brand-indigo-600); /* @kind color */
+  --primary-dark-3: var(--brand-indigo-600); /* @kind color */
+  --primary-dark-4: var(--brand-indigo-600); /* @kind color */
+  --primary-dark-5: var(--indigo-800); /* @kind color */
+  --primary-dark: var(--brand-indigo-600); /* @kind color */
+  --primary-light-2: rgb(247,249,251); /* @kind color */
+  --primary-light-3: var(--indigo-400); /* @kind color */
+  --primary-light: var(--brand-indigo-400); /* @kind color */
+  --primary-main-2: var(--brand-indigo-500-brand); /* @kind color */
+  --primary-main-3: var(--brand-indigo-500-brand); /* @kind color */
+  --primary-main-4: var(--brand-indigo-500-brand); /* @kind color */
+  --primary-main-5: var(--brand-indigo-500-brand); /* @kind color */
+  --primary-main-6: var(--indigo-600-2); /* @kind color */
+  --primary-main-7: var(--blue-700); /* @kind color */
+  --primary-main-8: var(--indigo-600-2); /* @kind color */
+  --primary-main-9: var(--indigo-600-2); /* @kind color */
+  --primary-main: var(--brand-indigo-500-brand); /* @kind color */
+  --primary-source: rgb(97,58,245); /* @kind color */
+  --primary-states-focus-2: rgba(57,73,171,0.12); /* @kind color */
+  --primary-states-focus-3: rgba(25,118,210,0.12); /* @kind color */
+  --primary-states-focus: rgba(57,79,182,0.12); /* @kind color */
+  --primary-states-focusvisible-2: rgba(57,73,171,0.3); /* @kind color */
+  --primary-states-focusvisible-3: rgba(25,118,210,0.3); /* @kind color */
+  --primary-states-focusvisible: rgba(57,79,182,0.3); /* @kind color */
+  --primary-states-hover-2: rgba(57,73,171,0.04); /* @kind color */
+  --primary-states-hover-3: rgba(25,118,210,0.04); /* @kind color */
+  --primary-states-hover: rgba(57,79,182,0.04); /* @kind color */
+  --primary-states-outlinedborder-2: rgba(57,73,171,0.5); /* @kind color */
+  --primary-states-outlinedborder: rgba(57,79,182,0.5); /* @kind color */
+  --primary-states-selected-2: rgba(57,73,171,0.08); /* @kind color */
+  --primary-states-selected-3: rgba(57,73,171,0.16); /* @kind color */
+  --primary-states-selected: rgba(57,79,182,0.08); /* @kind color */
+  --primary-transparent-48: rgba(97,58,245,0.48); /* @kind color */
+  --purple-200-2: rgb(206,147,216); /* @kind color */
+  --purple-200-3: rgb(206,147,216); /* @kind color */
+  --purple-200: rgb(206,147,216); /* @kind color */
+  --purple-400-2: rgb(171,71,188); /* @kind color */
+  --purple-400-3: rgb(214,187,251); /* @kind color */
+  --purple-400: rgb(171,71,188); /* @kind color */
+  --purple-500-2: rgb(156,39,176); /* @kind color */
+  --purple-500-3: rgb(156,39,176); /* @kind color */
+  --purple-500: rgb(156,39,176); /* @kind color */
+  --purple-600: rgb(158,119,237); /* @kind color */
+  --purple-700-2: rgb(123,31,162); /* @kind color */
+  --purple-700-3: rgb(127,86,217); /* @kind color */
+  --purple-700: rgb(123,31,162); /* @kind color */
+  --purple-800: rgb(105,65,198); /* @kind color */
+  --purple-contrasttext: rgb(255,255,255); /* @kind color */
+  --purple-dark-2: var(--purple-700); /* @kind color */
+  --purple-dark-3: var(--purple-700); /* @kind color */
+  --purple-dark: var(--purple-700); /* @kind color */
+  --purple-main-2: var(--purple-500); /* @kind color */
+  --purple-main-3: var(--purple-500); /* @kind color */
+  --purple-main: var(--purple-500); /* @kind color */
+  --purple-states-focus: rgba(156,39,176,0.12); /* @kind color */
+  --purple-states-focusvisible: rgba(156,39,176,0.3); /* @kind color */
+  --purple-states-hover: rgba(156,39,176,0.04); /* @kind color */
+  --purple-states-outlinedborder: rgba(156,39,176,0.5); /* @kind color */
+  --purple-states-selected: rgba(156,39,176,0.08); /* @kind color */
+  --radius-2xl: 20;
+  --radius-8-2: 8;
+  --radius-8-3: 8;
+  --radius-8: 8;
+  --radius-lg: 12;
+  --radius-md-2: 8;
+  --radius-md: 8;
+  --radius-none-2: 0;
+  --radius-none-3: 0;
+  --radius-none: 0;
+  --radius-sm-2: 6;
+  --radius-sm: 6;
+  --radius-xl: 16;
+  --radius-xs-2: 4;
+  --radius-xs: 4;
+  --radius-xxs: 2;
+  --red-300: rgb(240,121,117); /* @kind color */
+  --red-400: rgb(235,76,71); /* @kind color */
+  --red-500-2: rgb(244,67,54); /* @kind color */
+  --red-500-3: rgb(244,67,54); /* @kind color */
+  --red-500-4: rgb(244,67,54); /* @kind color */
+  --red-500-5: rgb(249,112,102); /* @kind color */
+  --red-500: rgb(217,30,24); /* @kind color */
+  --red-50: rgb(252,233,232); /* @kind color */
+  --red-700-2: rgb(211,47,47); /* @kind color */
+  --red-700-3: rgb(211,47,47); /* @kind color */
+  --red-700-4: rgb(211,47,47); /* @kind color */
+  --red-700-5: rgb(217,45,32); /* @kind color */
+  --red-700: rgb(138,19,15); /* @kind color */
+  --red-800-2: rgb(198,40,40); /* @kind color */
+  --red-800-3: rgb(180,35,24); /* @kind color */
+  --red-800: rgb(198,40,40); /* @kind color */
+  --regular: 400;
+  --secondary-200-2: rgb(206,147,216); /* @kind color */
+  --secondary-200: rgb(206,147,216); /* @kind color */
+  --secondary-400-2: rgb(171,71,188); /* @kind color */
+  --secondary-400: rgb(171,71,188); /* @kind color */
+  --secondary-500-2: rgb(156,39,176); /* @kind color */
+  --secondary-500: rgb(156,39,176); /* @kind color */
+  --secondary-50: rgb(243,229,245); /* @kind color */
+  --secondary-600: rgb(142,36,170); /* @kind color */
+  --secondary-700-2: rgb(123,31,162); /* @kind color */
+  --secondary-700: rgb(123,31,162); /* @kind color */
+  --secondary-blue-2: rgb(177,227,255); /* @kind color */
+  --secondary-blue: rgb(146,191,255); /* @kind color */
+  --secondary-contrasttext-2: rgb(255,255,255); /* @kind color */
+  --secondary-contrasttext: rgb(255,255,255); /* @kind color */
+  --secondary-dark-2: var(--purple-700-2); /* @kind color */
+  --secondary-dark-3: var(--purple-800); /* @kind color */
+  --secondary-dark: var(--purple-700); /* @kind color */
+  --secondary-indigo: rgb(159,159,248); /* @kind color */
+  --secondary-main-2: var(--purple-500-2); /* @kind color */
+  --secondary-main-3: var(--purple-500-3); /* @kind color */
+  --secondary-main-4: var(--purple-700-2); /* @kind color */
+  --secondary-main: var(--purple-500); /* @kind color */
+  --secondary-purple: rgb(198,199,248); /* @kind color */
+  --secondary-states-focus-2: rgba(127,86,217,0.12); /* @kind color */
+  --secondary-states-focus: rgba(156,39,176,0.12); /* @kind color */
+  --secondary-states-focusvisible-2: rgba(156,39,176,0.3); /* @kind color */
+  --secondary-states-focusvisible-3: rgba(156,39,176,0.3); /* @kind color */
+  --secondary-states-focusvisible-4: rgba(127,86,217,0.3); /* @kind color */
+  --secondary-states-focusvisible: rgba(156,39,176,0.3); /* @kind color */
+  --secondary-states-hover-2: rgba(156,39,176,0.04); /* @kind color */
+  --secondary-states-hover-3: rgba(156,39,176,0.04); /* @kind color */
+  --secondary-states-hover-4: rgba(127,86,217,0.04); /* @kind color */
+  --secondary-states-hover: rgba(156,39,176,0.04); /* @kind color */
+  --secondary-states-outlinedborder-2: rgba(127,86,217,0.5); /* @kind color */
+  --secondary-states-outlinedborder: rgba(156,39,176,0.5); /* @kind color */
+  --secondary-states-selected-2: rgba(156,39,176,0.08); /* @kind color */
+  --secondary-states-selected: rgba(127,86,217,0.08); /* @kind color */
+  --size-16-2: 16;
+  --size-16: 16;
+  --size-20-2: 20;
+  --size-20-3: 20;
+  --size-20: 20;
+  --size-24-2: 24;
+  --size-24: 24;
+  --size-28-2: 28;
+  --size-28: 28;
+  --spacing-space-8: 16;
+  --spacing-space-9: 20;
+  --state-base-border: var(--colors-gray-200); /* @kind color */
+  --success-300-2: rgb(108,249,183); /* @kind color */
+  --success-300: rgb(108,249,183); /* @kind color */
+  --success-600-2: rgb(8,196,108); /* @kind color */
+  --success-600: rgb(8,196,108); /* @kind color */
+  --success-700-2: rgb(6,147,81); /* @kind color */
+  --success-700: rgb(6,147,81); /* @kind color */
+  --success-900-2: rgb(2,49,27); /* @kind color */
+  --success-900: rgb(2,49,27); /* @kind color */
+  --success-contrasttext-2: rgb(255,255,255); /* @kind color */
+  --success-contrasttext-3: rgb(255,255,255); /* @kind color */
+  --success-contrasttext-4: rgb(255,255,255); /* @kind color */
+  --success-contrasttext-5: rgb(255,255,255); /* @kind color */
+  --success-contrasttext: rgb(255,255,255); /* @kind color */
+  --success-dark-2: var(--green-900); /* @kind color */
+  --success-dark-3: var(--green-900); /* @kind color */
+  --success-dark-4: var(--green-900); /* @kind color */
+  --success-dark-5: var(--green-900-3); /* @kind color */
+  --success-dark: var(--green-900); /* @kind color */
+  --success-main-2: var(--green-700); /* @kind color */
+  --success-main-3: var(--green-700); /* @kind color */
+  --success-main-4: var(--green-800); /* @kind color */
+  --success-main-5: var(--green-800); /* @kind color */
+  --success-main-6: var(--green-800-2); /* @kind color */
+  --success-main-7: var(--green-800-3); /* @kind color */
+  --success-main: var(--green-700); /* @kind color */
+  --success-source-2: rgb(60,151,24); /* @kind color */
+  --success-source: rgb(6,153,84); /* @kind color */
+  --success-states-focusvisible-2: rgba(46,125,50,0.3); /* @kind color */
+  --success-states-focusvisible-3: rgba(46,125,50,0.3); /* @kind color */
+  --success-states-focusvisible-4: rgba(46,125,50,0.3); /* @kind color */
+  --success-states-focusvisible-5: rgba(46,125,50,0.3); /* @kind color */
+  --success-states-focusvisible: rgba(20,154,86,0.3); /* @kind color */
+  --success-states-hover-2: rgba(46,125,50,0.04); /* @kind color */
+  --success-states-hover-3: rgba(46,125,50,0.04); /* @kind color */
+  --success-states-hover-4: rgba(46,125,50,0.04); /* @kind color */
+  --success-states-hover-5: rgba(46,125,50,0.04); /* @kind color */
+  --success-states-hover: rgba(20,154,86,0.04); /* @kind color */
+  --success-states-outlinedborder-2: rgba(46,125,50,0.5); /* @kind color */
+  --success-states-outlinedborder-3: rgba(46,125,50,0.5); /* @kind color */
+  --success-states-outlinedborder: rgba(20,154,86,0.5); /* @kind color */
+  --success-states-selected-2: rgba(46,125,50,0.08); /* @kind color */
+  --success-states-selected-3: rgba(46,125,50,0.08); /* @kind color */
+  --success-states-selected: rgba(20,154,86,0.08); /* @kind color */
+  --surface-surface-baloon-friend: var(--color-n100); /* @kind color */
+  --surface-surface-chat: var(--color-y94); /* @kind color */
+  --surface-surface-shadow-baloon: var(--color-alpha-n00-6); /* @kind color */
+  --text-disabled-2: rgba(0,0,0,0.38); /* @kind color */
+  --text-disabled-3: rgba(0,0,0,0.38); /* @kind color */
+  --text-disabled: rgba(0,0,0,0.38); /* @kind color */
+  --text-light: var(--neutral-0-white-2); /* @kind color */
+  --text-primary-2: var(--neutral-900); /* @kind color */
+  --text-primary-3: var(--neutral-900); /* @kind color */
+  --text-primary-4: rgba(0,0,0,0.87); /* @kind color */
+  --text-primary-5: rgba(0,0,0,0.87); /* @kind color */
+  --text-primary-6: rgba(0,0,0,0.87); /* @kind color */
+  --text-primary-7: var(--colors-alpha-dark-900); /* @kind color */
+  --text-primary: var(--neutral-900); /* @kind color */
+  --text-secondary-2: rgba(0,0,0,0.6); /* @kind color */
+  --text-secondary-3: rgba(0,0,0,0.6); /* @kind color */
+  --text-secondary-4: var(--colors-alpha-dark-700); /* @kind color */
+  --text-secondary: rgba(0,0,0,0.6); /* @kind color */
+  --text-states-focus-2: rgba(0,0,0,0.12); /* @kind color */
+  --text-states-focus-3: rgba(0,0,0,0.12); /* @kind color */
+  --text-states-focus: rgba(26,26,26,0.12); /* @kind color */
+  --text-states-focusvisible-2: rgba(0,0,0,0.3); /* @kind color */
+  --text-states-focusvisible-3: rgba(0,0,0,0.3); /* @kind color */
+  --text-states-focusvisible: rgba(26,26,26,0.3); /* @kind color */
+  --text-states-hover-2: rgba(0,0,0,0.04); /* @kind color */
+  --text-states-hover: rgba(0,0,0,0.04); /* @kind color */
+  --text: "Text";
+  --token: rgb(0,0,0); /* @kind color */
+  --typography-body1: var(--fontsize-1rem-2);
+  --typography-body2: var(--fontsize-0-875rem-2);
+  --typography-caption: var(--fontsize-0-75rem-4);
+  --typography-h1-2: var(--fontsize-6rem-2);
+  --typography-h1: var(--fontsize-6rem-2);
+  --typography-h2: var(--fontsize-3-75rem-2);
+  --typography-h3: var(--fontsize-3rem-2);
+  --typography-h4: var(--fontsize-2rem);
+  --typography-h5: var(--fontsize-1-5rem-2);
+  --typography-h6: var(--fontsize-1-25rem-2);
+  --typography-overline: var(--fontsize-0-75rem-4);
+  --typography-subtitle1: var(--fontsize-1rem-2);
+  --typography-subtitle2: var(--fontsize-0-875rem-2);
+  --warning-100: rgb(255,244,206); /* @kind color */
+  --warning-200: rgb(255,236,175); /* @kind color */
+  --warning-400-2: rgb(251,209,91); /* @kind color */
+  --warning-400: rgb(251,209,91); /* @kind color */
+  --warning-500-2: rgb(232,185,49); /* @kind color */
+  --warning-500-3: rgb(232,185,49); /* @kind color */
+  --warning-500: rgb(254,195,1); /* @kind color */
+  --warning-50: rgb(255,250,235); /* @kind color */
+  --warning-600-2: rgb(229,160,0); /* @kind color */
+  --warning-600: rgb(229,160,0); /* @kind color */
+  --warning-900-2: rgb(75,52,0); /* @kind color */
+  --warning-900: rgb(75,52,0); /* @kind color */
+  --warning-contrasttext-2: rgb(255,255,255); /* @kind color */
+  --warning-contrasttext: rgb(255,255,255); /* @kind color */
+  --warning-dark-2: var(--orange-600); /* @kind color */
+  --warning-dark-3: var(--orange-600); /* @kind color */
+  --warning-dark-4: var(--warning-900); /* @kind color */
+  --warning-dark-5: var(--yellow-900); /* @kind color */
+  --warning-dark-6: var(--yellow-900); /* @kind color */
+  --warning-dark: var(--orange-700); /* @kind color */
+  --warning-light: var(--yellow-500); /* @kind color */
+  --warning-main-2: var(--orange-500); /* @kind color */
+  --warning-main-3: var(--orange-600); /* @kind color */
+  --warning-main-4: var(--orange-500); /* @kind color */
+  --warning-main-5: var(--orange-800); /* @kind color */
+  --warning-main-6: var(--yellow-800); /* @kind color */
+  --warning-main-7: var(--orange-800-2); /* @kind color */
+  --warning-main-8: var(--yellow-800); /* @kind color */
+  --warning-main: var(--orange-600); /* @kind color */
+  --warning-source: rgb(225,173,1); /* @kind color */
+  --warning-states-focusvisible-2: rgba(239,108,0,0.3); /* @kind color */
+  --warning-states-focusvisible-3: rgba(239,108,0,0.3); /* @kind color */
+  --warning-states-focusvisible-4: rgba(239,108,0,0.3); /* @kind color */
+  --warning-states-focusvisible-5: rgba(181,71,8,0.3); /* @kind color */
+  --warning-states-focusvisible: rgba(225,173,1,0.3); /* @kind color */
+  --warning-states-hover-2: rgba(239,108,0,0.04); /* @kind color */
+  --warning-states-hover-3: rgba(239,108,0,0.04); /* @kind color */
+  --warning-states-hover-4: rgba(239,108,0,0.04); /* @kind color */
+  --warning-states-hover-5: rgba(181,71,8,0.04); /* @kind color */
+  --warning-states-hover: rgba(225,173,1,0.04); /* @kind color */
+  --warning-states-outlinedborder-2: rgba(239,108,0,0.5); /* @kind color */
+  --warning-states-outlinedborder-3: rgba(181,71,8,0.5); /* @kind color */
+  --warning-states-outlinedborder: rgba(225,173,1,0.5); /* @kind color */
+  --warning-states-selected-2: rgba(181,71,8,0.08); /* @kind color */
+  --warning-states-selected-3: rgba(239,108,0,0.08); /* @kind color */
+  --warning-states-selected: rgba(225,173,1,0.08); /* @kind color */
+  --white-10-2: rgba(255,255,255,0.1); /* @kind color */
+  --white-100-2: rgb(255,255,255); /* @kind color */
+  --white-100-3: rgb(255,255,255); /* @kind color */
+  --white-100-4: rgb(255,255,255); /* @kind color */
+  --white-1000: rgb(255,255,255); /* @kind color */
+  --white-100: rgb(255,255,255); /* @kind color */
+  --white-10: rgba(255,255,255,0.1); /* @kind color */
+  --white-20-2: rgba(255,255,255,0.2); /* @kind color */
+  --white-20: rgba(255,255,255,0.2); /* @kind color */
+  --white-40-2: rgba(255,255,255,0.4); /* @kind color */
+  --white-40: rgba(255,255,255,0.4); /* @kind color */
+  --white100: rgb(255,255,255); /* @kind color */
+  --xs: 444;
+  --yellow-300: rgb(254,223,137); /* @kind color */
+  --yellow-400-2: rgb(254,200,75); /* @kind color */
+  --yellow-400: rgb(255,238,88); /* @kind color */
+  --yellow-500: rgb(253,176,34); /* @kind color */
+  --yellow-700-2: rgb(220,104,3); /* @kind color */
+  --yellow-700: rgb(251,192,45); /* @kind color */
+  --yellow-800-2: rgb(181,71,8); /* @kind color */
+  --yellow-800: rgb(249,168,37); /* @kind color */
+  --yellow-900-2: rgb(147,55,13); /* @kind color */
+  --yellow-900: rgb(245,127,23); /* @kind color */
+}
+
+:root[data-mode="expanded-4"] {
+  --12-2: 16;
+  --12-3: 16;
+  --12-5: 16;
+  --12: 16;
+  --16-2: 20;
+  --16-3: 20;
+  --16-4: 20;
+  --16-5: 20;
+  --16-6: 20;
+  --16-7: 20;
+  --16-8: 20;
+  --16: 20;
+  --20-2: 24;
+  --20: 24;
+  --24-2: 28;
+  --24-3: 28;
+  --24-4: 28;
+  --24: 28;
+  --28-2: 32;
+  --28: 32;
+  --32-2: 36;
+  --32-3: 36;
+  --32: 36;
+  --4-2: 8;
+  --4-3: 8;
+  --4-4: 8;
+  --4-7: 8;
+  --4-8: 8;
+  --40-2: 44;
+  --40: 44;
+  --48-2: 52;
+  --48: 52;
+  --4: 8;
+  --8-11: 12;
+  --8-12: 12;
+  --8-2: 12;
+  --8-3: 12;
+  --8-4: 12;
+  --8-5: 12;
+  --8-7: 12;
+  --8-8: 12;
+  --80-2: 84;
+  --80-3: 84;
+  --80-4: 84;
+  --80: 84;
+  --8: 12;
+  --radius-8-2: 8;
+  --radius-8-3: 8;
+  --radius-8: 8;
+  --size-16-2: 20;
+  --size-16: 20;
+  --size-20-2: 24;
+  --size-20-3: 24;
+  --size-20: 24;
+  --size-24-2: 28;
+  --size-24: 28;
+  --size-28-2: 32;
+  --size-28: 32;
+}
+
+:root[data-mode="expanded-8"] {
+  --12-2: 20;
+  --12-3: 20;
+  --12-5: 20;
+  --12: 20;
+  --16-2: 24;
+  --16-3: 24;
+  --16-4: 24;
+  --16-5: 24;
+  --16-6: 24;
+  --16-7: 24;
+  --16-8: 24;
+  --16: 24;
+  --20-2: 28;
+  --20: 28;
+  --24-2: 32;
+  --24-3: 32;
+  --24-4: 32;
+  --24: 32;
+  --28-2: 36;
+  --28: 36;
+  --32-2: 40;
+  --32-3: 40;
+  --32: 40;
+  --4-2: 12;
+  --4-3: 12;
+  --4-4: 12;
+  --4-7: 12;
+  --4-8: 12;
+  --40-2: 48;
+  --40: 48;
+  --48-2: 56;
+  --48: 56;
+  --4: 12;
+  --8-11: 16;
+  --8-12: 16;
+  --8-2: 16;
+  --8-3: 16;
+  --8-4: 16;
+  --8-5: 16;
+  --8-7: 16;
+  --8-8: 16;
+  --80-2: 88;
+  --80-3: 88;
+  --80-4: 88;
+  --80: 88;
+  --8: 16;
+  --radius-8-2: 8;
+  --radius-8-3: 8;
+  --radius-8: 8;
+  --size-16-2: 12;
+  --size-16: 12;
+  --size-20-2: 16;
+  --size-20-3: 16;
+  --size-20: 16;
+  --size-24-2: 20;
+  --size-24: 20;
+  --size-28-2: 24;
+  --size-28: 24;
+}
+
+:root[data-mode="condensed-4"] {
+  --12-2: 8;
+  --12-3: 8;
+  --12-5: 8;
+  --12: 8;
+  --16-2: 12;
+  --16-3: 12;
+  --16-4: 12;
+  --16-5: 12;
+  --16-6: 12;
+  --16-7: 12;
+  --16-8: 12;
+  --16: 12;
+  --20-2: 16;
+  --20: 16;
+  --24-2: 20;
+  --24-3: 20;
+  --24-4: 20;
+  --24: 20;
+  --28-2: 24;
+  --28: 24;
+  --32-2: 28;
+  --32-3: 28;
+  --32: 28;
+  --4-2: 0;
+  --4-3: 0;
+  --4-4: 0;
+  --4-7: 0;
+  --4-8: 0;
+  --40-2: 36;
+  --40: 36;
+  --48-2: 44;
+  --48: 44;
+  --4: 0;
+  --8-11: 4;
+  --8-12: 4;
+  --8-2: 4;
+  --8-3: 4;
+  --8-4: 4;
+  --8-5: 4;
+  --8-7: 4;
+  --8-8: 4;
+  --80-2: 76;
+  --80-3: 76;
+  --80-4: 76;
+  --80: 76;
+  --8: 4;
+  --radius-8-2: 8;
+  --radius-8-3: 8;
+  --radius-8: 8;
+  --size-16-2: 16;
+  --size-16: 16;
+  --size-20-2: 20;
+  --size-20-3: 20;
+  --size-20: 20;
+  --size-24-2: 24;
+  --size-24: 24;
+  --size-28-2: 28;
+  --size-28: 28;
+}
+
+:root[data-theme="dark"], .dark {
+  --action-active-2: rgba(255,255,255,0.86); /* @kind color */
+  --action-active-3: rgba(255,255,255,0.86); /* @kind color */
+  --action-active-4: rgba(255,255,255,0.86); /* @kind color */
+  --action-active-5: rgba(255,255,255,0.48); /* @kind color */
+  --action-active-6: rgba(255,255,255,0.56); /* @kind color */
+  --action-active-7: rgb(255,255,255); /* @kind color */
+  --action-active-8: rgba(255,255,255,0.87); /* @kind color */
+  --action-active-9: rgba(255,255,255,0.87); /* @kind color */
+  --action-active: rgba(255,255,255,0.86); /* @kind color */
+  --action-disabled-2: rgba(255,255,255,0.38); /* @kind color */
+  --action-disabled-3: rgba(255,255,255,0.3); /* @kind color */
+  --action-disabled-4: rgba(255,255,255,0.38); /* @kind color */
+  --action-disabled-5: rgba(255,255,255,0.38); /* @kind color */
+  --action-disabled: rgba(255,255,255,0.38); /* @kind color */
+  --action-disabledbackground-2: rgba(255,255,255,0.12); /* @kind color */
+  --action-disabledbackground-3: rgba(255,255,255,0.12); /* @kind color */
+  --action-disabledbackground: rgba(255,255,255,0.12); /* @kind color */
+  --action-focus-2: rgba(255,255,255,0.12); /* @kind color */
+  --action-focus-3: rgba(255,255,255,0.12); /* @kind color */
+  --action-focus-4: rgba(255,255,255,0.12); /* @kind color */
+  --action-focus: rgba(255,255,255,0.12); /* @kind color */
+  --action-hover-2: rgba(255,255,255,0.08); /* @kind color */
+  --action-hover-3: rgba(255,255,255,0.08); /* @kind color */
+  --action-hover-4: rgba(255,255,255,0.08); /* @kind color */
+  --action-hover: rgba(255,255,255,0.08); /* @kind color */
+  --action-selected-2: rgba(255,255,255,0.16); /* @kind color */
+  --action-selected: rgba(255,255,255,0.16); /* @kind color */
+  --background-default-2: rgb(18,18,18); /* @kind color */
+  --background-default: rgb(18,18,18); /* @kind color */
+  --background-paper-elevation-0: rgb(18,18,18); /* @kind color */
+  --background-paper-elevation-10: rgb(49,49,49); /* @kind color */
+  --background-paper-elevation-11: rgb(49,49,49); /* @kind color */
+  --background-paper-elevation-12: rgb(51,51,51); /* @kind color */
+  --background-paper-elevation-13: rgb(51,51,51); /* @kind color */
+  --background-paper-elevation-14: rgb(51,51,51); /* @kind color */
+  --background-paper-elevation-15: rgb(51,51,51); /* @kind color */
+  --background-paper-elevation-16: rgb(54,54,54); /* @kind color */
+  --background-paper-elevation-17: rgb(54,54,54); /* @kind color */
+  --background-paper-elevation-18: rgb(54,54,54); /* @kind color */
+  --background-paper-elevation-19: rgb(54,54,54); /* @kind color */
+  --background-paper-elevation-20: rgb(56,56,56); /* @kind color */
+  --background-paper-elevation-21: rgb(56,56,56); /* @kind color */
+  --background-paper-elevation-22: rgb(56,56,56); /* @kind color */
+  --background-paper-elevation-23: rgb(56,56,56); /* @kind color */
+  --background-paper-elevation-24: rgb(56,56,56); /* @kind color */
+  --background-paper-elevation-2: rgb(35,35,35); /* @kind color */
+  --background-paper-elevation-3: rgb(37,37,37); /* @kind color */
+  --background-paper-elevation-4: rgb(39,39,39); /* @kind color */
+  --background-paper-elevation-5: rgb(42,42,42); /* @kind color */
+  --background-paper-elevation-6: rgb(44,44,44); /* @kind color */
+  --background-paper-elevation-7: rgb(44,44,44); /* @kind color */
+  --background-paper-elevation-8-2: rgb(46,46,46); /* @kind color */
+  --background-paper-elevation-8-3: rgb(46,46,46); /* @kind color */
+  --background-paper-elevation-8: rgb(46,46,46); /* @kind color */
+  --background-paper-elevation-9: rgb(46,46,46); /* @kind color */
+  --background-stroke-default: rgb(18,18,18); /* @kind color */
+  --background-stroke-paper-elevation-0-2: rgb(37,37,37); /* @kind color */
+  --background-stroke-paper-elevation-0-3: rgb(37,37,37); /* @kind color */
+  --background-stroke-paper-elevation-0: rgb(37,37,37); /* @kind color */
+  --background-stroke-paper-elevation-1-2: rgb(44,44,44); /* @kind color */
+  --background-stroke-paper-elevation-1-3: rgb(44,44,44); /* @kind color */
+  --background-stroke-paper-elevation-1: rgb(44,44,44); /* @kind color */
+  --background-stroke-stroke-default-2: rgb(44,44,44); /* @kind color */
+  --background-stroke-stroke-default-3: rgb(44,44,44); /* @kind color */
+  --background-stroke-stroke-default: rgb(44,44,44); /* @kind color */
+  --background-stroke-stroke-prominent-2: rgb(59,59,59); /* @kind color */
+  --background-stroke-stroke-prominent-3: rgb(59,59,59); /* @kind color */
+  --background-stroke-stroke-prominent: rgb(59,59,59); /* @kind color */
+  --black-10-2: rgba(255,255,255,0.15); /* @kind color */
+  --black-10-2: rgba(255,255,255,0.15); /* @kind color */
+  --black-10-3: rgba(255,255,255,0.1); /* @kind color */
+  --black-10-3: rgba(255,255,255,0.1); /* @kind color */
+  --black-10-4: rgba(255,255,255,0.1); /* @kind color */
+  --black-10-5: rgba(255,255,255,0.1); /* @kind color */
+  --black-10-5: rgba(255,255,255,0.1); /* @kind color */
+  --black-100-2: rgb(255,255,255); /* @kind color */
+  --black-100-2: rgb(255,255,255); /* @kind color */
+  --black-100-3: rgb(255,255,255); /* @kind color */
+  --black-100-3: rgb(255,255,255); /* @kind color */
+  --black-100-4: rgb(255,255,255); /* @kind color */
+  --black-100-5: rgb(255,255,255); /* @kind color */
+  --black-100-5: rgb(255,255,255); /* @kind color */
+  --black-100-6: rgb(255,255,255); /* @kind color */
+  --black-100-6: rgb(255,255,255); /* @kind color */
+  --black-100: rgb(255,255,255); /* @kind color */
+  --black-100: rgb(255,255,255); /* @kind color */
+  --black-10: rgba(255,255,255,0.1); /* @kind color */
+  --black-10: rgba(255,255,255,0.1); /* @kind color */
+  --black-20: rgba(255,255,255,0.2); /* @kind color */
+  --black-20: rgba(255,255,255,0.2); /* @kind color */
+  --black-4-2: rgba(255,255,255,0.1); /* @kind color */
+  --black-4-2: rgba(255,255,255,0.1); /* @kind color */
+  --black-40-2: rgba(255,255,255,0.4); /* @kind color */
+  --black-40-2: rgba(255,255,255,0.4); /* @kind color */
+  --black-40: rgba(255,255,255,0.4); /* @kind color */
+  --black-40: rgba(255,255,255,0.4); /* @kind color */
+  --black-4: rgba(255,255,255,0.1); /* @kind color */
+  --black-4: rgba(255,255,255,0.1); /* @kind color */
+  --black-5: rgba(255,255,255,0.1); /* @kind color */
+  --black-5: rgba(255,255,255,0.1); /* @kind color */
+  --black-80: rgba(255,255,255,0.8); /* @kind color */
+  --black-80: rgba(255,255,255,0.8); /* @kind color */
+  --black100: rgb(255,255,255); /* @kind color */
+  --black10: rgba(255,255,255,0.1); /* @kind color */
+  --black40: rgba(255,255,255,0.4); /* @kind color */
+  --black60: rgba(255,255,255,0.6); /* @kind color */
+  --blur-blur-0: 0;
+  --blur-blur-3: 4;
+  --colors-alpha-dark-50: rgba(255,255,255,0.08); /* @kind color */
+  --colors-alpha-dark-700: rgba(255,255,255,0.7); /* @kind color */
+  --colors-alpha-dark-900: rgb(255,255,255); /* @kind color */
+  --colors-blue-gray-300: rgb(84,99,122); /* @kind color */
+  --colors-bronze-50: rgb(50,44,41); /* @kind color */
+  --colors-gray-200: rgb(61,61,61); /* @kind color */
+  --colors-gray-50: rgb(35,31,31); /* @kind color */
+  --common-black-states-hover: rgba(0,0,0,0.08); /* @kind color */
+  --common-black-states-main-2: rgb(0,0,0); /* @kind color */
+  --common-black-states-main: rgb(0,0,0); /* @kind color */
+  --common-white-states-focus-2: rgba(255,255,255,0.12); /* @kind color */
+  --common-white-states-focus-3: rgba(255,255,255,0.12); /* @kind color */
+  --common-white-states-focus: rgba(255,255,255,0.12); /* @kind color */
+  --common-white-states-focusvisible-2: rgba(255,255,255,0.3); /* @kind color */
+  --common-white-states-focusvisible-3: rgba(255,255,255,0.3); /* @kind color */
+  --common-white-states-focusvisible: rgba(255,255,255,0.3); /* @kind color */
+  --common-white-states-hover-2: rgba(255,255,255,0.08); /* @kind color */
+  --common-white-states-hover-3: rgba(255,255,255,0.08); /* @kind color */
+  --common-white-states-hover: rgba(255,255,255,0.08); /* @kind color */
+  --common-white-states-main-2: rgb(255,255,255); /* @kind color */
+  --common-white-states-main-3: rgb(255,255,255); /* @kind color */
+  --common-white-states-main: rgb(255,255,255); /* @kind color */
+  --common-white-states-selected: rgba(255,255,255,0.16); /* @kind color */
+  --components-alert-error-background: rgb(22,11,11); /* @kind color */
+  --components-alert-error-color: rgb(244,199,199); /* @kind color */
+  --components-alert-info-background: rgb(7,19,24); /* @kind color */
+  --components-alert-info-color: rgb(184,231,251); /* @kind color */
+  --components-alert-success-background: rgb(12,19,13); /* @kind color */
+  --components-alert-success-color: rgb(204,232,205); /* @kind color */
+  --components-alert-warning-background: rgb(25,18,7); /* @kind color */
+  --components-alert-warning-color: rgb(255,226,183); /* @kind color */
+  --components-appbar-defaultfill: var(--background-paper-elevation-4); /* @kind color */
+  --components-avatar-fill-2: var(--neutral-600-2); /* @kind color */
+  --components-avatar-fill-3: var(--neutral-600-2); /* @kind color */
+  --components-avatar-fill-4: var(--grey-600); /* @kind color */
+  --components-avatar-fill: var(--neutral-600-2); /* @kind color */
+  --components-backdrop-fill: rgba(0,0,0,0.5); /* @kind color */
+  --components-button-outlined-text-2: var(--neutral-50); /* @kind color */
+  --components-button-outlined-text-3: var(--neutral-50); /* @kind color */
+  --components-button-outlined-text: var(--neutral-50); /* @kind color */
+  --components-button-slidefill: var(--common-white-states-selected); /* @kind color */
+  --components-chip-defaultclosefill: rgb(255,255,255); /* @kind color */
+  --components-chip-defaultenabledborder-2: var(--neutral-700-2); /* @kind color */
+  --components-chip-defaultenabledborder-3: var(--neutral-700-2); /* @kind color */
+  --components-chip-defaultenabledborder-4: var(--grey-700); /* @kind color */
+  --components-chip-defaultenabledborder: var(--neutral-700-2); /* @kind color */
+  --components-chip-defaultfocusfill-2: rgba(255,255,255,0.2); /* @kind color */
+  --components-chip-defaultfocusfill: rgba(255,255,255,0.2); /* @kind color */
+  --components-chip-defaulthoverfill-2: rgba(255,255,255,0.12); /* @kind color */
+  --components-chip-defaulthoverfill: rgba(255,255,255,0.12); /* @kind color */
+  --components-dialog-header-fill: var(--grey-800); /* @kind color */
+  --components-input-filled-enabledfill: rgba(255,255,255,0.09); /* @kind color */
+  --components-input-filled-hoverfill: rgba(255,255,255,0.12); /* @kind color */
+  --components-input-outlined-enabledborder-2: rgba(255,255,255,0.23); /* @kind color */
+  --components-input-outlined-enabledborder: rgba(255,255,255,0.23); /* @kind color */
+  --components-input-outlined-hoverborder-2: rgb(255,255,255); /* @kind color */
+  --components-input-outlined-hoverborder: rgb(255,255,255); /* @kind color */
+  --components-input-standard-enabledborder: rgba(255,255,255,0.42); /* @kind color */
+  --components-input-standard-hoverborder: rgb(255,255,255); /* @kind color */
+  --components-paper-elevation-0: rgb(18,18,18); /* @kind color */
+  --components-paper-elevation-10: rgb(49,49,49); /* @kind color */
+  --components-paper-elevation-11: rgb(49,49,49); /* @kind color */
+  --components-paper-elevation-12: rgb(51,51,51); /* @kind color */
+  --components-paper-elevation-13: rgb(51,51,51); /* @kind color */
+  --components-paper-elevation-14: rgb(51,51,51); /* @kind color */
+  --components-paper-elevation-15: rgb(51,51,51); /* @kind color */
+  --components-paper-elevation-16: rgb(54,54,54); /* @kind color */
+  --components-paper-elevation-17: rgb(54,54,54); /* @kind color */
+  --components-paper-elevation-18: rgb(54,54,54); /* @kind color */
+  --components-paper-elevation-19: rgb(54,54,54); /* @kind color */
+  --components-paper-elevation-1: rgb(30,30,30); /* @kind color */
+  --components-paper-elevation-20: rgb(56,56,56); /* @kind color */
+  --components-paper-elevation-21: rgb(56,56,56); /* @kind color */
+  --components-paper-elevation-22: rgb(56,56,56); /* @kind color */
+  --components-paper-elevation-23: rgb(56,56,56); /* @kind color */
+  --components-paper-elevation-24: rgb(56,56,56); /* @kind color */
+  --components-paper-elevation-2: rgb(35,35,35); /* @kind color */
+  --components-paper-elevation-3: rgb(37,37,37); /* @kind color */
+  --components-paper-elevation-4: rgb(39,39,39); /* @kind color */
+  --components-paper-elevation-5: rgb(42,42,42); /* @kind color */
+  --components-paper-elevation-6: rgb(44,44,44); /* @kind color */
+  --components-paper-elevation-7: rgb(44,44,44); /* @kind color */
+  --components-paper-elevation-8: rgb(46,46,46); /* @kind color */
+  --components-paper-elevation-9: rgb(46,46,46); /* @kind color */
+  --components-paper-outlineborder: var(--divider-2); /* @kind color */
+  --components-rating-activefill-2: rgb(255,180,0); /* @kind color */
+  --components-rating-activefill: rgb(255,180,0); /* @kind color */
+  --components-rating-enabledborder-2: rgba(255,255,255,0.23); /* @kind color */
+  --components-rating-enabledborder: rgba(255,255,255,0.23); /* @kind color */
+  --components-snackbar-fill-2: var(--components-paper-elevation-6); /* @kind color */
+  --components-snackbar-fill: var(--background-paper-elevation-6); /* @kind color */
+  --components-switch-knobfillenabled: var(--brand-indigo-600); /* @kind color */
+  --components-switch-knowfilldisabled: var(--neutral-600-2); /* @kind color */
+  --components-switch-slidefill: var(--common-white-states-selected); /* @kind color */
+  --components-table-border: rgb(81,81,81); /* @kind color */
+  --components-tooltip-fill: rgba(97,97,97,0.9); /* @kind color */
+  --contents-secondary: rgba(255,255,255,0.85); /* @kind color */
+  --divider-2: rgba(255,255,255,0.12); /* @kind color */
+  --divider-3: rgba(255,255,255,0.12); /* @kind color */
+  --divider: rgba(255,255,255,0.12); /* @kind color */
+  --elevation-outlined: var(--divider); /* @kind color */
+  --error-contrasttext-2: rgb(255,255,255); /* @kind color */
+  --error-contrasttext-3: rgb(0,0,0); /* @kind color */
+  --error-contrasttext: rgb(255,255,255); /* @kind color */
+  --error-dark-2: var(--red-500); /* @kind color */
+  --error-dark-3: var(--red-500); /* @kind color */
+  --error-dark-4: var(--red-700); /* @kind color */
+  --error-dark-5: var(--red-700-4); /* @kind color */
+  --error-dark-6: var(--red-700-4); /* @kind color */
+  --error-dark: var(--red-500); /* @kind color */
+  --error-light-2: var(--red-500); /* @kind color */
+  --error-light-3: var(--red-500); /* @kind color */
+  --error-light: var(--red-500); /* @kind color */
+  --error-main-2: var(--red-400); /* @kind color */
+  --error-main-3: var(--red-400); /* @kind color */
+  --error-main-4: var(--red-500); /* @kind color */
+  --error-main-5: var(--red-500-3); /* @kind color */
+  --error-main-6: var(--red-500-4); /* @kind color */
+  --error-main-7: var(--red-500-4); /* @kind color */
+  --error-main: var(--red-400); /* @kind color */
+  --error-states-focusvisible-2: rgba(244,67,54,0.3); /* @kind color */
+  --error-states-focusvisible-3: rgba(244,67,54,0.3); /* @kind color */
+  --error-states-focusvisible-4: rgba(244,67,54,0.3); /* @kind color */
+  --error-states-focusvisible-5: rgba(217,45,32,0.3); /* @kind color */
+  --error-states-focusvisible: rgba(244,67,54,0.3); /* @kind color */
+  --error-states-hover-2: rgba(244,67,54,0.08); /* @kind color */
+  --error-states-hover-3: rgba(244,67,54,0.08); /* @kind color */
+  --error-states-hover-4: rgba(244,67,54,0.08); /* @kind color */
+  --error-states-hover-5: rgba(217,45,32,0.08); /* @kind color */
+  --error-states-hover: rgba(244,67,54,0.08); /* @kind color */
+  --error-states-outlinedborder-2: rgba(244,67,54,0.5); /* @kind color */
+  --error-states-outlinedborder-3: rgba(217,45,32,0.5); /* @kind color */
+  --error-states-outlinedborder: rgba(244,67,54,0.5); /* @kind color */
+  --error-states-selected-2: rgba(217,45,32,0.16); /* @kind color */
+  --error-states-selected-3: rgba(244,67,54,0.16); /* @kind color */
+  --error-states-selected: rgba(244,67,54,0.16); /* @kind color */
+  --icon-default-default-2: var(--white-1000); /* @kind color */
+  --icon-default-default: var(--white-1000); /* @kind color */
+  --info-contrasttext-2: rgba(0,0,0,0.87); /* @kind color */
+  --info-contrasttext: rgba(0,0,0,0.87); /* @kind color */
+  --info-dark-2: var(--blue-600); /* @kind color */
+  --info-dark-3: var(--blue-600); /* @kind color */
+  --info-dark-4: var(--lightblue-700); /* @kind color */
+  --info-dark-5: var(--lightblue-700-3); /* @kind color */
+  --info-dark: var(--blue-600); /* @kind color */
+  --info-main-2: var(--blue-300); /* @kind color */
+  --info-main-3: var(--lightblue-400); /* @kind color */
+  --info-main-4: var(--blue-300); /* @kind color */
+  --info-main-5: var(--lightblue-400); /* @kind color */
+  --info-main-6: var(--lightblue-400-3); /* @kind color */
+  --info-main-7: var(--lightblue-400-4); /* @kind color */
+  --info-main: var(--blue-300); /* @kind color */
+  --info-states-focusvisible-2: rgba(41,182,246,0.3); /* @kind color */
+  --info-states-focusvisible-3: rgba(41,182,246,0.3); /* @kind color */
+  --info-states-focusvisible-4: rgba(2,136,209,0.3); /* @kind color */
+  --info-states-focusvisible: rgba(41,182,246,0.3); /* @kind color */
+  --info-states-hover-2: rgba(41,182,246,0.08); /* @kind color */
+  --info-states-hover-3: rgba(41,182,246,0.08); /* @kind color */
+  --info-states-hover-4: rgba(41,182,246,0.08); /* @kind color */
+  --info-states-hover-5: rgba(2,136,209,0.08); /* @kind color */
+  --info-states-hover: rgba(41,182,246,0.08); /* @kind color */
+  --info-states-outlinedborder-2: rgba(41,182,246,0.5); /* @kind color */
+  --info-states-outlinedborder-3: rgba(2,136,209,0.5); /* @kind color */
+  --info-states-outlinedborder: rgba(41,182,246,0.5); /* @kind color */
+  --info-states-selected-2: rgba(41,182,246,0.16); /* @kind color */
+  --info-states-selected: rgba(2,136,209,0.16); /* @kind color */
+  --layout-background: rgb(0,0,0); /* @kind color */
+  --layout-divider: rgb(38,38,38); /* @kind color */
+  --native-scrollbar-bg-2: var(--grey-700); /* @kind color */
+  --native-scrollbar-bg-3: var(--neutral-700-2); /* @kind color */
+  --native-scrollbar-bg-4: var(--neutral-700-2); /* @kind color */
+  --native-scrollbar-bg: var(--neutral-700-2); /* @kind color */
+  --neutral-100-2: rgb(39,39,42); /* @kind color */
+  --neutral-300-2: rgb(82,82,91); /* @kind color */
+  --primary-brand-2: rgb(198,199,248); /* @kind color */
+  --primary-brand-2: var(--secondary-blue-2); /* @kind color */
+  --primary-brand: var(--secondary-blue); /* @kind color */
+  --primary-brand: var(--secondary-indigo); /* @kind color */
+  --primary-contrasttext-2: rgba(0,0,0,0.87); /* @kind color */
+  --primary-contrasttext-3: rgba(0,0,0,0.87); /* @kind color */
+  --primary-contrasttext: rgba(0,0,0,0.87); /* @kind color */
+  --primary-dark-2: var(--brand-indigo-300); /* @kind color */
+  --primary-dark-3: var(--brand-indigo-300); /* @kind color */
+  --primary-dark-4: var(--brand-indigo-300); /* @kind color */
+  --primary-dark-5: var(--indigo-400); /* @kind color */
+  --primary-dark: var(--brand-indigo-300); /* @kind color */
+  --primary-light-2: rgba(255,255,255,0.05); /* @kind color */
+  --primary-light-2: rgba(255,255,255,0.05); /* @kind color */
+  --primary-light-3: var(--indigo-50); /* @kind color */
+  --primary-light: var(--brand-indigo-50); /* @kind color */
+  --primary-main-2: var(--brand-indigo-300); /* @kind color */
+  --primary-main-3: var(--brand-indigo-300); /* @kind color */
+  --primary-main-4: var(--brand-indigo-200); /* @kind color */
+  --primary-main-5: var(--brand-indigo-200); /* @kind color */
+  --primary-main-6: var(--indigo-200-2); /* @kind color */
+  --primary-main-7: var(--blue-200); /* @kind color */
+  --primary-main-8: var(--indigo-200-2); /* @kind color */
+  --primary-main-9: var(--indigo-200-2); /* @kind color */
+  --primary-main: var(--brand-indigo-300); /* @kind color */
+  --primary-states-focus-2: rgba(159,168,218,0.12); /* @kind color */
+  --primary-states-focus-3: rgba(144,202,249,0.12); /* @kind color */
+  --primary-states-focus: rgba(177,187,231,0.12); /* @kind color */
+  --primary-states-focusvisible-2: rgba(144,201,250,0.3); /* @kind color */
+  --primary-states-focusvisible-3: rgba(144,202,249,0.3); /* @kind color */
+  --primary-states-focusvisible: rgba(177,187,231,0.3); /* @kind color */
+  --primary-states-hover-2: rgba(159,168,218,0.08); /* @kind color */
+  --primary-states-hover-3: rgba(144,202,249,0.08); /* @kind color */
+  --primary-states-hover: rgba(177,187,231,0.08); /* @kind color */
+  --primary-states-outlinedborder-2: rgba(159,168,218,0.5); /* @kind color */
+  --primary-states-outlinedborder: rgba(177,187,231,0.5); /* @kind color */
+  --primary-states-selected-2: rgba(159,168,218,0.16); /* @kind color */
+  --primary-states-selected-3: rgba(159,168,218,0.48); /* @kind color */
+  --primary-states-selected: rgba(177,187,231,0.16); /* @kind color */
+  --purple-contrasttext: rgba(0,0,0,0.87); /* @kind color */
+  --purple-dark-2: var(--purple-400); /* @kind color */
+  --purple-dark-3: var(--purple-400); /* @kind color */
+  --purple-dark: var(--purple-400); /* @kind color */
+  --purple-main-2: var(--purple-200); /* @kind color */
+  --purple-main-3: var(--purple-200); /* @kind color */
+  --purple-main: var(--purple-200); /* @kind color */
+  --purple-states-focus: rgba(206,147,216,0.12); /* @kind color */
+  --purple-states-focusvisible: rgba(206,147,216,0.3); /* @kind color */
+  --purple-states-hover: rgba(206,147,216,0.08); /* @kind color */
+  --purple-states-outlinedborder: rgba(206,147,216,0.5); /* @kind color */
+  --purple-states-selected: rgba(206,147,216,0.16); /* @kind color */
+  --secondary-blue-2: rgb(177,227,255); /* @kind color */
+  --secondary-blue-2: rgb(24,134,254); /* @kind color */
+  --secondary-blue: rgb(10,132,255); /* @kind color */
+  --secondary-blue: rgb(146,191,255); /* @kind color */
+  --secondary-contrasttext-2: rgba(0,0,0,0.87); /* @kind color */
+  --secondary-contrasttext: rgba(0,0,0,0.87); /* @kind color */
+  --secondary-dark-2: var(--purple-400-2); /* @kind color */
+  --secondary-dark-3: var(--purple-600); /* @kind color */
+  --secondary-dark: var(--purple-400); /* @kind color */
+  --secondary-indigo: rgb(159,159,248); /* @kind color */
+  --secondary-indigo: rgb(94,92,230); /* @kind color */
+  --secondary-main-2: var(--purple-200-2); /* @kind color */
+  --secondary-main-3: var(--purple-200-3); /* @kind color */
+  --secondary-main-4: var(--purple-400-2); /* @kind color */
+  --secondary-main: var(--purple-200); /* @kind color */
+  --secondary-purple: rgb(175,82,222); /* @kind color */
+  --secondary-purple: rgb(198,199,248); /* @kind color */
+  --secondary-states-focus-2: rgba(127,86,217,0.12); /* @kind color */
+  --secondary-states-focus: rgba(206,147,216,0.12); /* @kind color */
+  --secondary-states-focusvisible-2: rgba(206,147,216,0.3); /* @kind color */
+  --secondary-states-focusvisible-3: rgba(206,147,216,0.3); /* @kind color */
+  --secondary-states-focusvisible-4: rgba(127,86,217,0.3); /* @kind color */
+  --secondary-states-focusvisible: rgba(206,147,216,0.3); /* @kind color */
+  --secondary-states-hover-2: rgba(206,147,216,0.08); /* @kind color */
+  --secondary-states-hover-3: rgba(206,147,216,0.08); /* @kind color */
+  --secondary-states-hover-4: rgba(127,86,217,0.08); /* @kind color */
+  --secondary-states-hover: rgba(206,147,216,0.08); /* @kind color */
+  --secondary-states-outlinedborder-2: rgba(127,86,217,0.5); /* @kind color */
+  --secondary-states-outlinedborder: rgba(206,147,216,0.5); /* @kind color */
+  --secondary-states-selected-2: rgba(206,147,216,0.16); /* @kind color */
+  --secondary-states-selected: rgba(127,86,217,0.16); /* @kind color */
+  --success-contrasttext-2: var(--green-900); /* @kind color */
+  --success-contrasttext-3: var(--green-900); /* @kind color */
+  --success-contrasttext-4: var(--green-900); /* @kind color */
+  --success-contrasttext-5: rgba(0,0,0,0.87); /* @kind color */
+  --success-contrasttext: var(--green-900); /* @kind color */
+  --success-dark-2: var(--green-600); /* @kind color */
+  --success-dark-3: var(--green-600); /* @kind color */
+  --success-dark-4: var(--green-700); /* @kind color */
+  --success-dark-5: var(--green-700-3); /* @kind color */
+  --success-dark: var(--green-600); /* @kind color */
+  --success-main-2: var(--green-300); /* @kind color */
+  --success-main-3: var(--green-300); /* @kind color */
+  --success-main-4: var(--green-200); /* @kind color */
+  --success-main-5: var(--green-400); /* @kind color */
+  --success-main-6: var(--green-400-2); /* @kind color */
+  --success-main-7: var(--green-400-3); /* @kind color */
+  --success-main: var(--green-300); /* @kind color */
+  --success-states-focusvisible-2: rgba(102,187,106,0.3); /* @kind color */
+  --success-states-focusvisible-3: rgba(102,187,106,0.3); /* @kind color */
+  --success-states-focusvisible-4: rgba(102,187,106,0.3); /* @kind color */
+  --success-states-focusvisible-5: rgba(46,125,50,0.3); /* @kind color */
+  --success-states-focusvisible: rgba(102,187,106,0.3); /* @kind color */
+  --success-states-hover-2: rgba(102,187,106,0.08); /* @kind color */
+  --success-states-hover-3: rgba(102,187,106,0.08); /* @kind color */
+  --success-states-hover-4: rgba(102,187,106,0.08); /* @kind color */
+  --success-states-hover-5: rgba(46,125,50,0.08); /* @kind color */
+  --success-states-hover: rgba(102,187,106,0.08); /* @kind color */
+  --success-states-outlinedborder-2: rgba(102,187,106,0.5); /* @kind color */
+  --success-states-outlinedborder-3: rgba(46,125,50,0.5); /* @kind color */
+  --success-states-outlinedborder: rgba(102,187,106,0.5); /* @kind color */
+  --success-states-selected-2: rgba(46,125,50,0.16); /* @kind color */
+  --success-states-selected-3: rgba(102,187,106,0.16); /* @kind color */
+  --success-states-selected: rgba(102,187,106,0.16); /* @kind color */
+  --surface-surface-baloon-friend: var(--color-n14); /* @kind color */
+  --surface-surface-chat: var(--color-n04); /* @kind color */
+  --surface-surface-shadow-baloon: var(--color-alpha-n00-6); /* @kind color */
+  --text-disabled-2: rgba(255,255,255,0.38); /* @kind color */
+  --text-disabled-3: rgba(255,255,255,0.38); /* @kind color */
+  --text-disabled: rgba(255,255,255,0.38); /* @kind color */
+  --text-primary-2: rgba(255,255,255,0.87); /* @kind color */
+  --text-primary-3: rgba(255,255,255,0.87); /* @kind color */
+  --text-primary-4: rgb(255,255,255); /* @kind color */
+  --text-primary-5: rgb(255,255,255); /* @kind color */
+  --text-primary-6: rgb(255,255,255); /* @kind color */
+  --text-primary-7: var(--colors-alpha-dark-900); /* @kind color */
+  --text-primary: rgba(255,255,255,0.87); /* @kind color */
+  --text-secondary-2: rgba(255,255,255,0.7); /* @kind color */
+  --text-secondary-3: rgba(255,255,255,0.7); /* @kind color */
+  --text-secondary-4: var(--colors-alpha-dark-700); /* @kind color */
+  --text-secondary: rgba(255,255,255,0.7); /* @kind color */
+  --text-states-focus-2: rgba(255,255,255,0.12); /* @kind color */
+  --text-states-focus-3: rgba(255,255,255,0.12); /* @kind color */
+  --text-states-focus: rgba(255,255,255,0.12); /* @kind color */
+  --text-states-focusvisible-2: rgba(255,255,255,0.3); /* @kind color */
+  --text-states-focusvisible-3: rgba(255,255,255,0.3); /* @kind color */
+  --text-states-focusvisible: rgba(255,255,255,0.3); /* @kind color */
+  --text-states-hover-2: rgba(255,255,255,0.08); /* @kind color */
+  --text-states-hover: rgba(255,255,255,0.08); /* @kind color */
+  --warning-contrasttext-2: rgba(0,0,0,0.87); /* @kind color */
+  --warning-contrasttext: rgba(0,0,0,0.87); /* @kind color */
+  --warning-dark-2: var(--orange-500); /* @kind color */
+  --warning-dark-3: var(--orange-500); /* @kind color */
+  --warning-dark-4: var(--orange-700); /* @kind color */
+  --warning-dark-5: var(--yellow-700); /* @kind color */
+  --warning-dark-6: var(--yellow-700); /* @kind color */
+  --warning-dark: var(--orange-500); /* @kind color */
+  --warning-light: var(--yellow-300); /* @kind color */
+  --warning-main-2: var(--orange-400); /* @kind color */
+  --warning-main-3: var(--orange-400); /* @kind color */
+  --warning-main-4: var(--orange-400); /* @kind color */
+  --warning-main-5: var(--orange-400); /* @kind color */
+  --warning-main-6: var(--yellow-400); /* @kind color */
+  --warning-main-7: var(--orange-400-4); /* @kind color */
+  --warning-main-8: var(--yellow-400); /* @kind color */
+  --warning-main: var(--orange-400); /* @kind color */
+  --warning-states-focusvisible-2: rgba(255,167,38,0.3); /* @kind color */
+  --warning-states-focusvisible-3: rgba(255,167,38,0.3); /* @kind color */
+  --warning-states-focusvisible-4: rgba(255,167,38,0.3); /* @kind color */
+  --warning-states-focusvisible-5: rgba(181,71,8,0.3); /* @kind color */
+  --warning-states-focusvisible: rgba(255,167,38,0.3); /* @kind color */
+  --warning-states-hover-2: rgba(255,167,38,0.08); /* @kind color */
+  --warning-states-hover-3: rgba(255,167,38,0.08); /* @kind color */
+  --warning-states-hover-4: rgba(255,167,38,0.08); /* @kind color */
+  --warning-states-hover-5: rgba(181,71,8,0.08); /* @kind color */
+  --warning-states-hover: rgba(255,167,38,0.08); /* @kind color */
+  --warning-states-outlinedborder-2: rgba(255,167,38,0.5); /* @kind color */
+  --warning-states-outlinedborder-3: rgba(181,71,8,0.5); /* @kind color */
+  --warning-states-outlinedborder: rgba(255,167,38,0.5); /* @kind color */
+  --warning-states-selected-2: rgba(181,71,8,0.16); /* @kind color */
+  --warning-states-selected-3: rgba(255,167,38,0.16); /* @kind color */
+  --warning-states-selected: rgba(255,167,38,0.16); /* @kind color */
+  --white-10-2: rgba(28,28,28,0.1); /* @kind color */
+  --white-10-2: rgba(28,28,28,0.1); /* @kind color */
+  --white-100-2: rgb(0,0,0); /* @kind color */
+  --white-100-2: rgb(0,0,0); /* @kind color */
+  --white-100-3: rgb(28,28,28); /* @kind color */
+  --white-100-3: rgb(28,28,28); /* @kind color */
+  --white-100-4: rgb(28,28,28); /* @kind color */
+  --white-100-4: rgb(28,28,28); /* @kind color */
+  --white-100: rgb(28,28,28); /* @kind color */
+  --white-100: rgb(28,28,28); /* @kind color */
+  --white-10: rgba(0,0,0,0.1); /* @kind color */
+  --white-10: rgba(0,0,0,0.1); /* @kind color */
+  --white-20-2: rgba(28,28,28,0.2); /* @kind color */
+  --white-20-2: rgba(28,28,28,0.2); /* @kind color */
+  --white-20: rgba(0,0,0,0.2); /* @kind color */
+  --white-20: rgba(0,0,0,0.2); /* @kind color */
+  --white-40-2: rgba(28,28,28,0.4); /* @kind color */
+  --white-40-2: rgba(28,28,28,0.4); /* @kind color */
+  --white-40: rgba(0,0,0,0.4); /* @kind color */
+  --white-40: rgba(0,0,0,0.4); /* @kind color */
+  --white100: rgb(0,0,0); /* @kind color */
+}
+
+:root[data-theme="light"], .light {
+  --black-10-2: rgba(0,0,0,0.1); /* @kind color */
+  --black-10-3: rgba(46,52,62,0.1); /* @kind color */
+  --black-10-5: rgba(46,52,62,0.1); /* @kind color */
+  --black-100-2: rgb(46,52,62); /* @kind color */
+  --black-100-3: rgb(46,52,62); /* @kind color */
+  --black-100-5: rgb(46,52,62); /* @kind color */
+  --black-100-6: rgb(46,52,62); /* @kind color */
+  --black-100: rgb(0,0,0); /* @kind color */
+  --black-10: rgba(46,52,62,0.1); /* @kind color */
+  --black-20: rgba(46,52,62,0.2); /* @kind color */
+  --black-4-2: rgba(0,0,0,0.04); /* @kind color */
+  --black-40-2: rgba(46,52,62,0.4); /* @kind color */
+  --black-40: rgba(0,0,0,0.4); /* @kind color */
+  --black-4: rgba(0,0,0,0.04); /* @kind color */
+  --black-5: rgba(46,52,62,0.05); /* @kind color */
+  --black-80: rgba(0,0,0,0.8); /* @kind color */
+  --primary-brand-2: var(--secondary-blue-2); /* @kind color */
+  --primary-brand: var(--secondary-blue); /* @kind color */
+  --primary-light-2: rgb(255,255,255); /* @kind color */
+  --secondary-blue-2: rgb(24,134,254); /* @kind color */
+  --secondary-blue: rgb(0,122,255); /* @kind color */
+  --secondary-indigo: rgb(88,86,214); /* @kind color */
+  --secondary-purple: rgb(175,82,222); /* @kind color */
+  --white-10-2: rgba(255,255,255,0.1); /* @kind color */
+  --white-100-2: rgb(255,255,255); /* @kind color */
+  --white-100-3: rgb(255,255,255); /* @kind color */
+  --white-100-4: rgb(255,255,255); /* @kind color */
+  --white-100: rgb(255,255,255); /* @kind color */
+  --white-10: rgba(255,255,255,0.1); /* @kind color */
+  --white-20-2: rgba(255,255,255,0.2); /* @kind color */
+  --white-20: rgba(255,255,255,0.2); /* @kind color */
+  --white-40-2: rgba(255,255,255,0.4); /* @kind color */
+  --white-40: rgba(255,255,255,0.4); /* @kind color */
+}
+
+:root[data-mode="paragraph"] {
+  --10: 10;
+  --12-4: 12;
+  --14: 14;
+  --8-6: 8;
+}
+
+:root[data-mode="sf-pro"] {
+  --font-family: "SF Pro";
+  --letter-spacing: 0;
+}
+
+:root[data-mode="bai-jamjuree"] {
+  --font-family: "Bai Jamjuree";
+  --letter-spacing: 0;
+}
+
+:root[data-mode="space-grotesk"] {
+  --font-family: "Space Grotesk";
+  --letter-spacing: 0;
+}
+
+:root[data-mode="semi-bold-regular"] {
+  --regular: 600;
+}
+
+:root[data-mode="mobile"] {
+  --fontfamily-3: "Roboto";
+  --fontfamily-4: "Noto Sans";
+  --fontfamily-5: "Noto Sans";
+  --fontfamily-6: "Noto Sans";
+  --fontfamily-7: "Noto Sans";
+  --fontsize-0-625rem-2: 10;
+  --fontsize-0-75rem-4: 12;
+  --fontsize-0-8125rem-2: 13;
+  --fontsize-0-875rem-2: 14;
+  --fontsize-0-9375rem: 15;
+  --fontsize-1-125rem: 18;
+  --fontsize-1-25rem-2: 20;
+  --fontsize-1-5625rem: 25;
+  --fontsize-1-5rem-2: 24;
+  --fontsize-1rem-2: 16;
+  --fontsize-2-375rem: 38;
+  --fontsize-2rem: 32;
+  --fontsize-3-5rem: 56;
+  --fontsize-3-75rem-2: 60;
+  --fontsize-3rem-2: 48;
+  --fontsize-6rem-2: 96;
+  --fontweightbold-2: 700;
+  --fontweightlight-2: 300;
+  --fontweightmedium-2: 500;
+  --fontweightregular-3: 400;
+  --fontweightsemibold-2: 600;
+  --typography-body1: var(--fontsize-1rem-2);
+  --typography-body2: var(--fontsize-0-875rem-2);
+  --typography-caption: var(--fontsize-0-75rem-4);
+  --typography-h1-2: var(--fontsize-3-5rem);
+  --typography-h1: var(--fontsize-3-5rem);
+  --typography-h2: var(--fontsize-2-375rem);
+  --typography-h3: var(--fontsize-2rem);
+  --typography-h4: var(--fontsize-1-5625rem);
+  --typography-h5: var(--fontsize-1-25rem-2);
+  --typography-h6: var(--fontsize-1-125rem);
+  --typography-overline: var(--fontsize-0-75rem-4);
+  --typography-subtitle1: var(--fontsize-1rem-2);
+  --typography-subtitle2: var(--fontsize-0-875rem-2);
+}
+
+:root[data-mode="chinese"] {
+  --button: "按钮";
+  --text: "文本";
+}
+
+:root[data-mode="theme-b"] {
+  --fill-50: var(--colors-bronze-50); /* @kind color */
+  --state-base-border: var(--colors-blue-gray-300); /* @kind color */
+}
+
+:root[data-mode="spacious"] {
+  --spacing-space-8: 20;
+  --spacing-space-9: 24;
+}
+
+:root[data-mode="font-b"] {
+  --font-family-2: "Lora";
+  --font-weight-medium: "Medium";
+  --line-height-base: 24;
+}

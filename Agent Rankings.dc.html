@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #F8F8F8; }
+  * { box-sizing: border-box; }
+  a { color: #31439B; text-decoration: none; }
+  a:hover { color: #312e81; }
+  @keyframes crownFloat { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-7px) rotate(4deg); } }
+  @keyframes ringPulse { 0% { box-shadow: 0 0 0 0 rgba(225,173,1,.55); } 70% { box-shadow: 0 0 0 18px rgba(225,173,1,0); } 100% { box-shadow: 0 0 0 0 rgba(225,173,1,0); } }
+  @keyframes dotPulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .35; transform: scale(.7); } }
+  @keyframes riseIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes flameFlick { 0%,100% { transform: scale(1) rotate(-2deg); } 50% { transform: scale(1.14) rotate(3deg); } }
+  @keyframes sheenSweep { 0% { transform: translateX(-120%) skewX(-18deg); } 55%,100% { transform: translateX(320%) skewX(-18deg); } }
+</style>
+</helmet>
+
+<div style="display: flex; min-height: 100vh; background: #F8F8F8; font-family: 'Noto Sans', ui-sans-serif, -apple-system, sans-serif; color: #2B2A30;">
+
+  <div style="flex: 1; min-width: 0; padding: 20px 22px 40px;">
+    <div style="background: #ffffff; border: 1px solid #E9EAE7; border-radius: 8px; overflow: hidden;">
+
+      <div style="display: flex; align-items: flex-start; justify-content: space-between; padding: 20px 24px 14px;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="font-size: 21px; font-weight: 700; letter-spacing: -.015em;">Agent Rankings</div>
+            <div style="display: flex; align-items: center; gap: 5px; background: #FFFAEB; border: 1px solid #FFECAF; color: #8A6A00; font-size: 11px; font-weight: 700; letter-spacing: .04em; padding: 3px 8px; border-radius: 999px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#E5A000"><path d="M3 7l4.5 3L12 4l4.5 6L21 7l-1.6 10H4.6z"></path></svg>
+              {{ seasonLabel }} · LIVE
+            </div>
+          </div>
+          <div style="font-size: 13px; color: #616161; margin-top: 4px;">How you stack up across engagement and quality metrics</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 6px; font-size: 11.5px; color: #616161;">Viewing as</div>
+          <div style="display: flex; border: 1px solid #E4E4E4; border-radius: 8px; overflow: hidden;">
+            <div onClick="{{ setAgent }}" style="padding: 6px 11px; font-size: 12px; cursor: pointer; background: {{ roleAgentBg }}; color: {{ roleAgentFg }}; font-weight: 600;">Agent</div>
+            <div onClick="{{ setSupervisor }}" style="padding: 6px 11px; font-size: 12px; cursor: pointer; border-left: 1px solid #E9EAE7; background: {{ roleSupBg }}; color: {{ roleSupFg }}; font-weight: 600;">Supervisor</div>
+            <div onClick="{{ setAdmin }}" style="padding: 6px 11px; font-size: 12px; cursor: pointer; border-left: 1px solid #E9EAE7; background: {{ roleAdminBg }}; color: {{ roleAdminFg }}; font-weight: 600;">Admin</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 0 24px 14px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 11.5px; letter-spacing: .06em; color: #9E9E9E; font-weight: 700;">PERIOD</span>
+          <div style="display: flex; border: 1px solid #E4E4E4; border-radius: 8px; overflow: hidden;">
+            <div onClick="{{ setWeekly }}" style="padding: 7px 13px; font-size: 12.5px; cursor: pointer; background: {{ pWeeklyBg }}; color: {{ pWeeklyFg }}; font-weight: 600;">Weekly</div>
+            <div onClick="{{ setMonthly }}" style="padding: 7px 13px; font-size: 12.5px; cursor: pointer; border-left: 1px solid #E9EAE7; background: {{ pMonthlyBg }}; color: {{ pMonthlyFg }}; font-weight: 600;">Monthly</div>
+            <div onClick="{{ setCustom }}" style="padding: 7px 13px; font-size: 12.5px; cursor: pointer; border-left: 1px solid #E9EAE7; background: {{ pCustomBg }}; color: {{ pCustomFg }}; font-weight: 600;">Custom</div>
+          </div>
+          <span style="font-size: 12px; color: #616161;">{{ periodRange }}</span>
+          <sc-if value="{{ isAdmin }}" hint-placeholder-val="{{ false }}">
+            <span style="font-size: 11.5px; color: #31439B; font-weight: 600; border: 1px dashed #D8DDF3; background: #ECEEF9; padding: 4px 9px; border-radius: 6px;">Tenant default · editable in Settings</span>
+          </sc-if>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; font-size: 11.5px; color: #9E9E9E;">
+          <span style="display: inline-flex; align-items: center; gap: 5px;">
+            <span style="width: 6px; height: 6px; border-radius: 50%; background: #069954;"></span>
+            {{ eventLabel }}
+          </span>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 0 24px 16px;">
+        <div style="border: 1px solid #E9EAE7; border-radius: 8px; padding: 14px 16px;">
+          <div style="font-size: 13px; font-weight: 600; color: #4D4D4C;">Agents Ranked</div>
+          <div style="display: flex; align-items: baseline; justify-content: space-between; margin-top: 10px;">
+            <div style="font-size: 26px; font-weight: 700;">10</div>
+            <div style="font-size: 11.5px; color: #9E9E9E;">{{ excludedCount }} below threshold</div>
+          </div>
+        </div>
+        <div style="border: 1px solid #E9EAE7; border-radius: 8px; padding: 14px 16px;">
+          <div style="font-size: 13px; font-weight: 600; color: #4D4D4C;">Avg Composite</div>
+          <div style="display: flex; align-items: baseline; justify-content: space-between; margin-top: 10px;">
+            <div style="font-size: 26px; font-weight: 700;">52.4</div>
+            <div style="font-size: 11.5px; color: #069351; font-weight: 600;">↑ 1.2 <span style="color: #9E9E9E; font-weight: 400;">vs last</span></div>
+          </div>
+        </div>
+        <div style="border: 1px solid #E9EAE7; border-radius: 8px; padding: 14px 16px;">
+          <div style="font-size: 13px; font-weight: 600; color: #4D4D4C;">Avg QP Score</div>
+          <div style="display: flex; align-items: baseline; justify-content: space-between; margin-top: 10px;">
+            <div style="font-size: 26px; font-weight: 700;">83.7</div>
+            <div style="font-size: 11.5px; color: #069351; font-weight: 600;">↑ 2.1% <span style="color: #9E9E9E; font-weight: 400;">vs last</span></div>
+          </div>
+        </div>
+        <div style="border: 1px solid #FFECAF; background: #FFFAEB; border-radius: 8px; padding: 14px 16px;">
+          <div style="font-size: 13px; font-weight: 600; color: #4B3400; display: flex; align-items: center; gap: 6px;">
+            <span style="display: inline-block; animation: flameFlick 1.1s ease-in-out infinite;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#EF6C00"><path d="M13 2s1 4-2 7c-2.4 2.4-4 4.2-4 7a7 7 0 0 0 14 0c0-3.5-2-5.5-3-7-.6 1.6-1.6 2.4-2.6 2.6C16 8 15 4 13 2z"></path></svg>
+            </span>
+            Active Streaks
+          </div>
+          <div style="display: flex; align-items: baseline; justify-content: space-between; margin-top: 10px;">
+            <div style="font-size: 26px; font-weight: 700; color: #4B3400;">6</div>
+            <div style="font-size: 11.5px; color: #8A6A00;">agents on a streak</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #E9EAE7; border-bottom: 1px solid #E9EAE7; padding: 0 24px;">
+        <div style="display: flex; align-items: stretch; gap: 4px;">
+          <div onClick="{{ setEngagement }}" style="display: flex; align-items: center; gap: 8px; padding: 13px 14px; font-size: 13.5px; cursor: pointer; font-weight: {{ engWeight }}; color: {{ engFg }}; box-shadow: {{ engUnderline }};">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4 14h6l-1 8 9-12h-6z"></path></svg>
+            Engagement
+          </div>
+          <div onClick="{{ setQuality }}" style="display: flex; align-items: center; gap: 8px; padding: 13px 14px; font-size: 13.5px; cursor: pointer; font-weight: {{ qualWeight }}; color: {{ qualFg }}; box-shadow: {{ qualUnderline }};">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"></path></svg>
+            Quality Score
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 999px; background: {{ urgencyBg }}; border: 1px solid {{ urgencyBorder }};">
+          <span style="width: 7px; height: 7px; border-radius: 50%; background: {{ urgencyDot }}; animation: dotPulse 1s ease-in-out infinite;"></span>
+          <span style="font-size: 12px; font-weight: 700; color: {{ urgencyText }}; font-variant-numeric: tabular-nums; letter-spacing: .02em;">{{ urgencyLabel }} {{ countdown }}</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px; font-size: 13px; color: #616161;">
+          <span style="font-weight: 650; color: #2B2A30;">All Teams</span>
+          <span>Enterprise</span>
+          <span>SMB</span>
+          <span>APAC</span>
+        </div>
+      </div>
+
+      <div style="position: relative; padding: 30px 24px 26px; background: radial-gradient(120% 90% at 50% -10%, #FFFAEB 0%, #ffffff 62%); overflow: hidden;">
+        <canvas ref="{{ confettiRef }}" style="position: absolute; inset: 0; pointer-events: none; z-index: 4;"></canvas>
+        <div style="position: absolute; left: 50%; top: 26px; transform: translateX(-50%); width: 300px; height: 300px; border-radius: 50%; background: radial-gradient(circle, rgba(225,173,1,.20) 0%, rgba(225,173,1,0) 68%); pointer-events: none;"></div>
+
+        <div style="position: relative; display: flex; align-items: flex-end; justify-content: center; gap: 18px; z-index: 2;">
+
+          <div style="display: flex; flex-direction: column; align-items: center; width: 190px; animation: riseIn .5s .15s both;">
+            <svg width="26" height="26" viewBox="0 0 24 24" style="margin-bottom: 4px;"><path d="M12 2l8 3v7c0 5-3.5 8.4-8 10-4.5-1.6-8-5-8-10V5z" fill="#D6D6D6" stroke="#9E9E9E" stroke-width="1.3" stroke-linejoin="round"></path></svg>
+            <div style="width: 62px; height: 62px; border-radius: 50%; background: {{ p2.avatarBg }}; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; border: 3px solid #ffffff; box-shadow: 0 0 0 3px #D6D6D6; margin-bottom: 10px;">{{ p2.initials }}</div>
+            <div style="font-size: 14.5px; font-weight: 700;">{{ p2.name }}</div>
+            <div style="font-size: 11.5px; color: #616161; margin-bottom: 10px;">{{ p2.sub }}</div>
+            <div style="width: 100%; height: 104px; border-radius: 8px 8px 0 0; background: linear-gradient(180deg, #F8F8F8 0%, #EDEDED 100%); border: 1px solid #E4E4E4; border-bottom: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;">
+              <div style="font-size: 12px; font-weight: 800; letter-spacing: .1em; color: #616161;">2ND</div>
+              <div style="font-size: 26px; font-weight: 800; color: #4D4D4C; font-variant-numeric: tabular-nums;">{{ p2.score }}</div>
+              <div style="font-size: 11px; color: #9E9E9E;">{{ p2.gap }} to 1st</div>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; align-items: center; width: 218px; animation: riseIn .5s both;">
+            <svg width="52" height="40" viewBox="0 0 52 40" style="animation: crownFloat 2.8s ease-in-out infinite;">
+              <path d="M6 33h40l4-25-12.5 9L26 4 14.5 17 2 8z" fill="#E1AD01" stroke="#B98C00" stroke-width="1.6" stroke-linejoin="round"></path>
+              <rect x="6" y="33" width="40" height="5" rx="2" fill="#E5A000"></rect>
+              <circle cx="26" cy="20" r="3" fill="#FFF4CE"></circle>
+              <circle cx="15" cy="24" r="2.2" fill="#FFF4CE"></circle>
+              <circle cx="37" cy="24" r="2.2" fill="#FFF4CE"></circle>
+            </svg>
+            <div style="position: relative; margin: 4px 0 10px;">
+              <div style="width: 78px; height: 78px; border-radius: 50%; background: {{ p1.avatarBg }}; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 25px; font-weight: 700; border: 4px solid #ffffff; box-shadow: 0 0 0 4px #E1AD01; animation: ringPulse 2.2s ease-out infinite;">{{ p1.initials }}</div>
+              <div style="position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%); background: #E5A000; color: #fff; font-size: 10px; font-weight: 800; letter-spacing: .08em; padding: 3px 10px; border-radius: 4px; white-space: nowrap;">CHAMPION</div>
+            </div>
+            <div style="font-size: 16.5px; font-weight: 800; margin-top: 6px;">{{ p1.name }}</div>
+            <div style="font-size: 11.5px; color: #4B3400; margin-bottom: 10px; font-weight: 600;">{{ p1.sub }}</div>
+            <div style="position: relative; width: 100%; height: 152px; border-radius: 8px 14px 0 0; background: linear-gradient(180deg, #FFF4CE 0%, #FFECAF 100%); border: 1px solid #FBD15B; border-bottom: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; overflow: hidden;">
+              <div style="position: absolute; top: 0; bottom: 0; width: 60px; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.75) 50%, rgba(255,255,255,0) 100%); animation: sheenSweep 3.6s ease-in-out infinite;"></div>
+              <div style="font-size: 13px; font-weight: 800; letter-spacing: .12em; color: #8A6A00;">1ST</div>
+              <div style="font-size: 40px; font-weight: 800; color: #4B3400; font-variant-numeric: tabular-nums; line-height: 1;">{{ p1.score }}</div>
+              <div style="font-size: 11.5px; color: #8A6A00; font-weight: 600;">{{ p1.note }}</div>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; align-items: center; width: 190px; animation: riseIn .5s .3s both;">
+            <svg width="24" height="28" viewBox="0 0 26 30" style="margin-bottom: 2px;"><circle cx="13" cy="10" r="9" fill="#EDB183" stroke="#B8722F" stroke-width="1.4"></circle><path d="M7 17l-4 12 10-5 10 5-4-12" fill="#D98A4A" stroke="#B8722F" stroke-width="1.2" stroke-linejoin="round"></path><circle cx="13" cy="10" r="4.5" fill="#FBE0C6"></circle></svg>
+            <div style="width: 58px; height: 58px; border-radius: 50%; background: {{ p3.avatarBg }}; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 19px; font-weight: 700; border: 3px solid #ffffff; box-shadow: 0 0 0 3px #EDB183; margin-bottom: 10px;">{{ p3.initials }}</div>
+            <div style="font-size: 14.5px; font-weight: 700;">{{ p3.name }}</div>
+            <div style="font-size: 11.5px; color: #616161; margin-bottom: 10px;">{{ p3.sub }}</div>
+            <div style="width: 100%; height: 82px; border-radius: 8px 8px 0 0; background: linear-gradient(180deg, #FDEEE0 0%, #F6DCC2 100%); border: 1px solid #EFCBA8; border-bottom: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;">
+              <div style="font-size: 12px; font-weight: 800; letter-spacing: .1em; color: #A85E1B;">3RD</div>
+              <div style="font-size: 24px; font-weight: 800; color: #6B3A0A; font-variant-numeric: tabular-nums;">{{ p3.score }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding: 4px 24px 18px;">
+        <div style="border: 1px solid #D8DDF3; background: linear-gradient(90deg, #ECEEF9 0%, #F8F8F8 100%); border-radius: 8px; padding: 16px 18px; display: flex; align-items: center; gap: 18px;">
+          <div style="flex: 0 0 auto; width: 52px; height: 52px; border-radius: 8px; background: #161B30; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700;">DR</div>
+          <div style="flex: 1; min-width: 0;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <div style="font-size: 15px; font-weight: 750;">You're <span style="color: #B81914;">{{ you.gapPts }} points</span> behind {{ you.targetName }}</div>
+              <div style="font-size: 10.5px; font-weight: 800; letter-spacing: .07em; color: #B81914; background: #FAD2D1; border: 1px solid #FAD2D1; padding: 2px 7px; border-radius: 4px;">{{ you.overtakeLabel }}</div>
+            </div>
+            <div style="font-size: 12.5px; color: #4D4D4C; margin-top: 3px;">{{ you.line }}</div>
+            <div style="position: relative; height: 12px; border-radius: 999px; background: #D8DDF3; margin-top: 12px; overflow: hidden;">
+              <div style="position: absolute; inset: 0 auto 0 0; border-radius: 999px; background: linear-gradient(90deg, #394FB6 0%, #6476CE 100%); width: {{ you.barPct }};"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 11px; color: #616161; margin-top: 6px; font-variant-numeric: tabular-nums;">
+              <span>You · {{ you.score }}</span>
+              <span style="color: #B81914; font-weight: 650;">{{ you.targetFirst }} · {{ you.targetScore }}</span>
+            </div>
+          </div>
+          <div style="flex: 0 0 auto; text-align: right;">
+            <div style="font-size: 11px; letter-spacing: .07em; color: #616161; font-weight: 700;">YOUR RANK</div>
+            <div style="font-size: 40px; font-weight: 800; line-height: 1.05; color: #161B30;">#{{ you.rank }}<span style="font-size: 15px; color: #9E9E9E; font-weight: 600;"> / 10</span></div>
+            <div onClick="{{ replay }}" style="margin-top: 8px; display: inline-flex; align-items: center; gap: 6px; background: #394FB6; color: #fff; font-size: 12.5px; font-weight: 650; padding: 8px 14px; border-radius: 8px; cursor: pointer;" style-hover="background: #31439B;" style-active="background: #243375;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#fff"><path d="M13 2L4 14h6l-1 8 9-12h-6z"></path></svg>
+              Make my move
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 24px; background: #F8F8F8; border-top: 1px solid #EDEDED; border-bottom: 1px solid #EDEDED;">
+        <div style="display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: #616161;">
+          <span style="display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: #D8DDF3;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="#394FB6"><path d="M12 2l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"></path></svg>
+          </span>
+          <span><strong style="color: #243375; letter-spacing: .05em; font-size: 11px;">MOST IMPROVED</strong> · {{ mostImproved }}</span>
+        </div>
+        <div onClick="{{ toggleFormula }}" style="font-size: 12.5px; color: #31439B; font-weight: 600; cursor: pointer;">{{ formulaToggleLabel }}</div>
+      </div>
+
+      <sc-if value="{{ showFormula }}" hint-placeholder-val="{{ false }}">
+        <div style="padding: 16px 24px; background: #F8F8F8; border-bottom: 1px solid #EDEDED;">
+          <div style="font-size: 12.5px; font-weight: 700; color: #4D4D4C; margin-bottom: 8px;">{{ formulaTitle }}</div>
+          <div style="font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; color: #2B2A30; background: #ffffff; border: 1px solid #E9EAE7; border-radius: 8px; padding: 10px 12px; display: inline-block;">{{ formulaExpr }}</div>
+          <div style="display: grid; grid-template-columns: 150px 70px 1fr; gap: 6px 14px; margin-top: 14px; font-size: 12.5px; color: #4D4D4C; max-width: 780px;">
+            <div style="font-weight: 700; color: #9E9E9E; font-size: 11px; letter-spacing: .06em;">DIMENSION</div>
+            <div style="font-weight: 700; color: #9E9E9E; font-size: 11px; letter-spacing: .06em;">WEIGHT</div>
+            <div style="font-weight: 700; color: #9E9E9E; font-size: 11px; letter-spacing: .06em;">DEFINITION</div>
+            <sc-for list="{{ formulaRows }}" as="fr" hint-placeholder-count="3">
+              <div style="font-weight: 650; color: #2B2A30;">{{ fr.dim }}</div>
+              <div style="font-variant-numeric: tabular-nums;">{{ fr.weight }}</div>
+              <div>{{ fr.def }}</div>
+            </sc-for>
+          </div>
+          <div style="font-size: 12px; color: #616161; margin-top: 12px;">{{ thresholdNote }}</div>
+        </div>
+      </sc-if>
+
+      <div style="display: grid; grid-template-columns: 54px 1fr 300px 130px; padding: 10px 24px; font-size: 11px; letter-spacing: .07em; color: #9E9E9E; font-weight: 700; border-bottom: 1px solid #EDEDED;">
+        <div>RANK</div><div>AGENT</div>
+        <div style="text-align: right;">{{ metricsHeader }}</div>
+        <div style="text-align: right;">{{ scoreHeader }}</div>
+      </div>
+
+      <sc-for list="{{ rows }}" as="row" hint-placeholder-count="10">
+        <div onClick="{{ row.toggle }}" style="display: grid; grid-template-columns: 54px 1fr 300px 130px; align-items: center; padding: 13px 24px; border-bottom: 1px solid #F1F1F1; background: {{ row.bg }}; box-shadow: {{ row.edge }}; cursor: pointer; transition: background .15s;" style-hover="background: #F8F8F8;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <sc-if value="{{ row.isFirst }}" hint-placeholder-val="{{ false }}">
+              <svg width="22" height="18" viewBox="0 0 32 28"><path d="M4 24h24l2-17-7.5 6L16 3 9.5 13 2 7z" fill="#E1AD01" stroke="#B98C00" stroke-width="1.6" stroke-linejoin="round"></path><rect x="4" y="24" width="24" height="3.5" rx="1.5" fill="#E5A000"></rect></svg>
+            </sc-if>
+            <sc-if value="{{ row.isSecond }}" hint-placeholder-val="{{ false }}">
+              <svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 2l8 3v7c0 5-3.5 8.4-8 10-4.5-1.6-8-5-8-10V5z" fill="#D6D6D6" stroke="#9E9E9E" stroke-width="1.3" stroke-linejoin="round"></path></svg>
+            </sc-if>
+            <sc-if value="{{ row.isThird }}" hint-placeholder-val="{{ false }}">
+              <svg width="17" height="19" viewBox="0 0 26 30"><circle cx="13" cy="10" r="8.5" fill="#EDB183" stroke="#B8722F" stroke-width="1.3"></circle><path d="M7 17l-4 12 10-5 10 5-4-12" fill="#D98A4A" stroke="#B8722F" stroke-width="1.1" stroke-linejoin="round"></path></svg>
+            </sc-if>
+            <sc-if value="{{ row.isPlain }}" hint-placeholder-val="{{ true }}">
+              <span style="font-size: 13px; color: #9E9E9E; font-variant-numeric: tabular-nums; font-weight: 600;">{{ row.rankLabel }}</span>
+            </sc-if>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 11px; min-width: 0;">
+            <div style="width: 34px; height: 34px; flex: 0 0 34px; border-radius: 50%; background: {{ row.avatarBg }}; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 700;">{{ row.initials }}</div>
+            <div style="min-width: 0;">
+              <div style="display: flex; align-items: center; gap: 7px;">
+                <span style="font-size: 14px; font-weight: 650;">{{ row.name }}</span>
+                <sc-if value="{{ row.isYou }}" hint-placeholder-val="{{ false }}">
+                  <span style="font-size: 10px; font-weight: 800; letter-spacing: .07em; background: #161B30; color: #fff; padding: 2px 7px; border-radius: 4px;">YOU</span>
+                </sc-if>
+                <sc-if value="{{ row.badge }}" hint-placeholder-val="{{ false }}">
+                  <span style="display: inline-flex; align-items: center; font-size: 10.5px; font-weight: 700; padding: 3px 14px 3px 8px; border-radius: 3px; background: {{ row.badgeBg }}; color: {{ row.badgeFg }}; clip-path: polygon(0 0, 100% 0, 92% 50%, 100% 100%, 0 100%);">{{ row.badge }}</span>
+                </sc-if>
+                <sc-if value="{{ row.isTarget }}" hint-placeholder-val="{{ false }}">
+                  <span style="display: inline-flex; align-items: center; gap: 5px; font-size: 10.5px; font-weight: 800; letter-spacing: .06em; color: #B81914; border: 1px dashed #F0A7A5; background: #FCE9E8; padding: 2px 8px; border-radius: 999px;">🎯 TARGET · {{ row.targetGap }} AHEAD</span>
+                </sc-if>
+              </div>
+              <div style="font-size: 11.5px; color: #616161; margin-top: 2px; display: flex; gap: 8px;">
+                <span>{{ row.team }}</span>
+                <sc-if value="{{ row.streak }}" hint-placeholder-val="{{ false }}">
+                  <span style="color: #8A6A00; font-weight: 600;">🔥 {{ row.streak }} streak</span>
+                </sc-if>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; justify-content: flex-end; align-items: center;">
+            <sc-if value="{{ row.isEngagement }}" hint-placeholder-val="{{ true }}">
+              <div style="display: flex; gap: 10px;">
+                <div style="width: 76px;">
+                  <div style="font-size: 9.5px; color: #9E9E9E; font-weight: 700; margin-bottom: 3px;">T · {{ row.tVal }}</div>
+                  <div style="height: 5px; border-radius: 3px; background: #EDEDED; overflow: hidden;"><div style="height: 100%; border-radius: 3px; background: #4D4D4C; width: {{ row.t }};"></div></div>
+                </div>
+                <div style="width: 76px;">
+                  <div style="font-size: 9.5px; color: #9E9E9E; font-weight: 700; margin-bottom: 3px;">D · {{ row.dVal }}</div>
+                  <div style="height: 5px; border-radius: 3px; background: #EDEDED; overflow: hidden;"><div style="height: 100%; border-radius: 3px; background: #069954; width: {{ row.d }};"></div></div>
+                </div>
+                <div style="width: 76px;">
+                  <div style="font-size: 9.5px; color: #9E9E9E; font-weight: 700; margin-bottom: 3px;">F · {{ row.fVal }}</div>
+                  <div style="height: 5px; border-radius: 3px; background: #EDEDED; overflow: hidden;"><div style="height: 100%; border-radius: 3px; background: #E1AD01; width: {{ row.f }};"></div></div>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ row.isQuality }}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <span style="font-size: 11.5px; color: #616161; font-variant-numeric: tabular-nums;">{{ row.interactions }} evaluated</span>
+                <div style="width: 150px;">
+                  <div style="height: 6px; border-radius: 3px; background: #EDEDED; overflow: hidden;"><div style="height: 100%; border-radius: 3px; background: #394FB6; width: {{ row.qBar }};"></div></div>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 10px; justify-content: flex-end;">
+            <div style="text-align: right;">
+              <div style="font-size: 17px; font-weight: 750; font-variant-numeric: tabular-nums;">{{ row.score }}</div>
+              <div style="font-size: 11.5px; font-weight: 650; color: {{ row.deltaColor }}; font-variant-numeric: tabular-nums;">{{ row.delta }}</div>
+            </div>
+            <div style="width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex: 0 0 auto;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9E9E9E" stroke-width="2.2" style="transition: transform .28s cubic-bezier(.4,0,.2,1); transform: {{ row.chevronRot }};"><path d="M6 9l6 6 6-6"></path></svg>
+            </div>
+          </div>
+        </div>
+
+        <div style="max-height: {{ row.expMaxH }}; opacity: {{ row.expOpacity }}; overflow: hidden; background: #FAFAFA; border-bottom: 1px solid #F1F1F1; transition: max-height .34s cubic-bezier(.4,0,.2,1), opacity .28s ease;">
+          <div style="padding: 20px 24px 24px 78px;">
+            <div style="display: flex; align-items: stretch; gap: 14px;">
+              <div style="display: flex; flex-direction: column; gap: 12px; width: 220px; flex: 0 0 220px;">
+                <div style="background: #ffffff; border: 1px solid #E9EAE7; border-radius: 8px; padding: 14px 16px; transition: box-shadow .15s, transform .15s;" style-hover="box-shadow: 0 4px 14px rgba(57,79,182,.14); transform: translateY(-2px); border-color: #D8DDF3;">
+                  <div style="font-size: 22px; font-weight: 700; color: #394FB6; font-variant-numeric: tabular-nums;">{{ row.tVal }}</div>
+                  <div style="font-size: 12.5px; color: #2B2A30; margin-top: 4px;">Time Spent</div>
+                  <div style="font-size: 11px; color: #9E9E9E; margin-top: 2px;">{{ row.t }} pctile</div>
+                </div>
+                <div style="background: #ffffff; border: 1px solid #E9EAE7; border-radius: 8px; padding: 14px 16px; transition: box-shadow .15s, transform .15s;" style-hover="box-shadow: 0 4px 14px rgba(6,153,84,.14); transform: translateY(-2px); border-color: #CBEFDC;">
+                  <div style="font-size: 22px; font-weight: 700; color: #069351; font-variant-numeric: tabular-nums;">{{ row.dVal }}</div>
+                  <div style="font-size: 12.5px; color: #2B2A30; margin-top: 4px;">Days Active</div>
+                  <div style="font-size: 11px; color: #9E9E9E; margin-top: 2px;">{{ row.d }} pctile</div>
+                </div>
+                <div style="background: #ffffff; border: 1px solid #E9EAE7; border-radius: 8px; padding: 14px 16px; transition: box-shadow .15s, transform .15s;" style-hover="box-shadow: 0 4px 14px rgba(225,173,1,.18); transform: translateY(-2px); border-color: #FBEFC0;">
+                  <div style="font-size: 22px; font-weight: 700; color: #E1AD01; font-variant-numeric: tabular-nums;">{{ row.f }}</div>
+                  <div style="font-size: 12.5px; color: #2B2A30; margin-top: 4px;">Focus Ratio</div>
+                  <div style="font-size: 11px; color: #9E9E9E; margin-top: 2px;">{{ row.fPctile }} pctile</div>
+                </div>
+              </div>
+
+              <div style="flex: 1; min-width: 0; background: #ffffff; border: 1px solid #E9EAE7; border-radius: 8px; padding: 18px 22px; transition: box-shadow .15s;" style-hover="box-shadow: 0 2px 10px rgba(43,42,48,.06);">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                  <span style="font-size: 11px; letter-spacing: .07em; color: #9E9E9E; font-weight: 700;">SCORE HISTORY · 8 WEEKS</span>
+                  <span style="font-size: 12.5px; color: #616161;">Latest: <strong style="color: #394FB6;">{{ row.latestScore }}</strong> <span style="color: {{ row.deltaPtsColor }}; font-weight: 650;">{{ row.deltaPtsLabel }}</span></span>
+                </div>
+                <div onMouseMove="{{ row.onChartMove }}" onMouseLeave="{{ row.onChartLeave }}" style="position: relative; height: 130px; margin-top: 12px; cursor: crosshair;">
+                  <svg viewBox="0 0 1000 90" style="width: 100%; height: 130px; display: block; overflow: visible;" preserveAspectRatio="none">
+                    <path d="{{ row.sparkArea }}" fill="#ECEEF9" stroke="none"></path>
+                    <polyline points="{{ row.sparkPoints }}" fill="none" stroke="#394FB6" stroke-width="2.5"></polyline>
+                    <sc-for list="{{ row.sparkDots }}" as="dot" hint-placeholder-count="8">
+                      <circle cx="{{ dot.x }}" cy="{{ dot.y }}" r="3" fill="#394FB6" opacity="{{ dot.opacity }}"></circle>
+                    </sc-for>
+                    <circle cx="{{ row.sparkLastX }}" cy="{{ row.sparkLastY }}" r="4.5" fill="#394FB6" stroke="#ffffff" stroke-width="2"></circle>
+                    <sc-if value="{{ row.hoverActive }}" hint-placeholder-val="{{ false }}">
+                      <line x1="{{ row.hoverX }}" x2="{{ row.hoverX }}" y1="0" y2="90" stroke="#9E9E9E" stroke-width="1.2" stroke-dasharray="3,3"></line>
+                      <circle cx="{{ row.hoverX }}" cy="{{ row.hoverY }}" r="5.5" fill="#161B30" stroke="#ffffff" stroke-width="2"></circle>
+                    </sc-if>
+                  </svg>
+                  <sc-if value="{{ row.hoverActive }}" hint-placeholder-val="{{ false }}">
+                    <div style="position: absolute; pointer-events: none; left: {{ row.hoverLeftPct }}%; top: {{ row.hoverTopPct }}%; transform: translate(-50%, -128%); background: #ffffff; border: 1px solid #E9EAE7; border-radius: 8px; padding: 8px 12px; box-shadow: 0 6px 16px rgba(43,42,48,.14); white-space: nowrap; z-index: 3;">
+                      <div style="font-size: 10.5px; color: #9E9E9E; font-weight: 700;">{{ row.hoverWeek }}</div>
+                      <div style="font-size: 14px; font-weight: 700; color: #161B30; font-variant-numeric: tabular-nums;">{{ row.hoverVal }} <span style="font-size: 11px; font-weight: 600; color: #9E9E9E;">pts</span></div>
+                    </div>
+                  </sc-if>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 11px; color: #9E9E9E; margin-top: 6px;">
+                  <span>W1</span><span>W2</span><span>W3</span><span>W4</span><span>W5</span><span>W6</span><span>W7</span><span>W8</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 16px;">
+              <div onClick="{{ row.compareClick }}" style="display: flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 650; color: #31439B; border: 1px solid #D8DDF3; background: #ECEEF9; padding: 8px 14px; border-radius: 8px; cursor: pointer; transition: background .15s, transform .15s;" style-hover="background: #E0E4F7; transform: translateY(-1px);">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h6M15 12h6M12 3v6M12 15v6"></path></svg>
+                Compare with me
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <sc-if value="{{ row.badge }}" hint-placeholder-val="{{ false }}">
+                  <span style="display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 999px; background: {{ row.badgeBg }}; color: {{ row.badgeFg }}; transition: transform .15s;" style-hover="transform: scale(1.05);">🏆 {{ row.badge }}</span>
+                </sc-if>
+                <sc-if value="{{ row.showStreakBadge }}" hint-placeholder-val="{{ false }}">
+                  <span style="display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; padding: 5px 10px; border-radius: 999px; background: linear-gradient(90deg, #EF6C00 0%, #B81914 100%); color: #ffffff; transition: transform .15s;" style-hover="transform: scale(1.05);">🔥 Streak King</span>
+                </sc-if>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+
+      <div style="display: flex; align-items: center; gap: 10px; padding: 12px 24px; background: #F8F8F8; border-bottom: 1px solid #EDEDED;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9E9E9E" stroke-width="2"><path d="M3 5h18l-7 8v6l-4-2v-4z"></path></svg>
+        <span style="font-size: 12px; color: #616161;">{{ thresholdNote }}</span>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 20px; padding: 14px 24px 8px; font-size: 11.5px; color: #616161;">
+        <span style="display: inline-flex; align-items: center; gap: 6px;"><svg width="14" height="12" viewBox="0 0 32 28"><path d="M4 24h24l2-17-7.5 6L16 3 9.5 13 2 7z" fill="#E1AD01"></path></svg> Crown · 1st</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px;"><svg width="12" height="12" viewBox="0 0 24 24"><path d="M12 2l8 3v7c0 5-3.5 8.4-8 10-4.5-1.6-8-5-8-10V5z" fill="#D6D6D6"></path></svg> Shield · 2nd</span>
+        <span style="display: inline-flex; align-items: center; gap: 6px;"><svg width="11" height="13" viewBox="0 0 26 30"><circle cx="13" cy="10" r="8.5" fill="#EDB183"></circle><path d="M7 17l-4 12 10-5 10 5-4-12" fill="#D98A4A"></path></svg> Ribbon · 3rd</span>
+        <span>🔥 ≥2 day streak</span>
+        <span>🎯 Your next target</span>
+      </div>
+      <div style="padding: 4px 24px 20px; font-size: 11px; color: #9E9E9E;">Scores reset at the start of each period · Period &amp; thresholds configurable per tenant · Amplitude events fire on view, tab and period change</div>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1760},&quot;confettiOnLoad&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Celebration&quot;},&quot;celebrationIntensity&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:0.2,&quot;max&quot;:2.5,&quot;step&quot;:0.1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Celebration&quot;},&quot;chaseMode&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Urgency&quot;},&quot;urgencyLevel&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;calm&quot;,&quot;urgent&quot;,&quot;final hour&quot;],&quot;default&quot;:&quot;urgent&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Urgency&quot;}}">
+class Component extends DCLogic {
+  confettiRef = React.createRef();
+  state = { secs: 11 * 3600 + 58 * 60, tab: 'engagement', period: 'monthly', role: 'agent', showFormula: false, event: 'CQA C3 - Leaderboard Viewed', expanded: null, hoverIdx: null };
+
+  componentDidMount() {
+    this.timer = setInterval(() => this.setState(s => ({ secs: Math.max(0, s.secs - 1) })), 1000);
+    if (this.props.confettiOnLoad !== false) setTimeout(() => this.burst(), 450);
+  }
+  componentWillUnmount() { clearInterval(this.timer); cancelAnimationFrame(this.raf); }
+
+  fire(name) { this.setState({ event: name }); }
+
+  burst() {
+    const c = this.confettiRef.current;
+    if (!c || !c.parentElement) return;
+    const host = c.parentElement;
+    const W = host.clientWidth, H = host.clientHeight;
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    c.width = W * dpr; c.height = H * dpr; c.style.width = W + 'px'; c.style.height = H + 'px';
+    const ctx = c.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const k = Math.max(0.2, this.props.celebrationIntensity ?? 1);
+    const colors = ['#E1AD01', '#E5A000', '#d6006c', '#0088b0', '#069954', '#394FB6', '#ffffff'];
+    const P = [];
+    const mk = (x, y, vx, vy) => P.push({
+      x, y, vx, vy, w: 5 + Math.random() * 6, h: 3 + Math.random() * 6,
+      rot: Math.random() * Math.PI, vr: (Math.random() - 0.5) * 0.3,
+      c: colors[(Math.random() * colors.length) | 0], life: 1
+    });
+    for (let i = 0; i < Math.round(80 * k); i++) mk(Math.random() * W, -20 - Math.random() * H * 0.6, (Math.random() - 0.5) * 1.2, 1.5 + Math.random() * 2.2);
+    for (let i = 0; i < Math.round(45 * k); i++) {
+      const a = -Math.PI / 2 - 0.55 + Math.random() * 0.5, s = 9 + Math.random() * 7;
+      mk(W * 0.5 - 120, H * 0.75, Math.cos(a) * s + 2.5, Math.sin(a) * s);
+    }
+    for (let i = 0; i < Math.round(45 * k); i++) {
+      const a = -Math.PI / 2 + 0.05 + Math.random() * 0.5, s = 9 + Math.random() * 7;
+      mk(W * 0.5 + 120, H * 0.75, Math.cos(a) * s - 2.5, Math.sin(a) * s);
+    }
+    const t0 = performance.now();
+    cancelAnimationFrame(this.raf);
+    const step = (t) => {
+      const el = t - t0;
+      ctx.clearRect(0, 0, W, H);
+      let alive = 0;
+      for (const p of P) {
+        p.vy += 0.16; p.vx *= 0.995; p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+        if (el > 3200) p.life = Math.max(0, 1 - (el - 3200) / 1400);
+        if (p.y < H + 30 && p.life > 0) {
+          alive++;
+          ctx.save(); ctx.globalAlpha = p.life; ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+          ctx.fillStyle = p.c; ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); ctx.restore();
+        }
+      }
+      if (alive && el < 6000) this.raf = requestAnimationFrame(step);
+      else ctx.clearRect(0, 0, W, H);
+    };
+    this.raf = requestAnimationFrame(step);
+  }
+
+  ENG = [
+    ['Priya Sharma', 'PS', 'Enterprise', '#069954', '95.1', '↑ 3 rank', '#069351', '12d', 'TOP 10%', '#FFF4CE', '#4B3400', '92%', '88%', '76%', '41h', '26d', '0.86'],
+    ['Aisha Okonkwo', 'AO', 'Enterprise', '#2163F1', '90.7', '—', '#9E9E9E', '8d', 'FOCUS CHAMP', '#E3EDFD', '#1C4BB8', '84%', '80%', '72%', '37h', '24d', '0.91'],
+    ['Marcus Webb', 'MW', 'SMB', '#EF6C00', '76.4', '↑ 1 rank', '#069351', '5d', '', '', '', '70%', '66%', '58%', '31h', '21d', '0.74'],
+    ['Sophie Müller', 'SM', 'APAC', '#9E9E9E', '65.9', '↓ 2 rank', '#B81914', '', '', '', '', '62%', '58%', '52%', '27h', '18d', '0.66'],
+    ['Daniel Reyes', 'DR', 'SMB', '#161B30', '56.6', '↑ 2 rank', '#069351', '3d', 'MOST IMPROVED', '#D8DDF3', '#243375', '54%', '50%', '44%', '23h', '16d', '0.58'],
+    ['Irina Volkov', 'IV', 'APAC', '#6476CE', '43.3', '↑ 1 rank', '#069351', '4d', 'COMEBACK KID', '#FBE7F1', '#A01050', '42%', '38%', '34%', '18h', '13d', '0.47'],
+    ['Kwame Asante', 'KA', 'Enterprise', '#9E9E9E', '34.1', '↓ 1 rank', '#B81914', '', '', '', '', '34%', '30%', '26%', '14h', '11d', '0.39'],
+    ['Tomás Herrera', 'TH', 'SMB', '#9E9E9E', '26.9', '—', '#9E9E9E', '2d', '', '', '', '26%', '24%', '20%', '11h', '9d', '0.31'],
+    ['Fatima Al-Rashid', 'FA', 'Enterprise', '#9E9E9E', '11.0', '↓ 3 rank', '#B81914', '', '', '', '', '12%', '10%', '9%', '5h', '4d', '0.18'],
+    ['Lena Bergström', 'LB', 'APAC', '#9E9E9E', '0.0', '↓ 1 rank', '#B81914', '', '', '', '', '2%', '2%', '2%', '1h', '1d', '0.05']
+  ];
+
+  QUAL = [
+    ['Aisha Okonkwo', 'AO', 'Enterprise', '#2163F1', '94.2', '↑ 1 rank', '#069351', '8d', 'QUALITY LEADER', '#E3EDFD', '#1C4BB8', '128'],
+    ['Priya Sharma', 'PS', 'Enterprise', '#069954', '92.8', '↓ 1 rank', '#B81914', '12d', 'TOP 10%', '#FFF4CE', '#4B3400', '141'],
+    ['Tomás Herrera', 'TH', 'SMB', '#EF6C00', '89.6', '↑ 2 rank', '#069351', '2d', 'CONSISTENT', '#E8F7F0', '#069351', '96'],
+    ['Daniel Reyes', 'DR', 'SMB', '#161B30', '87.1', '↑ 1 rank', '#069351', '3d', '', '', '', '84'],
+    ['Sophie Müller', 'SM', 'APAC', '#9E9E9E', '86.4', '↓ 2 rank', '#B81914', '', '', '', '', '112'],
+    ['Kwame Asante', 'KA', 'Enterprise', '#9E9E9E', '83.9', '—', '#9E9E9E', '', '', '', '', '74'],
+    ['Irina Volkov', 'IV', 'APAC', '#6476CE', '81.2', '↑ 1 rank', '#069351', '4d', 'COMEBACK KID', '#FBE7F1', '#A01050', '68'],
+    ['Marcus Webb', 'MW', 'SMB', '#9E9E9E', '78.5', '↓ 3 rank', '#B81914', '5d', '', '', '', '91'],
+    ['Fatima Al-Rashid', 'FA', 'Enterprise', '#9E9E9E', '74.6', '↓ 1 rank', '#B81914', '', '', '', '', '52'],
+    ['Lena Bergström', 'LB', 'APAC', '#9E9E9E', '71.3', '↑ 2 rank', '#069351', '', '', '', '', '46']
+  ];
+
+  UP_RATIOS = [0.60, 0.67, 0.73, 0.79, 0.85, 0.90, 0.95, 1.00];
+  DOWN_RATIOS = [1.28, 1.22, 1.16, 1.11, 1.07, 1.04, 1.02, 1.00];
+  FLAT_RATIOS = [0.94, 0.97, 1.01, 0.98, 1.03, 0.99, 1.02, 1.00];
+
+  history(score, deltaColor) {
+    const s = parseFloat(score) || 0;
+    const ratios = deltaColor === '#069351' ? this.UP_RATIOS : (deltaColor === '#B81914' ? this.DOWN_RATIOS : this.FLAT_RATIOS);
+    return ratios.map(r => Math.max(0, +(s * r).toFixed(1)));
+  }
+
+  sparkline(vals) {
+    const W = 1000, H = 90, PADY = 10;
+    const min = Math.min(...vals), max = Math.max(...vals), span = (max - min) || 1;
+    const pts = vals.map((v, i) => {
+      const x = +(i * (W / (vals.length - 1))).toFixed(1);
+      const y = +(H - PADY - ((v - min) / span) * (H - PADY * 2)).toFixed(1);
+      return { x, y };
+    });
+    const points = pts.map(p => p.x + ',' + p.y).join(' ');
+    const area = 'M' + pts.map(p => p.x + ',' + p.y).join(' L') + ` L${W},${H} L0,${H} Z`;
+    return { points, area, pts, last: pts[pts.length - 1], W, H };
+  }
+
+  rows(isEng) {
+    const src = isEng ? this.ENG : this.QUAL;
+    const chase = this.props.chaseMode !== false;
+    const youIdx = src.findIndex(r => r[0] === 'Daniel Reyes');
+    const expanded = this.state.expanded;
+    return src.map((r, i) => {
+      const rank = i + 1, isYou = i === youIdx, isTarget = chase && i === youIdx - 1;
+      const gap = isTarget ? (parseFloat(src[i][4]) - parseFloat(src[youIdx][4])).toFixed(1) : '';
+      const streakDays = parseInt(r[7] || '0', 10);
+      const hist = this.history(r[4], r[6]);
+      const spark = this.sparkline(hist);
+      const latest = hist[hist.length - 1];
+      const deltaPts = +(latest - hist[0]).toFixed(1);
+      const rowKey = r[0] + '::' + (isEng ? 'eng' : 'qual');
+      const hoverIdx = this.state.expanded === rowKey ? this.state.hoverIdx : null;
+      const hasHover = hoverIdx != null && hoverIdx >= 0 && hoverIdx < hist.length;
+      const hoverPt = hasHover ? spark.pts[hoverIdx] : null;
+      const fPct = isEng ? parseFloat(r[13]) : 0;
+      return {
+        rank, rankLabel: String(rank).padStart(2, '0'),
+        isFirst: rank === 1, isSecond: rank === 2, isThird: rank === 3, isPlain: rank > 3,
+        name: r[0], initials: r[1], team: r[2], avatarBg: r[3], score: r[4],
+        delta: r[5], deltaColor: r[6], streak: r[7] || false,
+        badge: r[8] || false, badgeBg: r[9], badgeFg: r[10],
+        isEngagement: isEng, isQuality: !isEng,
+        t: isEng ? r[11] : '0%', d: isEng ? r[12] : '0%', f: isEng ? r[13] : '0%',
+        tVal: isEng ? r[14] : '', dVal: isEng ? r[15] : '', fVal: isEng ? r[16] : '',
+        interactions: isEng ? '' : r[11], qBar: isEng ? '0%' : r[4] + '%',
+        isYou, isTarget, targetGap: gap ? gap + ' PTS' : '',
+        bg: isYou ? '#ECEEF9' : (isTarget ? '#FCE9E8' : '#ffffff'),
+        edge: isYou ? 'inset 4px 0 0 #394FB6' : (isTarget ? 'inset 4px 0 0 #F0A7A5' : 'none'),
+        isExpanded: expanded === rowKey,
+        chevronRot: expanded === rowKey ? 'rotate(180deg)' : 'rotate(0deg)',
+        expMaxH: expanded === rowKey ? '440px' : '0px',
+        expOpacity: expanded === rowKey ? 1 : 0,
+        toggle: () => this.setState(s => ({ expanded: s.expanded === rowKey ? null : rowKey, hoverIdx: null })),
+        compareClick: (e) => { e.stopPropagation(); },
+        showStreakBadge: streakDays >= 10,
+        sparkPoints: spark.points, sparkArea: spark.area,
+        sparkLastX: spark.last.x, sparkLastY: spark.last.y,
+        sparkDots: spark.pts.slice(0, -1).map((p, idx) => ({ x: p.x, y: p.y, opacity: hasHover && idx === hoverIdx ? 0 : 0.35 })),
+        latestScore: latest.toFixed(1),
+        deltaPtsLabel: (deltaPts >= 0 ? '+' : '') + deltaPts.toFixed(1) + ' pts',
+        deltaPtsColor: deltaPts > 0 ? '#069351' : (deltaPts < 0 ? '#B81914' : '#9E9E9E'),
+        fPctile: fPct ? Math.min(99, Math.round(fPct * 1.08)) + '%' : r[13] || '',
+        hoverActive: hasHover,
+        hoverX: hoverPt ? hoverPt.x : 0,
+        hoverY: hoverPt ? hoverPt.y : 0,
+        hoverLeftPct: hoverPt ? (hoverPt.x / spark.W) * 100 : 0,
+        hoverTopPct: hoverPt ? (hoverPt.y / spark.H) * 100 : 0,
+        hoverWeek: hasHover ? 'W' + (hoverIdx + 1) : '',
+        hoverVal: hasHover ? hist[hoverIdx].toFixed(1) : '',
+        onChartMove: (e) => {
+          const rect = e.currentTarget.getBoundingClientRect();
+          const relX = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+          const idx = Math.round(relX * (hist.length - 1));
+          this.setState(s => (s.hoverIdx === idx ? null : { hoverIdx: idx }));
+        },
+        onChartLeave: () => this.setState({ hoverIdx: null })
+      };
+    });
+  }
+
+  renderVals() {
+    const st = this.state;
+    const isEng = st.tab === 'engagement';
+    const rows = this.rows(isEng);
+    const s = st.secs, pad = n => String(n).padStart(2, '0');
+    const countdown = Math.floor(s / 3600) + 'h ' + pad(Math.floor(s / 60) % 60) + 'm ' + pad(s % 60) + 's';
+    const lvl = this.props.urgencyLevel ?? 'urgent';
+    const u = {
+      calm: ['#F1F1F1', '#E4E4E4', '#9E9E9E', '#4D4D4C', 'Resets in'],
+      urgent: ['#FCE9E8', '#FAD2D1', '#D91E18', '#B81914', 'Period ends in'],
+      'final hour': ['#FAD2D1', '#F07975', '#B81914', '#5C0D0A', 'FINAL PUSH —']
+    }[lvl] || ['#FCE9E8', '#FAD2D1', '#D91E18', '#B81914', 'Period ends in'];
+
+    const you = rows.find(r => r.isYou), tgt = rows[you.rank - 2];
+    const gapPts = (parseFloat(tgt.score) - parseFloat(you.score)).toFixed(1);
+    const pct = Math.round((parseFloat(you.score) / parseFloat(tgt.score)) * 100) + '%';
+    const tab = (on) => ({
+      w: on ? 700 : 500, fg: on ? '#31439B' : '#616161', ul: on ? 'inset 0 -2px 0 #394FB6' : 'none'
+    });
+    const e = tab(isEng), q = tab(!isEng);
+    const seg = (on) => ({ bg: on ? '#ECEEF9' : '#ffffff', fg: on ? '#243375' : '#616161' });
+    const w = seg(st.period === 'weekly'), m = seg(st.period === 'monthly'), c = seg(st.period === 'custom');
+    const r1 = seg(st.role === 'agent'), r2 = seg(st.role === 'supervisor'), r3 = seg(st.role === 'admin');
+    const setP = p => () => { this.setState({ period: p }); this.fire('CQA C3 - Leaderboard Period Changed · ' + p); };
+
+    return {
+      rows,
+      p1: { ...rows[0], sub: rows[0].team + ' · 🔥 ' + (rows[0].streak || '—') + ' streak', note: rows[0].delta + ' this period' },
+      p2: { ...rows[1], sub: rows[1].team, gap: '−' + (parseFloat(rows[0].score) - parseFloat(rows[1].score)).toFixed(1) },
+      p3: { ...rows[2], sub: rows[2].team },
+      you: {
+        rank: you.rank, score: you.score, gapPts, targetName: tgt.name,
+        targetFirst: tgt.name.split(' ')[0], targetScore: tgt.score, barPct: pct,
+        overtakeLabel: 'OVERTAKE #' + (you.rank - 1),
+        line: isEng
+          ? 'Composite = 0.30×T + 0.25×D + 0.45×F — lift your focus ratio and you clear the gap before reset.'
+          : 'Average QP score across evaluated interactions this period — a few strong evaluations closes it.'
+      },
+      countdown, urgencyBg: u[0], urgencyBorder: u[1], urgencyDot: u[2], urgencyText: u[3], urgencyLabel: u[4],
+      engWeight: e.w, engFg: e.fg, engUnderline: e.ul,
+      qualWeight: q.w, qualFg: q.fg, qualUnderline: q.ul,
+      pWeeklyBg: w.bg, pWeeklyFg: w.fg, pMonthlyBg: m.bg, pMonthlyFg: m.fg, pCustomBg: c.bg, pCustomFg: c.fg,
+      roleAgentBg: r1.bg, roleAgentFg: r1.fg, roleSupBg: r2.bg, roleSupFg: r2.fg, roleAdminBg: r3.bg, roleAdminFg: r3.fg,
+      isAdmin: st.role === 'admin',
+      periodRange: { weekly: '28 Jul – 3 Aug', monthly: '1 – 31 Jul', custom: '12 Jun – 31 Jul' }[st.period],
+      seasonLabel: st.period === 'weekly' ? 'WEEK 31' : (st.period === 'custom' ? 'CUSTOM RANGE' : 'SEASON 4'),
+      eventLabel: st.event,
+      excludedCount: isEng ? '1 agent' : '2 agents',
+      mostImproved: isEng ? 'Priya Sharma climbed +3 ranks' : 'Tomás Herrera climbed +2 ranks',
+      showFormula: st.showFormula,
+      formulaToggleLabel: (st.showFormula ? 'Hide' : 'Show') + ' scoring formula',
+      formulaTitle: isEng ? 'Engagement composite — weighted percentiles' : 'Quality score — average QP across evaluated interactions',
+      formulaExpr: isEng
+        ? 'Composite = (0.30 × T_percentile) + (0.25 × D_percentile) + (0.45 × F_percentile)'
+        : 'Quality = Σ(QP score of evaluated interactions) ÷ count(evaluated interactions)',
+      formulaRows: isEng ? [
+        { dim: 'T · Time Spent', weight: '0.30', def: 'Total session hours (sessions chart, seconds ÷ 3600)' },
+        { dim: 'D · Days Active', weight: '0.25', def: 'Unique days with session time > 0' },
+        { dim: 'F · Focus Ratio', weight: '0.45', def: 'Time on Analysis List / detail pages ÷ total time (capped at 1.0)' }
+      ] : [
+        { dim: 'QP score', weight: '1.00', def: 'Average quality profile score across CQA-evaluated interactions in the period' },
+        { dim: 'Volume gate', weight: '—', def: 'Agents below the evaluated-interaction threshold are excluded, not penalised' }
+      ],
+      thresholdNote: isEng
+        ? '1 agent below the minimum threshold (< 120 session minutes this period) — not ranked'
+        : '2 agents below the minimum threshold (< 30 evaluated interactions this period) — not ranked',
+      metricsHeader: isEng ? 'TIME · DAYS · FOCUS' : 'INTERACTIONS EVALUATED',
+      scoreHeader: isEng ? 'COMPOSITE' : 'AVG QP',
+      confettiRef: this.confettiRef,
+      replay: () => this.burst(),
+      toggleFormula: () => this.setState(p => ({ showFormula: !p.showFormula })),
+      setEngagement: () => { this.setState({ tab: 'engagement' }); this.fire('CQA C3 - Leaderboard Viewed · engagement'); },
+      setQuality: () => { this.setState({ tab: 'quality' }); this.fire('CQA C3 - Leaderboard Viewed · quality'); this.burst(); },
+      setWeekly: setP('weekly'), setMonthly: setP('monthly'), setCustom: setP('custom'),
+      setAgent: () => { this.setState({ role: 'agent' }); this.fire('CQA C3 - Leaderboard Viewed · viewer_role=agent'); },
+      setSupervisor: () => { this.setState({ role: 'supervisor' }); this.fire('CQA C3 - Leaderboard Viewed · viewer_role=supervisor'); },
+      setAdmin: () => { this.setState({ role: 'admin' }); this.fire('CQA C3 - Leaderboard Viewed · viewer_role=admin'); }
+    };
+  }
+}
+</script>
+</body>
+</html>
